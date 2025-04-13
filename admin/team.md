@@ -3,6 +3,9 @@
 ## Powell Rangers
 
 ## Our Values:  
+1. Honest
+2. Respectful
+3. Finish work on Time
 
 
 ## Roster: 
