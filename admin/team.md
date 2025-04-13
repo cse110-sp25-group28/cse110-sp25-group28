@@ -26,6 +26,11 @@ Nikitha Maderamitla
 Kumiko Komori
 Roy Lee
 Samuel Gonzalez
+
+[GitHub](https://github.com/SamGlez11)
+
+Hi, I'm Sam! I'm a second-year CS major from Chula Vista. I like playing sports, video games, chess, the piano, and watching anime/tv shows :)
+
 Ulziikhutag Davaasuren
 Jeffrey Thi
 Ethan Fang
