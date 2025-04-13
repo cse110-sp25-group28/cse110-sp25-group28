@@ -26,6 +26,11 @@ Hi! I am a third year CS Major transfer from the San Diego area. A couple of my 
 ### Nikitha Maderamitla
 ### Kumiko Komori
 ### Roy Lee
+
+[GitHub](https://github.com/royhlee)
+
+Hi, I'm Roy a third year cog sci/business econ major from San Diego, I like playing video games like Valorant during my free time.
+
 ### Samuel Gonzalez
 
 [GitHub](https://github.com/SamGlez11)
