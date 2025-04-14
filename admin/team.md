@@ -44,7 +44,10 @@ Hi, I'm Sam! I'm a second-year CS major from Chula Vista. I like playing sports,
 
 ### Ulziikhutag Davaasuren
 
+[GitHub](https://github.com/Ulziihutag15)
+
 Hi, I'm Ulziikutag an international student from Mongolia. I'm a 3rd year computer science student. In my free time, I really like to play video games.
+
 ### Jeffrey Thi
 
 [GitHub](https://github.com/L0oter1)
