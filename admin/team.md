@@ -50,6 +50,10 @@ Hi, I'm Sam! I'm a second-year CS major from Chula Vista. I like playing sports,
 Hi my name's Jeffrey! I'm a second year Math-CS Major from SF. Yes SF SF. In my spare time I like reading books!
 
 ### Ethan Fang
+[GitHub](https://github.com/efang5)
+
+Hi, my name is Ethan! I am a second year CS Major from San Jose. I enjoy spending time with friends and family.
+
 ### Daniel Ahossou
 
 [Github](https://github.com/dahossou)
