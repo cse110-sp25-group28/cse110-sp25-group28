@@ -11,7 +11,7 @@
 
 ## Roster: 
 
-### Jeremy Su (Team Lead)
+### Jeremy Su
 
 [GitHub](https://github.com/jeremysu99)
 
