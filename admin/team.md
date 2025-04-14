@@ -74,6 +74,7 @@ Hello! My name is Kumiko, a 3rd year Computer Science major transfer from San Fr
 
 ## Brand:
 
+![brand](./branding/brand.png)
 
 
 
