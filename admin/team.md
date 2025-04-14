@@ -43,6 +43,8 @@ Hi, I'm Roy a third year cog sci/business econ major from San Diego, I like play
 Hi, I'm Sam! I'm a second-year CS major from Chula Vista. I like playing sports, video games, chess, the piano, and watching anime/tv shows :)
 
 ### Ulziikhutag Davaasuren
+
+Hi, I'm Ulziikutag an international student from Mongolia. I'm a 3rd year computer science student. In my free time, I really like to play video games.
 ### Jeffrey Thi
 
 [GitHub](https://github.com/L0oter1)
