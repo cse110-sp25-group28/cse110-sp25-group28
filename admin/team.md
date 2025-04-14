@@ -24,6 +24,11 @@ Hi, I'm Jeremy! I'm a second year CS Major from Los Angeles. In my free time, I 
 Hi! I am a third year CS Major transfer from the San Diego area. A couple of my hobbies consist of tennis, video games, working out and watching anime!
 
 ### Nikitha Maderamitla
+
+[GitHub](https://github.com/niktion9)
+
+Hello! I am a second year CS Major from NorCal. I enjoy playing sports, comedy, and some good food during my free time.
+
 ### Kumiko Komori
 ### Roy Lee
 
