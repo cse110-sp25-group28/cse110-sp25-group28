@@ -66,6 +66,12 @@ Hi, I'm Daniel! I'm a second year CS Major right here from San Diego! In my spar
 
 Hi there! My name is Chuheng Xi (you can call me Roger). I’m a second-year Computer Science major from Beijing, China. In my free time, I enjoy photography, tennis, and going to the gym. I also like building custom mechanical keyboards.
 
+### Kumiko Komori
+
+[GitHub](https://github.com/kmkomori)
+
+Hello! My name is Kumiko, a 3rd year Computer Science major transfer from San Francisco. In my free time, I enjoy listening to music, doing crafts, and exploring new places!
+
 ## Brand:
 
 
