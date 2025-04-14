@@ -44,8 +44,18 @@ Hi, I'm Sam! I'm a second-year CS major from Chula Vista. I like playing sports,
 
 ### Ulziikhutag Davaasuren
 ### Jeffrey Thi
+
+[GitHub](https://github.com/L0oter1)
+
+Hi my name's Jeffrey! I'm a second year Math-CS Major from SF. Yes SF SF. In my spare time I like reading books!
+
 ### Ethan Fang
 ### Daniel Ahossou
+
+[Github](https://github.com/dahossou)
+
+Hi, I'm Daniel! I'm a second year CS Major right here from San Diego! In my spare time I enjoy playing basketball, reading, and discovering new music.
+
 ### Chuheng Xi
 
 [GitHub](https://github.com/xchuheng613)
