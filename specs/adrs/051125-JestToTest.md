@@ -6,9 +6,9 @@ title: Use Jest as a Unit-Testing Framework.
 
 status: accepted
 date: 2025-05-11
-decision-makers: [Roy, Kumiko, Sam, Ulziikhutag]
-consulted: [All team members]
-informed: [All team members]
+decision-makers: Roy, Kumiko, Sam, Ulziikhutag
+consulted: All team members
+informed: All team members
 ---
 
 # Adopt JSDoc for Documentation of JavaScript Code
