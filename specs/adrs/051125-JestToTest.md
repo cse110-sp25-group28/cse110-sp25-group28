@@ -11,7 +11,7 @@ consulted: All team members
 informed: All team members
 ---
 
-# Adopt JSDoc for Documentation of JavaScript Code
+# Adopt Jest for Unit Testing JavaScript Code
 
 ## Context and Problem Statement
 
