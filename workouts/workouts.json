@@ -81,7 +81,7 @@
     "category": "Full Body",
     "muscle": "Full Body",
     "description": "Explosive move combining squat, push-up, and jump.",
-    "image": "workouts/images/Burpess.webp"
+    "image": "workouts/images/Burpees.webp"
   },
   {
     "name": "Glute Bridge",
@@ -214,7 +214,7 @@
     "category": "Full Body",
     "muscle": "Core",
     "description": "Complex movement enhancing strength and mobility.",
-    "image": "workouts/images/Plank-Get-Ups.webp"
+    "image": "workouts/images/Plank-Get-Ups.svg"
   },
   {
     "name": "Tuck Jumps",
