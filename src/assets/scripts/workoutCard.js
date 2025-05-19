@@ -5,9 +5,9 @@ class WorkoutCard extends HTMLElement {
   // the element is written into the DOM directly as <workout-card>
   constructor() {
     super(); // Inherit everything from HTMLElement
-    let shadowEl = this.attachShadow({ mode: 'open' });
-    let articleEl = document.createElement('article');
-    let styleEl = document.createElement('style');
+    let shadowEl = this.attachShadow({ mode: "open" });
+    let articleEl = document.createElement("article");
+    let styleEl = document.createElement("style");
 
     styleEl.textContent = `
             * {
@@ -80,24 +80,20 @@ class WorkoutCard extends HTMLElement {
    * let workoutCard = document.createElement('workout-card'); // Calls constructor()
    * workoutCard.data = { foo: 'bar' } // Calls set data({ foo: 'bar' })
    *
-   * @param {Object} data - The data to pass into the <recipe-card> must be of the
+   * @param {Object} data - The data to pass into the <workout-card> must be of the
    *                        following format:
-   *                        {
-   *                          "imgSrc": "string",
-   *                          "imgAlt": "string",
-   *                          "titleLnk": "string",
-   *                          "titleTxt": "string",
-   *                          "organization": "string",
-   *                          "rating": number,
-   *                          "numRatings": number,
-   *                          "lengthTime": "string",
-   *                          "ingredients": "string"
-   *                        }
+   *                            {
+                                    "name": "string",
+                                    "category": "string",
+                                    "muscle": "string",
+                                    "description": "string",
+                                    "image": "string"
+                                },
    */
   set data(data) {
     if (!data) return;
 
-    const cardEl = this.shadowRoot.querySelector('article');
+    const cardEl = this.shadowRoot.querySelector("article");
     cardEl.innerHTML = `
         <img src="${data.image}" alt="${data.name}">
         <h2 class="name">
