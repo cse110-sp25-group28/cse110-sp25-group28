@@ -65,7 +65,7 @@ class WorkoutCard extends HTMLElement {
             }
 
             .muscle {
-                font-style: italic;
+                font-style: sans-serif;
                 color: #888;
             }
     `;
