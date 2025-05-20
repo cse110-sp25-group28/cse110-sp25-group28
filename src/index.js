@@ -46,3 +46,28 @@ function addWorkoutsToDocument(workouts) {
   });
 }
 
+
+// Track the currently enlarged card
+let currentEnlargedCard = null;
+
+// Listen for custom events dispatched from any card
+document.addEventListener("workout-card-clicked", (e) => { // e is the custom event
+  const clickedCard = e.detail.card;
+
+  // If another card is already enlarged, shrink it
+  if (currentEnlargedCard && currentEnlargedCard !== clickedCard) {
+    currentEnlargedCard.shrinkCard();
+  }
+
+  // Toggle the clicked card's state
+  if (clickedCard.isEnlarged()) {
+    clickedCard.shrinkCard();
+    currentEnlargedCard = null;
+  } else {
+    clickedCard.enlargeCard();
+    currentEnlargedCard = clickedCard;
+  }
+});
+
+
+
