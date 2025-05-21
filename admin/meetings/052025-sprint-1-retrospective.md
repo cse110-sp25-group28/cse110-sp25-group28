@@ -14,12 +14,12 @@
 
 ### Accomplishments this past week:
 
-- We have the cards!!
-- We have the wireframes!!
-- Kinda have a main page
-- Qlty code
-- Delegation of tasks through issues
-- 
+- We were able to make accomplishments to lay the foundation
+- We communicated fairly well amongst ourselves
+- Issues were useful and so was project board delegations
+- Everyone had an idea of what they were working on
+- No one really fell behind
+  
 ### Improvements:
 
 - More prs being made so everyone is up to date
