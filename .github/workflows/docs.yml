@@ -6,7 +6,7 @@ on:
       - main  # or your default branch
   pull_request:
     branches:
-      - main  # or your default branch
+      - main  # or your default branch 
 
 jobs:
   jsdoc:

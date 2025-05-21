@@ -8,7 +8,7 @@ import { defineConfig } from "eslint/config";
 
 export default defineConfig([
   {
-    ignores: ['docs/styles/**', 'docs/scripts/**', 'dist/**', 'coverage/**'],
+    ignores: ['docs/styles/**', 'docs/scripts/**', 'dist/**', 'coverage/**', 'source/out/**'],
   },
   { files: ["**/*.{js,mjs,cjs}"], plugins: { js }, extends: ["js/recommended"] },
   { files: ["**/*.{js,mjs,cjs}"], languageOptions: { globals: globals.browser } },
