@@ -35,17 +35,22 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git checkout --orphan temp-$BRANCH_NAME
-          git reset --hard
-          git clean -fdx
-          
+
           if [ -d "docs" ]; then
-            cp -r docs/* .
+            mkdir temp-docs
+            cp -r docs/* temp-docs/
           else
             echo "No docs generated"
             exit 1
           fi
 
+          git checkout --orphan temp-$BRANCH_NAME
+          git reset --hard
+          git clean -fdx
+          
+          cp -r temp-docs/* .
+          rm -rf temp-docs
+          
           git add .
           git commit -m "Update JSDoc output"
           git push -f origin HEAD:$BRANCH_NAME
