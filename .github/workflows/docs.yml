@@ -8,6 +8,9 @@ on:
     branches:
       - main  # or your default branch 
 
+permissions:
+  contents: write
+
 jobs:
   jsdoc:
     runs-on: ubuntu-latest
@@ -25,3 +28,11 @@ jobs:
 
       - name: Generate JSDoc
         run: npx jsdoc -c jsdoc.json
+
+      - name: Commit and Push JSDoc
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add docs
+          git diff --cached --quiet || git commit -m "Update JSDoc output"
+          git push origin main
