@@ -38,8 +38,14 @@ jobs:
           git checkout --orphan $BRANCH_NAME
           git reset --hard
           git clean -fdx
-          mv docs/* .
-          rm -rf docs
+          
+          if [ -d "docs" ]; then
+            cp -r docs/* .
+          else
+            echo "No docs generated"
+            exit 1
+          fi
+
           git add .
           git commit -m "Update JSDoc output"
           git branch -M jsdoc
