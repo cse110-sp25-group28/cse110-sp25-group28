@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: shuffle.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,38 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: shuffle.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Randomly shuffles array of workout cards without modifying original array
+ *
+ * Uses the Fisher-Yates shuffle algorithm
+ *
+ * @param {Array} cards - Array of cards to shuffle
+ * @returns {Array} New array with the elements shuffled
+ * @throws {TypeError} If the input is not array
+ */
+export function shuffle(cards) {
+    if (!Array.isArray(cards)) {
+        throw new TypeError('Cards must be an array');
+    }
 
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+    const result = cards.slice();
+    for (let i = cards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [result[i], result[j]] = [result[j],result[i]];
+    }
+    return result;
+}</code></pre>
+        </article>
+    </section>
 
 
 
