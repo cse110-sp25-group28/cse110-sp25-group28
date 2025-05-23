@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: assets/scripts/workout-cards.js</title>
+    <title>JSDoc: Source: workout-cards.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: assets/scripts/workout-cards.js</h1>
+    <h1 class="page-title">Source: workout-cards.js</h1>
 
     
 
@@ -33,7 +33,7 @@
  */
 async function loadWorkoutCards() {
   try {
-    const dataURL = new URL('../../../workouts/workouts.json', import.meta.url);
+    const dataURL = '/workouts/workouts.json';
     const response = await fetch(dataURL);
     if (!response.ok) {
       throw new Error(`Failed to fetch workouts.json: ${response.status}`);
@@ -69,8 +69,8 @@ function createWorkoutCard(workout) {
   card.classList.add('card');
 
   const img = document.createElement('img');
-  const imgBase = new URL('../../../workouts/images/', import.meta.url);
-  img.src = new URL(encodeURIComponent(workout.name) + '.webp', imgBase);
+  const imgBase = '/workouts/images/';
+  img.src = imgBase + encodeURIComponent(workout.name) + '.webp';
   img.alt = workout.name;
   card.appendChild(img);
 
