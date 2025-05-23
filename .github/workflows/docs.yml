@@ -30,9 +30,17 @@ jobs:
         run: npx jsdoc -c jsdoc.json
 
       - name: Commit and Push JSDoc
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git add docs
-          git diff --cached --quiet || git commit -m "Update JSDoc output"
-          git push origin main
+          git checkout --orphan $BRANCH_NAME
+          git reset --hard
+          git clean -fdx
+          mv docs/* .
+          rm -rf docs
+          git add .
+          git commit -m "Update JSDoc output"
+          git branch -M jsdoc
+          git push -f origin jsdoc
