@@ -5,7 +5,7 @@
  */
 async function loadWorkoutCards() {
   try {
-    const dataURL = new URL('../../../workouts/workouts.json', import.meta.url);
+    const dataURL = './workouts/workouts.json';
     const response = await fetch(dataURL);
     if (!response.ok) {
       throw new Error(`Failed to fetch workouts.json: ${response.status}`);
@@ -41,8 +41,8 @@ function createWorkoutCard(workout) {
   card.classList.add('card');
 
   const img = document.createElement('img');
-  const imgBase = new URL('../../../workouts/images/', import.meta.url);
-  img.src = new URL(encodeURIComponent(workout.name) + '.webp', imgBase);
+  const imgBase = './workouts/images/';
+  img.src = imgBase + encodeURIComponent(workout.name) + '.webp';
   img.alt = workout.name;
   card.appendChild(img);
 
