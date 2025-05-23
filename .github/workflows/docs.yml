@@ -37,8 +37,7 @@ jobs:
           git config --global user.email "github-actions@github.com"
 
           if [ -d "docs" ]; then
-            mkdir temp-docs
-            cp -r docs/* temp-docs/
+            cp -a docs temp-docs
           else
             echo "No docs generated"
             exit 1
@@ -48,7 +47,7 @@ jobs:
           git reset --hard
           git clean -fdx
           
-          cp -r temp-docs/* .
+          cp -a temp-docs/* .
           rm -rf temp-docs
           
           git add .
