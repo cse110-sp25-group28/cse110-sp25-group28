@@ -35,7 +35,7 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git checkout --orphan $BRANCH_NAME
+          git checkout --orphan temp-$BRANCH_NAME
           git reset --hard
           git clean -fdx
           
@@ -48,5 +48,4 @@ jobs:
 
           git add .
           git commit -m "Update JSDoc output"
-          git branch -M jsdoc
-          git push -f origin jsdoc
+          git push -f origin HEAD:$BRANCH_NAME
