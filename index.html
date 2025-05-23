@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Workout Cards</title>
-    <link rel="stylesheet" href="source/style.css">
-    <script src="source/assets/scripts/workoutCard.js" type="module"></script>
-    <script src="source/index.js" type="module"></script>
-  </head>
-  <body>
-    <main>
-        <!-- <h1>Choose a card from the deck:</h1>  
-        <div class="card">
-          <h2>Workout Card</h2>
-          <p>Flip me</p>
-        </div>
-        <div class="button-container">
-            <button>Previous</button>
-            <button>Next</button>
-        </div> -->
-    </main>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SweatDeck</title>
+  <link rel="stylesheet" href="source/styles.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo-section">
+      <div class="logo"></div>
+      <h1 class="app-name">SweatDeck</h1>
+    </div>
+    <button class="create-deck" onclick="window.location.href='create-deck.html'">Create New Deck</button>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <h2 class="catch-phrase">Check out your Decks!</h2>
+    <p class="summary">
+      Below are your created decks. Click on any to expand.
+    </p>
+    <div id="deck-container" class="decks"></div>
+    <script src="source/index.js"></script>
+  </main>
+</body>
 </html>

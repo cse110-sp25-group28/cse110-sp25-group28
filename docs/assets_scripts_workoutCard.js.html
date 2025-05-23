@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: assets/scripts/workoutCard.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: assets/scripts/workoutCard.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// workoutCard.js
+
+class WorkoutCard extends HTMLElement {
+  // Called once when document.createElement('workout-card') is called, or
+  // the element is written into the DOM directly as &lt;workout-card>
+  constructor() {
+    super(); // Inherit everything from HTMLElement
+    let shadowEl = this.attachShadow({ mode: "open" });
+    let articleEl = document.createElement("article");
+    let styleEl = document.createElement("style");
+
+    styleEl.textContent = `
+            * {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            article {
+                background-color: #fff;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+                width: 250px;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding-bottom: 1rem;
+                // transition: transform 0.2s ease-in-out;
+                transition:
+                    transform 0.4s ease,
+                    top 0.4s ease,
+                    left 0.4s ease,
+                    cursor: pointer;
+                    position: relative;
+            }
+
+            article:hover {
+                transform: translateY(-4px);
+            }
+
+            /* Enlarged state styling */
+            article.enlarged {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) scale(1.5);
+                z-index: 1000;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+                transition:
+                    transform 0.4s ease,
+                    top 0.4s ease,
+                    left 0.4s ease,
+            }
+
+            article > img {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+            }
+
+            h2.name {
+                font-size: 1.1rem;
+                margin: 1rem 0 0.5rem;
+                color: #333;
+            }
+
+            h2.name a {
+                text-decoration: none;
+                color: inherit;
+            }
+
+            p {
+                font-size: 0.9rem;
+                margin: 0.3rem 0;
+                color: #555;
+                text-align: center;
+                padding: 0 1rem;
+            }
+
+            .category {
+                font-weight: bold;
+            }
+
+            .muscle {
+                font-style: sans-serif;
+                color: #888;
+            }
+    `;
+
+     // Add click listener to article
+    articleEl.addEventListener("click", () => {
+      // Tell the outside world "I was clicked"
+      this.dispatchEvent(new CustomEvent("workout-card-clicked", {
+        bubbles: true,     // allow the event to bubble up
+        composed: true,    // allow it to escape the Shadow DOM
+        detail: { card: this } // include a reference to this card
+      }));
+    });
+
+    shadowEl.append(articleEl);
+    shadowEl.append(styleEl);
+  }
+
+  /**
+   * Called when the .data property is set on this element.
+   *
+   * For example:
+   * let workoutCard = document.createElement('workout-card'); // Calls constructor()
+   * workoutCard.data = { foo: 'bar' } // Calls set data({ foo: 'bar' })
+   *
+   * @param {Object} data - The data to pass into the &lt;workout-card> must be of the
+   *                        following format:
+   *                            {
+                                    "name": "string",
+                                    "category": "string",
+                                    "muscle": "string",
+                                    "description": "string",
+                                    "image": "string"
+                                },
+   */
+  set data(data) {
+    if (!data) return;
+
+    const cardEl = this.shadowRoot.querySelector("article");
+    cardEl.innerHTML = `
+        &lt;img src="${data.image}" alt="${data.name}">
+        &lt;h2 class="name">
+          &lt;a>${data.name}&lt;/a>
+        &lt;/h2>
+        &lt;p class="category">${data.category}&lt;/p>
+        &lt;p class="muscle">${data.muscle}&lt;/p>
+        &lt;p class="description">${data.description}&lt;/p>
+      `;
+  }
+
+
+  // Utility methods for outside code to use
+
+  enlargeCard() {
+    const article = this.shadowRoot.querySelector("article");
+    article.classList.add("enlarged");
+  }
+
+  shrinkCard() {
+    const article = this.shadowRoot.querySelector("article");
+    article.classList.remove("enlarged");
+  }
+
+  toggleCard() {
+    const article = this.shadowRoot.querySelector("article");
+    article.classList.toggle("enlarged");
+  }
+
+  isEnlarged() {
+    const article = this.shadowRoot.querySelector("article");
+    return article.classList.contains("enlarged");
+  }
+
+}
+
+customElements.define("workout-card", WorkoutCard);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#add">add</a></li><li><a href="global.html#addWorkoutsToDocument">addWorkoutsToDocument</a></li><li><a href="global.html#createWorkoutCard">createWorkoutCard</a></li><li><a href="global.html#getWorkoutsFromStorage">getWorkoutsFromStorage</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#loadWorkoutCards">loadWorkoutCards</a></li><li><a href="global.html#shuffle">shuffle</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Fri May 23 2025 21:48:32 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
