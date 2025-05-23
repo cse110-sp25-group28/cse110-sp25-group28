@@ -29,8 +29,10 @@ jobs:
       - name: Generate JSDoc
         run: npx jsdoc -c jsdoc.json
 
-      - name: Upload docs as artifact (optional)
-        uses: actions/upload-artifact@v3
-        with:
-          name: jsdoc
-          path: docs/
+      - name: Commit JSDoc to branch
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git add docs
+          git commit -m "Auto-generate JSDoc" || echo "No changes to commit"
+          git push
