@@ -39,15 +39,8 @@ export function initFiltering(workouts) {
     /* 2. Pass list through helper to deduplicate & sort */
     const muscles = uniqueStrings(rawMuscleNames);
 
-    /* 3. Repeat same steps for categories */
-    const rawCategoryNames = [];
-    for (const workout of workouts) {
-        rawCategoryNames.push(workout.category);
-    }
-    const categories = uniqueStrings(rawCategoryNames);
-
     // ─── 3. Toolbar  ────────────────────────────
-    const toolbar = buildToolbar(muscles, categories);
+    const toolbar = buildToolbar(muscles);
     const main = document.querySelector('main');
     main.prepend(toolbar);      // Insert on top of cards
 
@@ -119,7 +112,7 @@ function makeSelect(type, values, label) {
  * @param {string[]} categories
  * @returns {HTMLElement}
  */
-function buildToolbar(muscles, categories) {
+function buildToolbar(muscles) {
     const toolbar = document.createElement('section');
     toolbar.id = 'filter-toolbar';
     Object.assign(toolbar.style, {
@@ -131,7 +124,6 @@ function buildToolbar(muscles, categories) {
 
     toolbar.append(
         makeSelect('muscle', muscles, 'Muscle group'),
-        makeSelect('category', categories, 'Category')
     );
     return toolbar;
 }
@@ -143,7 +135,6 @@ function buildToolbar(muscles, categories) {
  */
 function applyFilters() {
     const muscleSel = document.querySelector('#filter-muscle').value;
-    const categorySel = document.querySelector('#filter-category').value;
 
     /** @type {NodeListOf<HTMLElement>} */
     const cards = document.querySelectorAll('workout-card');
@@ -152,10 +143,7 @@ function applyFilters() {
         const matchesMuscle =
             muscleSel === 'all' || card.dataset.muscle === muscleSel;
 
-        const matchesCategory =
-            categorySel === 'all' || card.dataset.category === categorySel;
-
-        if (matchesMuscle && matchesCategory) {
+        if (matchesMuscle) {
             // Keep card visible
             card.style.display = '';
         } else {
@@ -167,8 +155,7 @@ function applyFilters() {
 
     // Remain for reloads
     localStorage.setItem('filters', JSON.stringify({
-        muscle: muscleSel,
-        category: categorySel
+        muscle: muscleSel
     }));
 }
 
@@ -179,10 +166,7 @@ function restoreSelections(toolbar) {
         if (saved.muscle){
             toolbar.querySelector('#filter-muscle').value = saved.muscle
 
-        } 
-        if (saved.category){
-            toolbar.querySelector('#filter-category').value = saved.category;
-        }    
+        }     
     } catch (err) {
         console.warn('[filterControls] Corrupt filter data ignored!', err);
     }
