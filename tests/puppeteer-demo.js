@@ -10,4 +10,5 @@ const puppeteer = require('puppeteer');
   const title = await page.title();
   console.log('Page title:', title);
   await browser.close();
+  //comment
 })();
