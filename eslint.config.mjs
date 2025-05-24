@@ -15,4 +15,5 @@ export default defineConfig([
   { files: ["**/*.md"], plugins: { markdown }, language: "markdown/gfm", extends: ["markdown/recommended"] },
   { files: ["**/*.css"], plugins: { css }, language: "css/css", extends: ["css/recommended"] },
   { files: ['**/*.test.js', '**/__tests__/**/*.js'], plugins: { jest }, languageOptions: { globals: jest.environments.globals.globals } },
+  {files: ["**/*.{js,mjs,cjs}"], languageOptions: { globals: { ...globals.node, ...globals.commonjs }} }
 ]);
