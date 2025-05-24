@@ -32,10 +32,14 @@ jobs:
       - name: Generate JSDoc
         run: npx jsdoc -c jsdoc.json
 
-      - name: Commit JSDoc to branch
+      - name: Commit JSDoc and push to PR branch
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
+
+          BRANCH_NAME=jsdoc/update-$(date +%s)
+          git checkout -b $BRANCH_NAME
+
           git add docs
           git commit -m "Auto-generate JSDoc" || echo "No changes to commit"
-          git push origin HEAD:main
+          git push origin $BRANCH_NAME
