@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint .",
-    "docs": "jsdoc -c jsdoc.json"
+    "docs": "jsdoc -c jsdoc.json",
+    "puppeteer:test": "node tests/puppeteer-demo.js"
   },
   "repository": {
     "type": "git",
@@ -35,9 +36,5 @@
     "jest-puppeteer": "^11.0.0",
     "jsdoc": "^4.0.4",
     "puppeteer": "^24.9.0"
-  },
-  "jest": {
-    "preset": "jest-puppeteer",
-    "verbose": true
   }
 }
