@@ -80,9 +80,6 @@ class WorkoutCard extends HTMLElement {
                 padding: 0 1rem;
             }
 
-            .category {
-                font-weight: bold;
-            }
 
             .muscle {
                 font-style: sans-serif;
@@ -115,7 +112,6 @@ class WorkoutCard extends HTMLElement {
    *                        following format:
    *                            {
                                     "name": "string",
-                                    "category": "string",
                                     "muscle": "string",
                                     "description": "string",
                                     "image": "string"
@@ -137,7 +133,6 @@ class WorkoutCard extends HTMLElement {
         <h2 class="name">
           <a>${data.name}</a>
         </h2>
-        <p class="category">${data.category}</p>
         <p class="muscle">${data.muscle}</p>
         <p class="description">${data.description}</p>
       `;

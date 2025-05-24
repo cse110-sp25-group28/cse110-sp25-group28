@@ -104,6 +104,18 @@ button {
   transition: background-color 0.2s ease;
 }
 
+.create-deck{
+  margin: 0 auto;
+}
+
 button:hover {
   background-color: #0056b3;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

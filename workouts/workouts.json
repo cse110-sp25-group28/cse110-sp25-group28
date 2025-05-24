@@ -1,301 +1,258 @@
 [
   {
     "name": "Push-Up",
-    "category": "Upper Body",
     "muscle": "Chest",
     "description": "Classic bodyweight exercise targeting the chest, triceps, and shoulders.",
     "image": "workouts/images/Push-Up.webp"
   },
   {
     "name": "Squat",
-    "category": "Lower Body",
     "muscle": "Quadriceps",
     "description": "Compound movement that strengthens legs and glutes.",
     "image": "workouts/images/Squat.webp"
   },
   {
     "name": "Pull-Up",
-    "category": "Upper Body",
     "muscle": "Back",
     "description": "Bodyweight exercise for building upper back and biceps.",
     "image": "workouts/images/Pull-Up.webp"
   },
   {
     "name": "Plank",
-    "category": "Core",
     "muscle": "Abdominals",
     "description": "Isometric core exercise that improves stability and endurance.",
     "image": "workouts/images/Plank.webp"
   },
   {
     "name": "Lunges",
-    "category": "Lower Body",
     "muscle": "Glutes",
     "description": "Strengthens legs and improves balance through unilateral movement.",
     "image": "workouts/images/Lunges.webp"
   },
   {
     "name": "Bench Press",
-    "category": "Upper Body",
     "muscle": "Chest",
     "description": "Barbell or dumbbell exercise for upper body pushing strength.",
     "image": "workouts/images/Bench-Press.webp"
   },
   {
     "name": "Deadlift",
-    "category": "Full Body",
     "muscle": "Hamstrings",
     "description": "Fundamental lifting exercise targeting posterior chain.",
     "image": "workouts/images/Deadlift.webp"
   },
   {
     "name": "Shoulder Press",
-    "category": "Upper Body",
     "muscle": "Shoulders",
     "description": "Overhead pressing movement to build deltoid strength.",
     "image": "workouts/images/Shoulder-Press.webp"
   },
   {
     "name": "Bicep Curl",
-    "category": "Upper Body",
     "muscle": "Biceps",
     "description": "Isolation movement to develop arm strength.",
     "image": "workouts/images/Bicep-Curl.webp"
   },
   {
     "name": "Tricep Dip",
-    "category": "Upper Body",
     "muscle": "Triceps",
     "description": "Bodyweight exercise to isolate the triceps.",
     "image": "workouts/images/Tricep-Dip.webp"
   },
   {
     "name": "Oblique Crunch",
-    "category": "Core",
     "muscle": "Obliques",
     "description": "Rotational ab move to target the obliques.",
     "image": "workouts/images/Oblique-Crunch.webp"
   },
   {
     "name": "Burpees",
-    "category": "Full Body",
     "muscle": "Full Body",
     "description": "Explosive move combining squat, push-up, and jump.",
     "image": "workouts/images/Burpees.webp"
   },
   {
     "name": "Glute Bridge",
-    "category": "Lower Body",
     "muscle": "Glutes",
     "description": "Targets glutes and hamstrings from a supine position.",
     "image": "workouts/images/Glute-Bridge.webp"
   },
   {
     "name": "Leg Raises",
-    "category": "Core",
     "muscle": "Abs",
     "description": "Hanging leg raise to activate lower abs.",
     "image": "workouts/images/Leg-Raises.webp"
   },
   {
     "name": "Calf Raises",
-    "category": "Lower Body",
     "muscle": "Calves",
     "description": "Simple exercise to strengthen the calves.",
     "image": "workouts/images/Calf-Raises.webp"
   },
   {
     "name": "Dumbbell Rows",
-    "category": "Upper Body",
     "muscle": "Back",
     "description": "Pulling movement to develop upper back strength.",
     "image": "workouts/images/Dumbbell-Rows.webp"
   },
   {
     "name": "Wall Sit",
-    "category": "Lower Body",
     "muscle": "Quads",
     "description": "Isometric hold to build quad endurance.",
     "image": "workouts/images/Wall-Sit.webp"
   },
   {
     "name": "Jump Squat",
-    "category": "Lower Body",
     "muscle": "Glutes",
     "description": "Explosive version of squat for power.",
     "image": "workouts/images/Jump-Squat.webp"
   },
   {
     "name": "Donkey Kicks",
-    "category": "Lower Body",
     "muscle": "Glutes",
     "description": "Targets glutes in quadruped position.",
     "image": "workouts/images/Donkey-Kicks.webp"
   },
   {
     "name": "Fire Hydrant",
-    "category": "Lower Body",
     "muscle": "Glutes",
     "description": "Isolates outer glutes and hip mobility.",
     "image": "workouts/images/Fire-Hydrant.webp"
   },
   {
     "name": "Hip Thrust",
-    "category": "Lower Body",
     "muscle": "Glutes",
     "description": "Glute-building move with or without weights.",
     "image": "workouts/images/Hip-Thrust.webp"
   },
   {
     "name": "Chest Fly",
-    "category": "Upper Body",
     "muscle": "Chest",
     "description": "Isolation movement for chest using dumbbells.",
     "image": "workouts/images/Chest-Fly.webp"
   },
   {
     "name": "Lat Pulldown",
-    "category": "Upper Body",
     "muscle": "Back",
     "description": "Cable or machine-based vertical pulling exercise.",
     "image": "workouts/images/Lat-Pulldown.webp"
   },
   {
     "name": "Cable Row",
-    "category": "Upper Body",
     "muscle": "Back",
     "description": "Seated pulling movement for mid back.",
     "image": "workouts/images/Cable-Row.webp"
   },
   {
     "name": "Incline Press",
-    "category": "Upper Body",
     "muscle": "Chest",
     "description": "Variation of bench press focusing on upper chest.",
     "image": "workouts/images/Incline-Press.webp"
   },
   {
     "name": "Lateral Raise",
-    "category": "Upper Body",
     "muscle": "Shoulders",
     "description": "Raises arms sideways to isolate lateral delts.",
     "image": "workouts/images/Lateral-Raise.webp"
   },
   {
     "name": "Front Raise",
-    "category": "Upper Body",
     "muscle": "Shoulders",
     "description": "Raises arms forward to target front delts.",
     "image": "workouts/images/Front-Raise.webp"
   },
   {
     "name": "Rear Delt Fly",
-    "category": "Upper Body",
     "muscle": "Shoulders",
     "description": "Reverse fly motion to isolate rear deltoids.",
     "image": "workouts/images/Rear-Delt-Fly.webp"
   },
   {
     "name": "Hammer Curl",
-    "category": "Upper Body",
     "muscle": "Biceps",
     "description": "Curl variation to emphasize brachialis muscle.",
     "image": "workouts/images/Hammer-Curl.webp"
   },
   {
     "name": "Overhead Tricep Extension",
-    "category": "Upper Body",
     "muscle": "Triceps",
     "description": "Extension movement to isolate triceps.",
     "image": "workouts/images/Overhead-Tricep-Extension.webp"
   },
   {
     "name": "Plank Get Ups",
-    "category": "Full Body",
     "muscle": "Core",
     "description": "Complex movement enhancing strength and mobility.",
     "image": "workouts/images/Plank-Get-Ups.svg"
   },
   {
     "name": "Tuck Jumps",
-    "category": "Cardio",
     "muscle": "Legs",
     "description": "Explosive cardio drill requiring jump tuck position.",
     "image": "workouts/images/Tuck-Jumps.webp"
   },
   {
     "name": "Cable Lateral Raise",
-    "category": "Upper Body",
     "muscle": "Shoulders",
     "description": "Uses a cable machine to isolate the lateral deltoids.",
     "image": "workouts/images/Cable-Lateral-Raise.webp"
   },
   {
     "name": "Goblet Squat",
-    "category": "Lower Body",
     "muscle": "Quads",
     "description": "Squat holding a dumbbell or kettlebell at chest level.",
     "image": "workouts/images/Goblet-Squat.webp"
   },
   {
     "name": "Step Ups",
-    "category": "Lower Body",
     "muscle": "Glutes",
     "description": "Step onto a box or bench to build leg strength.",
     "image": "workouts/images/Step-Ups.webp"
   },
   {
     "name": "Incline Dumbbell Curl",
-    "category": "Upper Body",
     "muscle": "Biceps",
     "description": "Curl done seated on incline bench for full range.",
     "image": "workouts/images/Incline-Dumbbell-Curl.webp"
   },
   {
     "name": "Reverse Crunch",
-    "category": "Core",
     "muscle": "Lower Abs",
     "description": "Lying ab move bringing knees toward chest.",
     "image": "workouts/images/Reverse-Crunch.webp"
   },
   {
     "name": "T-Bar Row",
-    "category": "Upper Body",
     "muscle": "Back",
     "description": "Free weight pulling movement to develop upper-back.",
     "image": "workouts/images/T-Bar-Row.webp"
   },
   {
     "name": "Leg Curl Machine",
-    "category": "Lower Body",
     "muscle": "Hamstrings",
     "description": "Isolates hamstrings using curling motion.",
     "image": "workouts/images/Leg-Curl-Machine.webp"
   },
   {
     "name": "Leg Extension Machine",
-    "category": "Lower Body",
     "muscle": "Quads",
     "description": "Machine-based leg lift for quads.",
     "image": "workouts/images/Leg-Extension-Machine.webp"
   },
   {
     "name": "Dumbbell Pullover",
-    "category": "Upper Body",
     "muscle": "Chest",
     "description": "Chest and lat stretch-strengthen movement.",
     "image": "workouts/images/Dumbbell-Pullover.webp"
   },
   {
     "name": "Cable Kickback",
-    "category": "Lower Body",
     "muscle": "Glutes",
     "description": "Cable-assisted kickback isolating glutes.",
     "image": "workouts/images/Cable-Kickback.webp"
   },
   {
     "name": "Crunch Machine",
-    "category": "Core",
     "muscle": "Abs",
     "description": "Sit-up performed with added weight for resistance.",
     "image": "workouts/images/Crunch-Machine.webp"
