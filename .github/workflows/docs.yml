@@ -10,6 +10,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   jsdoc:
@@ -29,10 +30,19 @@ jobs:
       - name: Generate JSDoc
         run: npx jsdoc -c jsdoc.json
 
-      - name: Commit JSDoc to branch
+      - name: Commit and push JSDoc changes
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
+          git checkout -b jsdoc/update-${{ github.run_id }}
           git add docs
           git commit -m "Auto-generate JSDoc" || echo "No changes to commit"
-          git push origin HEAD:$GITHUB_REF_NAME
+          git push origin jsdoc/update-${{ github.run_id }}
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          branch: jsdoc/update-${{ github.run_id }}
+          title: "Auto-generate JSDoc"
+          body: "This PR was automatically created by GitHub Actions to update JSDoc output."
+          labels: documentation
