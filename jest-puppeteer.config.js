@@ -1,7 +1,14 @@
-/* eslint-env node */
 module.exports = {
   launch: {
-    headless: false,
-    slowMo: 25
-  }
-}
+    headless: "new",
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-gpu',
+      '--disable-dev-shm-usage',
+      '--disable-software-rasterizer',
+      '--single-process',
+      '--no-zygote',
+    ],
+  },
+};
