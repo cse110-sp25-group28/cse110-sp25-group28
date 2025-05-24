@@ -15,4 +15,4 @@ jobs:
           node-version: '20'
 
       - run: npm install
-      - run: npm run ./tests/puppeteer-demo.test.js
+      - run: npm test ./tests/puppeteer-demo.test.js
