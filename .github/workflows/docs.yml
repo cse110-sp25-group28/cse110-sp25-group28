@@ -2,9 +2,9 @@ name: Generate JSDoc
 
 on:
   push:
-    branches:
+    branches-ignore:
       - main
-  pull_request:
+  pull_request-ignore:
     branches:
       - main
 
