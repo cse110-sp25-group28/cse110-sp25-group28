@@ -124,6 +124,20 @@ class WorkoutCard extends HTMLElement {
   set data(data) {
     if (!data) return;
 
+    if (typeof data.muscle === 'string' && data.muscle.trim() !== '') {
+      // Normal case: store muscle name
+      this.dataset.muscle = cardData.muscle.toLowerCase();
+    } else {
+      // Fallback: no valid muscle
+      this.dataset.muscle = '';
+    }
+
+    if (typeof data.category === 'string' && data.category.trim() !== '') {
+      this.dataset.category = cardData.category.toLowerCase();
+    } else {
+      this.dataset.category = '';
+    }
+
     const cardEl = this.shadowRoot.querySelector("article");
     cardEl.innerHTML = `
         <img src="${data.image}" alt="${data.name}">

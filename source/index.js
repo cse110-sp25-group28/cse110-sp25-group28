@@ -5,13 +5,14 @@ window.addEventListener("DOMContentLoaded", () => {
   const decks = JSON.parse(localStorage.getItem("decks")) || [];
 
   if (decks.length === 0) {
-    const defaultDecks = [
+    const DEFAULT_DECKS = [
       { name: "Chest Day" },
       { name: "Legs & Core" },
       { name: "Mobility Flow" },
       { name: "Cardio Blast" }
     ];
-    localStorage.setItem("decks", JSON.stringify(defaultDecks));
+    localStorage.setItem("decks", JSON.stringify(DEFAULT_DECKS));
+    decks = DEFAULT_DECKS;
     console.log("Default decks initialized in localStorage.");
   } else {
     console.log("Decks already exist in localStorage.");
