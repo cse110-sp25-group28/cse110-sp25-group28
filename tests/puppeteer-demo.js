@@ -11,4 +11,5 @@ const puppeteer = require('puppeteer');
   console.log('Page title:', title);
   await browser.close();
   //comment
+  //comment 2
 })();
