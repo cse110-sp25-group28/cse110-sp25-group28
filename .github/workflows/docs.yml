@@ -35,4 +35,4 @@ jobs:
           git config --global user.email 'github-actions@github.com'
           git add docs
           git commit -m "Auto-generate JSDoc" || echo "No changes to commit"
-          git push
+          git push origin HEAD:$GITHUB_REF_NAME
