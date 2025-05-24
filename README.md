@@ -27,3 +27,4 @@ Tests can be found in the `tests/` folder and contains Jest unit tests and E2E t
 - Qltycode
 - HTML/CSS/JS
 - GitHub Actions
+- Puppeteer
