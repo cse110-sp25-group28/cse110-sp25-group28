@@ -33,7 +33,7 @@ async function loadWorkoutCards() {
 
 /**
  * Create DOM element representing workout card.
- * @param {{name: string, category: string, muscle: string, description: string}} workout - Workout data
+ * @param {{name: string, muscle: string, description: string}} workout - Workout data
  * @returns {HTMLElement} The created card element
  */
 function createWorkoutCard(workout) {
@@ -49,10 +49,6 @@ function createWorkoutCard(workout) {
   const name = document.createElement('h2');
   name.textContent = workout.name;
   card.appendChild(name);
-
-  const category = document.createElement('p');
-  category.textContent = `Category: ${workout.category}`;
-  card.appendChild(category);
 
   const muscle = document.createElement('p');
   muscle.textContent = `Target Muscle: ${workout.muscle}`;

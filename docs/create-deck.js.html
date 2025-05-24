@@ -26,7 +26,8 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>window.addEventListener("DOMContentLoaded", init);
+            <pre class="prettyprint source linenums"><code>import { initFiltering } from './assets/scripts/filter-control.js';
+window.addEventListener("DOMContentLoaded", init);
 
 /**
  * Starts the program, all function calls trace back here
@@ -35,6 +36,7 @@ async function init() {
     const workouts = await getWorkoutsFromStorage();
     if (workouts) {
       addWorkoutsToDocument(workouts);
+      initFiltering(workouts);
     }
 }
 
@@ -109,7 +111,7 @@ document.addEventListener("workout-card-clicked", (e) => { // e is the custom ev
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#add">add</a></li><li><a href="global.html#addWorkoutsToDocument">addWorkoutsToDocument</a></li><li><a href="global.html#createWorkoutCard">createWorkoutCard</a></li><li><a href="global.html#getWorkoutsFromStorage">getWorkoutsFromStorage</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#loadWorkoutCards">loadWorkoutCards</a></li><li><a href="global.html#shuffle">shuffle</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#add">add</a></li><li><a href="global.html#addWorkoutsToDocument">addWorkoutsToDocument</a></li><li><a href="global.html#applyFilters">applyFilters</a></li><li><a href="global.html#buildToolbar">buildToolbar</a></li><li><a href="global.html#capitalize">capitalize</a></li><li><a href="global.html#createWorkoutCard">createWorkoutCard</a></li><li><a href="global.html#getWorkoutsFromStorage">getWorkoutsFromStorage</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#loadWorkoutCards">loadWorkoutCards</a></li><li><a href="global.html#makeSelect">makeSelect</a></li><li><a href="global.html#restoreSelections">restoreSelections</a></li><li><a href="global.html#shuffle">shuffle</a></li><li><a href="global.html#uniqueStrings">uniqueStrings</a></li></ul>
 </nav>
 
 <br class="clear">
