@@ -12,7 +12,6 @@ window.addEventListener("DOMContentLoaded", () => {
       { name: "Cardio Blast" }
     ];
     localStorage.setItem("decks", JSON.stringify(DEFAULT_DECKS));
-    decks = DEFAULT_DECKS;
     console.log("Default decks initialized in localStorage.");
   } else {
     console.log("Decks already exist in localStorage.");
