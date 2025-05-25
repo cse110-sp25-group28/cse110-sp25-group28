@@ -18,23 +18,25 @@ describe('Basic user flow for Website', () => {
   }, 10000);
 
   it('Testing Filtering System', async () => {
-    await page.click('.create-deck');
-    
-    // select the filter and select biceps
-    await page.select('select#filter-muscle', 'biceps');
+  await page.click('.create-deck');
 
-    const visibleMuscles = await page.$$eval('workout-card', cards =>
-      cards
-        .filter(card => getComputedStyle(card).display !== 'none')
-        .map(card => card.dataset.muscle)
-    );
+  // ⏳ Wait for dropdown to be injected
+  await page.waitForSelector('select#filter-muscle');
 
-    // Assert all visible cards have muscle === 'biceps'
-    expect(visibleMuscles.every(muscle => muscle === 'biceps')).toBe(true);
+  // ✅ Now it's safe to select
+  await page.select('select#filter-muscle', 'biceps');
 
-    // Check localStorage for saved filter value
-    const savedFilters = await page.evaluate(() => localStorage.getItem('filters'));
-    expect(savedFilters).toContain('"muscle":"biceps"');
-  }, 10000);
+  // Check visible cards
+  const visibleMuscles = await page.$$eval('workout-card', cards =>
+    cards
+      .filter(card => getComputedStyle(card).display !== 'none')
+      .map(card => card.dataset.muscle)
+  );
 
+  expect(visibleMuscles.every(muscle => muscle === 'biceps')).toBe(true);
+
+  // Check localStorage
+  const savedFilters = await page.evaluate(() => localStorage.getItem('filters'));
+  expect(savedFilters).toContain('"muscle":"biceps"');
+}, 10000);
 });
