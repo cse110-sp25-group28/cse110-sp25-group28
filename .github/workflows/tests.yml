@@ -11,3 +11,5 @@ jobs: # the things being executed
         run: npm install
       - name: Unit Test
         run: npm test ./tests/example.test.js # the actual testing line
+      - name: Create Deck Test
+        run: npm test ./__tests__/create-deck.test.js
