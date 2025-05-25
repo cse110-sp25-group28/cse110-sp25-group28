@@ -1,6 +1,6 @@
 module.exports = {
   launch: {
-    headless: "new",
+    headless: false,
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',

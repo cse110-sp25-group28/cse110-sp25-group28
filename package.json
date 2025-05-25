@@ -9,8 +9,8 @@
     "docs": "jsdoc -c jsdoc.json"
   },
   "jest": {
-  "preset": "jest-puppeteer",
-  "verbose": true
+    "preset": "jest-puppeteer",
+    "verbose": true
   },
   "repository": {
     "type": "git",
