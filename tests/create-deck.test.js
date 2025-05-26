@@ -9,6 +9,8 @@ describe('create deck test', () => {
     it('Get workouts from local paths', async () => {
       console.log('getWorkoutsFromStorage() function');
   
+      await page.waitForSelector('workout-card', { timeout: 10000 });
+
       // Query select all of the <product-item> elements and return the length of that array
       const numWorkouts = await page.$$eval('workout-card', (workoutCards) => {
         return workoutCards.length;
@@ -24,7 +26,7 @@ describe('create deck test', () => {
 
         // Start as true, if any don't have data, swap to false
         let allArePopulated = true;
-
+      
         // Query select all of the <product-item> elements
         const workoutCardData = await page.$$eval('product-item', workoutCards => {
             return workoutCards.map(item => {

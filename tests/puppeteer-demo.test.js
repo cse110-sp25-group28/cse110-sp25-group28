@@ -18,19 +18,20 @@ describe('Basic user flow for Website', () => {
   }, 10000);
 
   it('Testing Filtering System', async () => {
-  await page.click('.create-deck');
+    await page.waitForSelector('.create-deck', { timeout: 5000 });
+    await page.click('.create-deck');
 
-  // ⏳ Wait for dropdown to be injected
-  await page.waitForSelector('select#filter-muscle');
+    // ⏳ Wait for dropdown to be injected
+    await page.waitForSelector('select#filter-muscle');
 
-  // ✅ Now it's safe to select
-  await page.select('select#filter-muscle', 'biceps');
+    // ✅ Now it's safe to select
+    await page.select('select#filter-muscle', 'biceps');
 
-  // Check visible cards
-  const visibleMuscles = await page.$$eval('workout-card', cards =>
-    cards
-      .filter(card => getComputedStyle(card).display !== 'none')
-      .map(card => card.dataset.muscle)
+    // Check visible cards
+    const visibleMuscles = await page.$$eval('workout-card', cards =>
+      cards
+        .filter(card => getComputedStyle(card).display !== 'none')
+        .map(card => card.dataset.muscle)
   );
 
   expect(visibleMuscles.every(muscle => muscle === 'biceps')).toBe(true);
