@@ -1,7 +1,7 @@
 describe('Basic user flow for Website', () => {
 
   beforeAll(async () => {
-    await page.goto('http://localhost:3000/index.html');
+    await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28/');
   });
 
   it('Clicking Create New Deck redirects to create-deck.html', async () => {

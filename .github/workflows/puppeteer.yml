@@ -16,9 +16,4 @@ jobs:
 
       - run: npm install
 
-      - name: Start local server
-        run: |
-          npx http-server . -p 3000 &
-          npx wait-on http://localhost:3000
-          
       - run: npm test ./tests/puppeteer-demo.test.js

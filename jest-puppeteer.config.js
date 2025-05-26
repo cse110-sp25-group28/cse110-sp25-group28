@@ -11,10 +11,4 @@ module.exports = {
       '--no-zygote',
     ],
   },
-  server: {
-    command: 'npx http-server . -p 3000',
-    port: 3000,
-    launchTimeout: 10000,
-    debug: true,
-  },
 };
