@@ -1,7 +1,7 @@
 describe('Basic user flow for Website', () => {
 
   beforeAll(async () => {
-    await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28/');
+    await page.goto('http://localhost:3000/index.html');
   });
 
   it('Clicking Create New Deck redirects to create-deck.html', async () => {
@@ -11,8 +11,7 @@ describe('Basic user flow for Website', () => {
   }, 10000);
 
   it('Clicking View Deck redirects to index.html', async () => {
-    await page.click('button');
-    
+    await page.click('.view-decks');
     const url = page.url();
     expect(url).toContain('index.html');
   }, 10000);

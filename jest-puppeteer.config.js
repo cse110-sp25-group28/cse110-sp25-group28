@@ -1,6 +1,6 @@
 module.exports = {
   launch: {
-    headless: 'new',
+    headless: false,
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
@@ -10,5 +10,11 @@ module.exports = {
       '--single-process',
       '--no-zygote',
     ],
+  },
+  server: {
+    command: 'npx http-server . -p 3000',
+    port: 3000,
+    launchTimeout: 10000,
+    debug: true,
   },
 };
