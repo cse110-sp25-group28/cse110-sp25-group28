@@ -2,7 +2,7 @@ import { initFiltering } from './assets/scripts/filter-control.js';
 window.addEventListener("DOMContentLoaded", init);
 
 let selection = false;
-// Sets a selection mode, giving the ability to add cards to a deck
+// Sets a "selection" mode, giving the ability to add cards to a deck
 document.getElementById("selectorOn").addEventListener("click", () => {
   selection = !selection;
   const toggle = document.getElementById("selectorOn");
