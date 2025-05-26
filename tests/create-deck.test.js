@@ -35,8 +35,9 @@ describe('create deck test', () => {
 
         for (let i = 0; i < workoutCardData.length;  i++){
             let value = workoutCardData[i];
-            if (value.title.length == 0) { allArePopulated = false; }
-            if (value.price.length == 0) { allArePopulated = false; }
+            if (value.name.length == 0) { allArePopulated = false; }
+            if (value.muscle.length == 0) { allArePopulated = false; }
+            if (value.description.length == 0) { allArePopulated = false; }
             if (value.image.length == 0) { allArePopulated = false; }
             expect(allArePopulated).toBe(true);
         }
