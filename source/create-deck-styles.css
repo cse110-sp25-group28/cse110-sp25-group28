@@ -119,3 +119,14 @@ button:hover {
   padding: 16px 32px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+.selected {
+  border: 3px groove #3b82f6;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.buttons {
+  display : flex;
+  gap : 1rem;
+}

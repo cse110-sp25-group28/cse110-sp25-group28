@@ -100,3 +100,18 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
+.selectbutton {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.selectbutton:hover {
+  background-color: #0056b3;
+}
