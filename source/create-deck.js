@@ -1,3 +1,4 @@
+import { initFiltering } from './assets/scripts/filter-control.js';
 window.addEventListener("DOMContentLoaded", init);
 
 /**
@@ -7,6 +8,7 @@ async function init() {
     const workouts = await getWorkoutsFromStorage();
     if (workouts) {
       addWorkoutsToDocument(workouts);
+      initFiltering(workouts);
     }
 }
 
