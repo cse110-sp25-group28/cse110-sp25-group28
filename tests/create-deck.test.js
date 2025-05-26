@@ -29,7 +29,7 @@ describe('create deck test', () => {
         const workoutCardData = await page.$$eval('product-item', workoutCards => {
             return workoutCards.map(item => {
                 // Grab all of the json data stored inside
-                return data = item.data;
+                return item.data;
             });
         });
 
