@@ -14,7 +14,7 @@ describe('create deck test', () => {
         return workoutCards.length;
       });
   
-      // Expect there that array from earlier to be of length 20, meaning 20 <product-item> elements where found
+      // Expect there that array from earlier to be of length 43, meaning 43 <workout-card> elements were found
       expect(numWorkouts).toBe(43);
     });
 
