@@ -1,6 +1,19 @@
 import { initFiltering } from './assets/scripts/filter-control.js';
 window.addEventListener("DOMContentLoaded", init);
 
+let selection = false;
+// Sets a "selection" mode, giving the ability to add cards to a deck
+document.getElementById("selectorOn").addEventListener("click", () => {
+  selection = !selection;
+  const toggle = document.getElementById("selectorOn");
+  toggle.textContent = selection ? "Cancel Selection" : "Select Cards"
+// When we "Cancel Selection", we unselect the cards
+  if (!selection){
+    unselectCards();
+  }
+});
+
+
 /**
  * Starts the program, all function calls trace back here
  */
@@ -56,6 +69,12 @@ let currentEnlargedCard = null;
 document.addEventListener("workout-card-clicked", (e) => { // e is the custom event
   const clickedCard = e.detail.card;
 
+  // When selection is turned on we skip past the enlargement
+  if (selection) {
+    clickedCard.classList.toggle("selected");
+    return;
+  }
+
   // If another card is already enlarged, shrink it
   if (currentEnlargedCard && currentEnlargedCard !== clickedCard) {
     currentEnlargedCard.shrinkCard();
@@ -71,5 +90,9 @@ document.addEventListener("workout-card-clicked", (e) => { // e is the custom ev
   }
 });
 
-
+function unselectCards(){
+  document.querySelectorAll(".selected").forEach(card => {
+    card.classList.remove("selected");
+  });
+}
 
