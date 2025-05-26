@@ -1,4 +1,4 @@
-import { initFiltering } from './assets/scripts/filter-control.js';
+import { initFiltering } from './filter-control.js';
 window.addEventListener("DOMContentLoaded", init);
 
 let selection = false;
