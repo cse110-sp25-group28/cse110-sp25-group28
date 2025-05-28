@@ -33,7 +33,7 @@ async function init() {
  */
 async function getWorkoutsFromStorage() {
     try {
-        const dataURL = './workouts/workouts.json';
+        const dataURL = 'source/assets/scripts/json/workouts.json';
         const response = await fetch(dataURL);
         if (!response.ok) {
           throw new Error(`Failed to fetch workouts.json: ${response.status}`);
