@@ -7,6 +7,7 @@ document.getElementById("selectorOn").addEventListener("click", () => {
   selection = !selection;
   const toggle = document.getElementById("selectorOn");
   toggle.textContent = selection ? "Cancel Selection" : "Select Cards"
+  setCardsDisableFlip(selection);
 // When we "Cancel Selection", we unselect the cards
   if (!selection){
     unselectCards();
@@ -61,33 +62,13 @@ function addWorkoutsToDocument(workouts) {
   });
 }
 
-
-// Track the currently enlarged card
-let currentEnlargedCard = null;
-
 // Listen for custom events dispatched from any card
 document.addEventListener("workout-card-clicked", (e) => { // e is the custom event
   const clickedCard = e.detail.card;
 
-  // When selection is turned on we skip past the enlargement
   if (selection) {
     clickedCard.classList.toggle("selected");
-    setCardsDisableFlip(selection);
     return;
-  }
-
-  // If another card is already enlarged, shrink it
-  if (currentEnlargedCard && currentEnlargedCard !== clickedCard) {
-    currentEnlargedCard.shrinkCard();
-  }
-
-  // Toggle the clicked card's state
-  if (clickedCard.isEnlarged()) {
-    clickedCard.shrinkCard();
-    currentEnlargedCard = null;
-  } else {
-    clickedCard.enlargeCard();
-    currentEnlargedCard = clickedCard;
   }
 });
 
@@ -97,10 +78,12 @@ function unselectCards(){
   });
 }
 
-//Will disable flip feature of all cards
+/**
+ * Sets whether all workout cards should have flipping disabled.
+ * @param {boolean} disable - If true, disables flipping for all cards.
+ */
 function setCardsDisableFlip(disable) {
   document.querySelectorAll('workout-card').forEach(card => {
-    card.disableFlip = true;
+    card.disableFlip = disable;
   });
 }
-

@@ -1,5 +1,13 @@
 // workoutCard.js
 
+
+/**
+ * Custom element representing a workout card.
+ * Displays workout details on the front and the muscle group on the back.
+ * Can be flipped unless flipping is disabled (e.g., in selection mode).
+ * @class
+ * @extends HTMLElement
+ */
 class WorkoutCard extends HTMLElement {
   // Called once when document.createElement('workout-card') is called, or
   // the element is written into the DOM directly as <workout-card>
@@ -107,15 +115,20 @@ class WorkoutCard extends HTMLElement {
       </div>
     `;
 
-     // Add click listener to article
+    /**
+     * Handles click events on the card.
+     * Flips the card unless flipping is disabled, and always dispatches a custom event.
+     * @event workout-card-clicked
+     */
     articleEl.addEventListener("click", () => {
-      // Tell the outside world "I was clicked"
-      if (this._disableFlip) return;
-      articleEl.classList.toggle("flipped");
+      if (!this._disableFlip) {
+        articleEl.classList.toggle("flipped");
+      }
+      // Always dispatch the event so selection works!
       this.dispatchEvent(new CustomEvent("workout-card-clicked", {
-        bubbles: true,     // allow the event to bubble up
-        composed: true,    // allow it to escape the Shadow DOM
-        detail: { card: this } // include a reference to this card
+        bubbles: true,
+        composed: true,
+        detail: { card: this }
       }));
     });
 
@@ -156,15 +169,22 @@ class WorkoutCard extends HTMLElement {
     `;
   }
 
-  // Set this property to true to keep the card face up (for selection page)
+  /**
+   * Enables or disables flipping for the card.
+   * When set to true, the card cannot be flipped and always shows the workout (face up).
+   * When set to false, the card can be flipped.
+   * @param {boolean} val - Whether to disable flipping.
+   */
   set disableFlip(val) {
     this._disableFlip = val;
     if (val) {
+      // Selection mode: always show workout (face up)
       this._articleEl.classList.remove("flipped");
       this._articleEl.style.cursor = "default";
     } else {
-      this._articleEl.classList.add("flipped");
+      // Browsing: allow flipping, start face up (workout showing)
       this._articleEl.style.cursor = "pointer";
+      // Do NOT add 'flipped' here!
     }
   }
 }
