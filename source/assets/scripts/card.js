@@ -18,78 +18,100 @@ class WorkoutCard extends HTMLElement {
             }
 
             article {
-                background-color: #fff;
+                background-color: transparent;
                 border-radius: 12px;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-                overflow: hidden;
                 width: 250px;
-                height: auto;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                padding-bottom: 1rem;
-                // transition: transform 0.2s ease-in-out;
-                transition:
-                    transform 0.4s ease,
-                    top 0.4s ease,
-                    left 0.4s ease,
-                    cursor: pointer;
-                    position: relative;
+                height: 320px;
+                perspective: 1000px;
+                margin: 1rem;
+                cursor: pointer;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                position: relative;
             }
 
             article:hover {
                 transform: translateY(-4px);
             }
 
-            /* Enlarged state styling */
-            article.enlarged {
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%) scale(1.5);
-                z-index: 1000;
-                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-                transition:
-                    transform 0.4s ease,
-                    top 0.4s ease,
-                    left 0.4s ease,
+            .card-inner {
+              position: relative;
+              width: 100%;
+              height: 100%;
+              transition: transform 0.6s;
+              transform-style: preserve-3d;
             }
-
-            article > img {
-                width: 100%;
-                height: 200px;
-                object-fit: cover;
+            .flipped .card-inner {
+              transform: rotateY(180deg);
             }
-
-            h2.name {
-                font-size: 1.1rem;
-                margin: 1rem 0 0.5rem;
-                color: #333;
+            .card-front, .card-back {
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              backface-visibility: hidden;
+              border-radius: 12px;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              background: #fff;
+              box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             }
-
-            h2.name a {
-                text-decoration: none;
-                color: inherit;
+            .card-front img {
+              width: 100%;
+              height: 200px;
+              object-fit: cover;
+              border-top-left-radius: 12px;
+              border-top-right-radius: 12px;
             }
-
-            p {
-                font-size: 0.9rem;
-                margin: 0.3rem 0;
-                color: #555;
-                text-align: center;
-                padding: 0 1rem;
+            .card-front h2.name {
+              font-size: 1.1rem;
+              margin: 1rem 0 0.5rem;
+              color: #333;
             }
-
-
-            .muscle {
-                font-style: sans-serif;
-                color: #888;
+            .card-front h2.name a {
+              text-decoration: none;
+              color: inherit;
             }
+            .card-front p {
+              font-size: 0.9rem;
+              margin: 0.3rem 0;
+              color: #555;
+              text-align: center;
+              padding: 0 1rem;
+            }
+            .card-front .muscle {
+              color: #888;
+            }
+            .card-back {
+              background: #e5e7eb;
+              color: #333;
+              transform: rotateY(180deg);
+              font-size: 1.2rem;
+              font-weight: bold;
+              justify-content: center;
+              align-items: center;
+              display: flex;
+            }
+            .card-back .muscle-label {
+              font-size: 1.5rem;
+              color: #444;
+              text-align: center;
+              padding: 1rem;
+            }
+    `;
+
+    articleEl.innerHTML = `
+      <div class="card-inner">
+        <div class="card-front"></div>
+        <div class="card-back"></div>
+      </div>
     `;
 
      // Add click listener to article
     articleEl.addEventListener("click", () => {
       // Tell the outside world "I was clicked"
+      if (this._disableFlip) return;
+      articleEl.classList.toggle("flipped");
       this.dispatchEvent(new CustomEvent("workout-card-clicked", {
         bubbles: true,     // allow the event to bubble up
         composed: true,    // allow it to escape the Shadow DOM
@@ -99,6 +121,7 @@ class WorkoutCard extends HTMLElement {
 
     shadowEl.append(articleEl);
     shadowEl.append(styleEl);
+    this._articleEl = articleEl;
   }
 
   /**
@@ -117,50 +140,33 @@ class WorkoutCard extends HTMLElement {
                                     "image": "string"
                                 },
    */
-  set data(data) {
+    set data(data) {
     if (!data) return;
-     if (typeof data.muscle === 'string' && data.muscle.trim() !== '') {
-      // Normal case: store muscle name
-      this.dataset.muscle = data.muscle.toLowerCase();
+    this.dataset.muscle = data.muscle?.toLowerCase() || '';
+    const front = this.shadowRoot.querySelector(".card-front");
+    const back = this.shadowRoot.querySelector(".card-back");
+    front.innerHTML = `
+      <img src="${data.image}" alt="${data.name}">
+      <h2 class="name"><a>${data.name}</a></h2>
+      <p class="muscle">${data.muscle}</p>
+      <p class="description">${data.description}</p>
+    `;
+    back.innerHTML = `
+      <div class="muscle-label">${data.muscle}</div>
+    `;
+  }
+
+  // Set this property to true to keep the card face up (for selection page)
+  set disableFlip(val) {
+    this._disableFlip = val;
+    if (val) {
+      this._articleEl.classList.remove("flipped");
+      this._articleEl.style.cursor = "default";
     } else {
-      // Fallback: no valid muscle
-      this.dataset.muscle = '';
+      this._articleEl.classList.add("flipped");
+      this._articleEl.style.cursor = "pointer";
     }
-
-    const cardEl = this.shadowRoot.querySelector("article");
-    cardEl.innerHTML = `
-        <img src="${data.image}" alt="${data.name}">
-        <h2 class="name">
-          <a>${data.name}</a>
-        </h2>
-        <p class="muscle">${data.muscle}</p>
-        <p class="description">${data.description}</p>
-      `;
   }
-
-
-  // Utility methods for outside code to use
-
-  enlargeCard() {
-    const article = this.shadowRoot.querySelector("article");
-    article.classList.add("enlarged");
-  }
-
-  shrinkCard() {
-    const article = this.shadowRoot.querySelector("article");
-    article.classList.remove("enlarged");
-  }
-
-  toggleCard() {
-    const article = this.shadowRoot.querySelector("article");
-    article.classList.toggle("enlarged");
-  }
-
-  isEnlarged() {
-    const article = this.shadowRoot.querySelector("article");
-    return article.classList.contains("enlarged");
-  }
-
 }
 
 customElements.define("workout-card", WorkoutCard);

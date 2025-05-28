@@ -72,6 +72,7 @@ document.addEventListener("workout-card-clicked", (e) => { // e is the custom ev
   // When selection is turned on we skip past the enlargement
   if (selection) {
     clickedCard.classList.toggle("selected");
+    setCardsDisableFlip(selection);
     return;
   }
 
@@ -93,6 +94,13 @@ document.addEventListener("workout-card-clicked", (e) => { // e is the custom ev
 function unselectCards(){
   document.querySelectorAll(".selected").forEach(card => {
     card.classList.remove("selected");
+  });
+}
+
+//Will disable flip feature of all cards
+function setCardsDisableFlip(disable) {
+  document.querySelectorAll('workout-card').forEach(card => {
+    card.disableFlip = true;
   });
 }
 
