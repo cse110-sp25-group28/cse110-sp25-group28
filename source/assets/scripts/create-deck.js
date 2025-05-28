@@ -58,6 +58,7 @@ function addWorkoutsToDocument(workouts) {
   workouts.forEach((workout) => {
     const workoutCard = document.createElement('workout-card');
     workoutCard.data = workout;
+    workoutCard._articleEl.classList.toggle('flipped');
     main.appendChild(workoutCard);
   });
 }
