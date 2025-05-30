@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Workout Cards</title>
-    <link rel="stylesheet" href="source/assets/styles/create-deck-styles.css">
-    <script src="source/assets/scripts/card.js" type="module"></script>
-    <script src="source/assets/scripts/create-deck.js" type="module"></script>
+    <link rel="stylesheet" href="assets/styles/view-deck-styles.css">
   </head>
   <body>
       <!-- Header -->
@@ -16,16 +14,24 @@
         <div class="logo"></div>
         <h1 class="app-name">SweatDeck</h1>
       </div>
-      <div class="buttons">
-        <button id="selectorOn">Select Cards</button>
-      <button class="view-decks" onclick="window.location.href='index.html'">View Decks</button>
-      </div>
     </header>
-    <h2>Choose some cards!</h2>
     <main id="cards-container" class="main-content">
+      <h1 id="deck-title">Deck</h1>
+      <div class="carousel-container">
+        <div id="card-display">
+          Loading...
+        </div>
+        <p id="card-counter">1 / N</p>
+
+        <button id="prev-button">← Previous</button>
+        <button id="next-button">Next →</button>
+        <button class="create-deck">Delete Deck</button>
+
+        <script src="assets/scripts/view-deck.js"></script>
+      </div>
     </main>
     <footer class="footer">
-      <button class="create-deck">Create Deck</button>
+      
     </footer>
   </body>
 </html>

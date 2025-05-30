@@ -76,7 +76,7 @@ body {
 
 .deck-box {
   width: 200px;             /* Fixed width */
-  height: 300px;            /* Fixed height */
+  height: 270px;            /* Fixed height */
   background-color: #e5e7eb;
   padding: 20px;
   border-radius: 12px;
@@ -87,7 +87,21 @@ body {
   justify-content: center;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
 }
+
+/* Hover effect */
+.deck-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Click (active) effect */
+.deck-box:active {
+  transform: scale(0.97);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
 button {
   padding: 0.6rem 1.2rem;
   border: none;

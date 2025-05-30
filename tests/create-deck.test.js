@@ -1,7 +1,7 @@
 describe('create deck test', () => {
     // First, visit the website
     beforeAll(async () => {
-      await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28/create-deck.html');
+      await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28/source/create-deck.html');
     });
   
     // Each it() call is a separate test
