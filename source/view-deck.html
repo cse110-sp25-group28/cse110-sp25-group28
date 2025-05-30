@@ -15,11 +15,23 @@
         <h1 class="app-name">SweatDeck</h1>
       </div>
     </header>
-    <h2>View Your Deck</h2>
     <main id="cards-container" class="main-content">
+      <h1 id="deck-title">Deck</h1>
+      <div class="carousel-container">
+        <div id="card-display">
+          Loading...
+        </div>
+        <p id="card-counter">1 / N</p>
+
+        <button id="prev-button">← Previous</button>
+        <button id="next-button">Next →</button>
+        <button class="create-deck">Delete Deck</button>
+
+        <script src="assets/scripts/view-deck.js"></script>
+      </div>
     </main>
     <footer class="footer">
-      <button class="create-deck">Delete Deck</button>
+      
     </footer>
   </body>
 </html>
