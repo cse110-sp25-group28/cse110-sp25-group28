@@ -18,7 +18,7 @@ class WorkoutCard extends HTMLElement {
     let styleEl = document.createElement("style");
     let linkEl = document.createElement("link");
     linkEl.setAttribute("rel", "stylesheet");
-    linkEl.setAttribute("href", "./source/assets/styles/create-deck-styles.css");
+    linkEl.setAttribute("href", "./assets/styles/create-deck-styles.css");
 
     articleEl.innerHTML = `
       <div class="card-inner">
