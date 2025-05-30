@@ -10,7 +10,7 @@ All colors are given via its RAL value, color name, and HEX code.
 
 | RAL Value | Color Name | HEX Code | Preview |
 | --------- | ---------- | -------- | ------- |
-| RAL 9016 | Traffic White | `#f6f6f6` | ![#f6f6f6](https://via.placeholder.com/15/f6f6f6/000000?text=+) |
+| RAL 9016 | Traffic White | `#f6f6f6` | ![#f6f6f6](https://via.placeholder.com/15/f6f6f6/000000.png?text=+) |
 | RAL 9010 | Pure White | `#ffffff` |
 | RAL 9001 | Cream | `#fbf5e2` |
 | RAL 1015 | Light Ivory | `#eddfb8` |
