@@ -8,9 +8,9 @@ All colors are given via its RAL value, color name, and HEX code.
 
 ### Light Mode
 
-| RAL Value | Color Name | HEX Code | Preview |
-| --------- | ---------- | -------- | ------- |
-| RAL 9016 | Traffic White | `#f6f6f6` | ![#f6f6f6](https://via.placeholder.com/15/f6f6f6/000000.png?text=+) |
+| RAL Value | Color Name | HEX Code |
+| --------- | ---------- | -------- |
+| RAL 9016 | Traffic White | `#f6f6f6` |
 | RAL 9010 | Pure White | `#ffffff` |
 | RAL 9001 | Cream | `#fbf5e2` |
 | RAL 1015 | Light Ivory | `#eddfb8` |
@@ -21,6 +21,8 @@ All colors are given via its RAL value, color name, and HEX code.
 | --------- | ---------- | -------- |
 | RAL 7035 | Light Grey | `#d2d5d2` |
 | RAL 7040 | Window Grey | `#9c9faa` |
+| RAL 9006 | Silver-White Aluminum | `#a2a6a7` |
+| RAL 9007 | Silver-Grey Aluminum | `#878581` |
 
 ### Dark Mode
 
@@ -40,7 +42,7 @@ All colors are given via its RAL value, color name, and HEX code.
 | RAL 8019 | Grey Brown | `#403939` |
 | RAL 1028 | Melon Yellow | `#fbb902` |
 | RAL 3000 | Flame Red | `#b30016` |
-| RAL 2002 | Vermillion | `#e53117` |
+| RAL 2002 | Vermilion | `#e53117` |
 | RAL 3005 | Wine Red | `#5e212a` |
 | RAL 2011 | Deep Orange | `#ec7c27` |
 | RAL 5010 | Gentian Blue | `#005281` |
