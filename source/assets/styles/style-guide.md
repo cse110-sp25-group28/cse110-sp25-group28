@@ -4,6 +4,10 @@ These values should be used as a guideline to standardize styling across differe
 
 All colors are given via its RAL value, color name, and HEX code.
 
+## Font
+
+We will be utilizing the [Poppins](https://fonts.google.com/specimen/Poppins) font, provided by Google Fonts.
+
 ## Base Website Color Palette
 
 ### Light Mode
