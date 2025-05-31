@@ -62,7 +62,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     cardDisplay.appendChild(cards[i]);
   }
 
-  function showCard(index) {
+  function showCard() {
     for (let i = 0; i < cards.length; i++) {
       const card = cards[i];
 
