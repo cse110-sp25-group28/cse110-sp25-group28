@@ -1,6 +1,58 @@
 // Example structure: localStorage.setItem("decks", JSON.stringify([{ name: "Deck 1" }, { name: "Deck 2" }]));
 
-window.addEventListener("DOMContentLoaded", () => {
+//The start of the webpage.
+window.addEventListener("DOMContentLoaded", init);
+
+//Default decks the program starts with
+const DEFAULT_DECKS = [
+  {
+    name: "Chest Day",
+    cards: [
+      { name: "Push-Up",
+        muscle: "Chest",
+        description: "Classic bodyweight exercise targeting the chest, triceps, and shoulders.",
+        image: "workouts/images/Push-Up.webp"
+       },
+      { name: "Bench Press",
+        muscle: "Chest",
+        description: "Barbell or dumbbell exercise for upper body pushing strength.",
+        image: "workouts/images/Bench-Press.webp"
+       },
+      { name: "Incline Press",
+        muscle: "Chest",
+        description: "Variation of bench press focusing on upper chest.",
+        image: "workouts/images/Incline-Press.webp"
+       },
+    ],
+  },
+  {
+    name: "Legs",
+    cards: [
+      { name: "Squat" },
+      { name: "Calf Raises" },
+      { name: "Glute Bridge" },
+    ],
+  },
+  {
+    name: "Core Blast",
+    cards: [
+      { name: "Plank" },
+      { name: "Oblique Crunch" },
+      { name: "Leg Raises" },
+    ],
+  },
+  {
+    name: "Arm Workout",
+    cards: [
+      { name: "Bicep Curl" },
+      { name: "Tricep Dip" },
+      { name: "Shoulder Press" },
+    ],
+  },
+];
+
+function init() {
+
   const defaultContainer = document.getElementById("default-deck-container");
   const customContainer = document.getElementById("custom-deck-container");
 
@@ -8,36 +60,6 @@ window.addEventListener("DOMContentLoaded", () => {
   const customDecks = JSON.parse(localStorage.getItem("custom-decks"));
 
   
-  const DEFAULT_DECKS = [
-    { name: "Chest Day", 
-      cards: [
-        { "name": "Push-Up" },
-        { "name": "Bench Press" },
-        { "name": "Incline Press" }
-      ] 
-    },
-    { name: "Legs",
-      cards: [
-        { "name": "Squat" },
-        { "name": "Calf Raises" },
-        { "name": "Glute Bridge" }
-      ]
-    },
-    { name: "Core Blast",
-      cards: [
-        { "name": "Plank" },
-        { "name": "Oblique Crunch" },
-        { "name": "Leg Raises" }
-      ]
-    },
-    { name: "Arm Workout",
-      cards: [
-        { "name": "Bicep Curl" },
-        { "name": "Tricep Dip" },
-        { "name": "Shoulder Press" }
-      ]
-      }
-  ];
   localStorage.setItem("decks", JSON.stringify(DEFAULT_DECKS));
 
   decks.forEach((deck, index) => {
@@ -50,8 +72,8 @@ window.addEventListener("DOMContentLoaded", () => {
     });
     defaultContainer.appendChild(div);
   });
-  
-  if (customDecks != null){
+
+  if (customDecks != null) {
     customDecks.forEach((customDeck, index) => {
       const div = document.createElement("div");
       div.className = "deck-box";
@@ -61,8 +83,6 @@ window.addEventListener("DOMContentLoaded", () => {
         window.location.href = "source/view-deck.html";
       });
       customContainer.appendChild(div);
-    })
+    });
   }
-});
-
-
+}
