@@ -97,7 +97,13 @@ document.querySelector(".create-deck").addEventListener("click", () =>{
     alert("Please enter a name")
   }
 
-  const chosenCards = selected.map(card => card.data);
+  const chosenCards = selected.map(card => ({
+    name: card.data?.name,
+    muscle: card.data?.muscle,
+    description: card.data?.description,
+    image: card.data?.image
+  }));
+
 
   const newDeck = {
     name: deckName,
@@ -107,7 +113,7 @@ document.querySelector(".create-deck").addEventListener("click", () =>{
   const customDecks = JSON.parse(localStorage.getItem("custom-decks") || "[]");
   customDecks.push(newDeck);
   localStorage.setItem("custom-decks", JSON.stringify(customDecks));   
-  //localStorage.setItem("selected-deck", JSON.stringify(newDeck));
+  localStorage.setItem("selected-deck", JSON.stringify(newDeck));
 
   window.location.href = "../index.html";
 });

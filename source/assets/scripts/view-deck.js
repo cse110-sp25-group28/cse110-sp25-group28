@@ -27,7 +27,6 @@ window.addEventListener("DOMContentLoaded", () => {
     workoutCard.data = card;
 
     cardDisplay.appendChild(workoutCard);
-    //cardDisplay.textContent = card.name || `Card #${index + 1}`; 
     counter.textContent = `${index + 1} / ${deck.cards.length}`;
   };
 
