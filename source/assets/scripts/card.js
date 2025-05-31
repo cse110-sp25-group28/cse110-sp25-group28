@@ -91,13 +91,11 @@ class WorkoutCard extends HTMLElement {
   set disableFlip(val) {
     this._disableFlip = val;
     if (val) {
-      // Selection mode: always show workout (face up)
-      this._articleEl.classList.toggle("flipped");
+      // Selection mode: flipping is disabled, show default cursor
       this._articleEl.style.cursor = "default";
     } else {
-      // Browsing: allow flipping, start face up (workout showing)
+      // Flipping is enabled, show pointer cursor
       this._articleEl.style.cursor = "pointer";
-      this._articleEl.classList.toggle("flipped");
     }
   }
 }
