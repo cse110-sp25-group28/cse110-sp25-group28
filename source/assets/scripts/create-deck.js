@@ -160,30 +160,25 @@ function saveSelectedCards(deckName) {
     cards: selectedData,
   };
 
-  //Get existing decks
-  const existingDecks = JSON.parse(localStorage.getItem("decks") || "[]");
+  // Load both stored deck arrays
+  const defaultDecks = JSON.parse(localStorage.getItem("decks") || "[]");
+  const customDecks = JSON.parse(localStorage.getItem("custom-decks") || "[]");
 
-  //Check is a deck with a same name exists.
-  const deckExists = existingDecks.some((deck) => deck.name === newDeck.name);
+  // Combine and check for duplicate deck name
+  const allDecks = [...defaultDecks, ...customDecks];
+  const deckExists = allDecks.some((deck) => deck.name === newDeck.name);
 
-  if(deckName.length === 0){
-    errorEl.textContent = `A deck name can't be empty`;
-    errorEl.classList.remove("hidden");
-    return;
-  }
-
-  if (deckExists == false) {
-    //Add new decks to the existing decks
-    existingDecks.push(newDeck);
-  } else {
+  if (deckExists) {
     errorEl.textContent = `A deck named "${deckName}" already exists. Please choose another name`;
     errorEl.classList.remove("hidden");
     return;
   }
 
-  //Store the new updated data, containing default decks.
-  localStorage.setItem("decks", JSON.stringify(existingDecks));
+  // Add new custom deck
+  customDecks.push(newDeck);
+  localStorage.setItem("custom-decks", JSON.stringify(customDecks));
 
+  // Hide modal, clear selection error, and redirect
   closeModal();
   document.getElementById("create-deck-error").classList.add("hidden");
   window.location.href = '../index.html';
