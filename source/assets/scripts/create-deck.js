@@ -108,6 +108,21 @@ function unselectCards() {
  */
 function setCardsDisableFlip(disable) {
   document.querySelectorAll("workout-card").forEach((card) => {
+    if (disable) {
+      // Save current flip state and force face up
+      card._wasFlipped = card._articleEl.classList.contains("flipped");
+      card._articleEl.classList.remove("flipped");
+    } else {
+      // Restore previous flip state if it exists
+      if ('_wasFlipped' in card) {
+        if (card._wasFlipped) {
+          card._articleEl.classList.add("flipped");
+        } else {
+          card._articleEl.classList.remove("flipped");
+        }
+        delete card._wasFlipped;
+      }
+    }
     card.disableFlip = disable;
   });
 }
