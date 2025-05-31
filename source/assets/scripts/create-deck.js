@@ -144,7 +144,6 @@ function getCardData(card) {
 function saveSelectedCards(deckName) {
   const selectedCards = document.querySelectorAll(".selected");
   const selectedData = [];
-  const popUpModal = document.getElementById("deck-name-modal");
 
   const errorEl = document.getElementById("deck-name-error");
 
@@ -163,12 +162,6 @@ function saveSelectedCards(deckName) {
 
   //Get existing decks
   const existingDecks = JSON.parse(localStorage.getItem("decks") || "[]");
-  //Add new decks to the existing decks
-  existingDecks.forEach((deck) => {
-    if (deck.name == newDeck.name) {
-      let deckExists = true;
-    }
-  });
 
   //Check is a deck with a same name exists.
   const deckExists = existingDecks.some((deck) => deck.name === newDeck.name);
@@ -180,6 +173,7 @@ function saveSelectedCards(deckName) {
   }
 
   if (deckExists == false) {
+    //Add new decks to the existing decks
     existingDecks.push(newDeck);
   } else {
     errorEl.textContent = `A deck named "${deckName}" already exists. Please choose another name`;
