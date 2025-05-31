@@ -88,3 +88,26 @@ function setCardsDisableFlip(disable) {
     card.disableFlip = disable;
   });
 }
+
+document.querySelector(".create-deck").addEventListener("click", () =>{
+  const selected = Array.from(document.querySelectorAll("workout-card.selected"));
+  selected.forEach(card => console.log("Selected card data:", card.data));
+  const deckName = prompt("Please select a name for your deck");
+  if(!deckName){
+    alert("Please enter a name")
+  }
+
+  const chosenCards = selected.map(card => card.data);
+
+  const newDeck = {
+    name: deckName,
+    cards: chosenCards
+  };
+
+  const customDecks = JSON.parse(localStorage.getItem("custom-decks") || "[]");
+  customDecks.push(newDeck);
+  localStorage.setItem("custom-decks", JSON.stringify(customDecks));   
+  //localStorage.setItem("selected-deck", JSON.stringify(newDeck));
+
+  window.location.href = "../index.html";
+});
