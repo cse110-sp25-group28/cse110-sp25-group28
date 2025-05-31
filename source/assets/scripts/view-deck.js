@@ -97,8 +97,11 @@ window.addEventListener('DOMContentLoaded', async () => {
   });
 
    shuffleButton.addEventListener('click', () => {
-    shuffle(cards);                     // From shuffle.js
-    cardDisplay.replaceChildren(...cards);
+    const shuffled = shuffle([...cards]);   
+    cards.length   = 0;                    
+    cards.push(...shuffled);               
+
+    cardDisplay.replaceChildren(...cards)
     currentIndex = 0;
     showCard();
   });
