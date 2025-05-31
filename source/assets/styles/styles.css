@@ -90,6 +90,14 @@ body {
   cursor: pointer;
 }
 
+.custom-decks {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* auto-fill ensures wrapping */
+  gap: 20px;
+  margin-top: 40px;
+  justify-items: center;
+}
+
 /* Hover effect */
 .deck-box:hover {
   transform: scale(1.05);

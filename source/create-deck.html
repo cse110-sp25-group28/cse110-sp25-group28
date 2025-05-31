@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Workout Cards</title>
-    <link rel="stylesheet" href="./assets/styles/create-deck-styles.css">
+    <link rel="stylesheet" href="./assets/styles/create-deck-styles.css" />
     <script src="./assets/scripts/card.js" type="module"></script>
     <script src="./assets/scripts/create-deck.js" type="module"></script>
   </head>
   <body>
-      <!-- Header -->
+    <!-- Header -->
     <header class="header">
       <div class="logo-section">
         <div class="logo"></div>
@@ -18,14 +18,40 @@
       </div>
       <div class="buttons">
         <button id="selectorOn">Select Cards</button>
-      <button class="view-decks" onclick="window.location.href='../index.html'">View Decks</button>
+        <button
+          class="view-decks"
+          onclick="window.location.href='../index.html'"
+        >
+          View Decks
+        </button>
       </div>
     </header>
     <h2>Choose some cards!</h2>
     <main id="cards-container" class="main-content">
+      <div class="cards-container"></div>
+      <!--The container for cards-->
     </main>
     <footer class="footer">
-      <button class="create-deck">Create Deck</button>
+    
+        <p id="create-deck-error" class="error-message hidden"></p>
+        <button id="create-deck-button" class="create-deck">Create Deck</button>
     </footer>
+
+    <!--Pop up window that asks user to name the custom deck created-->
+    <div id="deck-name-modal" class="modal hidden">
+      <div class="modal-content">
+        <h3>Name Your Deck</h3>
+        <p id="deck-name-error" class="error-message hidden"></p>
+        <input
+          type="text"
+          id="deck-name-input"
+          placeholder="Enter deck name..."
+        />
+        <div class="modal-buttons">
+          <button id="confirm-deck-name">Save Deck</button>
+          <button id="cancel-deck-name">Cancel</button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
