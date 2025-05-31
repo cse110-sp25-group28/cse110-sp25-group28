@@ -168,6 +168,11 @@ function saveSelectedCards(deckName) {
   const allDecks = [...defaultDecks, ...customDecks];
   const deckExists = allDecks.some((deck) => deck.name === newDeck.name);
 
+  if(deckName.length <= 0){
+    errorEl.textContent = `A deck name can't be empty`;
+    errorEl.classList.remove("hidden");
+    return;
+  }
   if (deckExists) {
     errorEl.textContent = `A deck named "${deckName}" already exists. Please choose another name`;
     errorEl.classList.remove("hidden");
