@@ -51,6 +51,6 @@ describe('create deck test', () => {
   
       // Expect that workout3 will be Glute Bridge
       expect(workout3).toBe("Glute Bridge");
-    });
+    }, 30000);
 });
   

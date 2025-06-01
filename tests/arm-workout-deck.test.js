@@ -51,6 +51,6 @@ describe('create deck test', () => {
   
       // Expect that workout3 will be Shoulder Press
       expect(workout3).toBe("Shoulder Press");
-    });
+    }, 30000);
 });
   

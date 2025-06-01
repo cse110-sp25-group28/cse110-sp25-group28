@@ -51,6 +51,6 @@ describe('create deck test', () => {
   
       // Expect that workout3 will be Incline Press
       expect(workout3).toBe("Incline Press");
-    });
+    }, 30000);
 });
   

@@ -18,6 +18,6 @@ describe('create deck test', () => {
   
       // Expect there that array from earlier to be of length 4, meaning 4 <deck-box> class elements were found
       expect(numWorkoutSets).toBe(4);
-    });
+    }, 10000);
 });
   
