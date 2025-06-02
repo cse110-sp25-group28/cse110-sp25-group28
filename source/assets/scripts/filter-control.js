@@ -87,24 +87,84 @@ function uniqueStrings(arr) {
  * @param {string} label
  * @returns {HTMLLabelElement}
  */
-function makeSelect(type, values, label) {
-    const select = document.createElement('select');
-    select.id = `filter-${type}`;
+function makeSelect(type, values, labelText) {
+  const wrapper = document.createElement('label');
+  wrapper.className = 'custom-dropdown-wrapper filter-control';
 
-    // Start with catch all option
-    select.append(new Option(`All ${label.toLowerCase()}`, 'all', true));
+  const label = document.createElement('span');
+  label.textContent = labelText;
+  label.className = 'filter-label';
+  wrapper.appendChild(label);
 
-    values.forEach(val =>
-        select.append(new Option(capitalize(val), val))
-    );
+  const dropdown = document.createElement('div');
+  dropdown.className = `custom-dropdown ${type}-dropdown`;
+  dropdown.id = `filter-${type}`;
+  dropdown.dataset.selected = 'all'; 
+  dropdown.tabIndex = 0;
 
-    // Wrap in <label> for accessibility
-    let wrapper = document.createElement('label');
-    wrapper.className = 'filter-control';
-    wrapper.textContent = `${label}: `;
-    wrapper.append(select);
-    return wrapper;
+  const selected = document.createElement('div');
+  selected.className = 'custom-dropdown-selected';
+  selected.textContent = 'All Muscle Groups';
+  dropdown.appendChild(selected);
+
+  const optionsContainer = document.createElement('div');
+  optionsContainer.className = 'custom-dropdown-options';
+
+  optionsContainer.addEventListener('wheel', (e) => {
+  const isScrollingDown = e.deltaY > 0;
+  const atBottom = optionsContainer.scrollTop + optionsContainer.clientHeight >= optionsContainer.scrollHeight;
+  const atTop = optionsContainer.scrollTop === 0;
+
+  if ((isScrollingDown && atBottom) || (!isScrollingDown && atTop)) {
+    e.preventDefault();
+    }
+  }, { passive: false });
+
+  const allOption = document.createElement('div');
+  allOption.className = 'custom-dropdown-option';
+  allOption.dataset.value = 'all';
+  allOption.textContent = `All Muscle Groups`;
+  optionsContainer.appendChild(allOption);
+
+  values.forEach(val => {
+    const opt = document.createElement('div');
+    opt.className = 'custom-dropdown-option';
+    opt.dataset.value = val;
+    opt.textContent = capitalize(val);
+    optionsContainer.appendChild(opt);
+  });
+
+  dropdown.appendChild(optionsContainer);
+  wrapper.appendChild(dropdown);
+
+  selected.addEventListener('click', () => {
+    optionsContainer.classList.toggle('open');
+    dropdown.classList.toggle('open');
+  });
+
+  document.addEventListener('click', (event) => {
+  const isClickInside = dropdown.contains(event.target);
+  if (!isClickInside) {
+    optionsContainer.classList.remove('open');
+    dropdown.classList.remove('open');
+    }
+  });
+
+  optionsContainer.addEventListener('click', e => {
+    if (e.target.classList.contains('custom-dropdown-option')) {
+      selected.textContent = e.target.textContent;
+      dropdown.dataset.selected = e.target.dataset.value;
+      optionsContainer.classList.remove('open');
+      dropdown.classList.remove('open');
+
+      const changeEvent = new Event('change', { bubbles: true });
+      dropdown.dispatchEvent(changeEvent);
+    }
+  });
+
+  return wrapper;
 }
+
 
 /**
  * Creates <section> containing dropdown
@@ -123,7 +183,7 @@ function buildToolbar(muscles) {
     });
 
     toolbar.append(
-        makeSelect('muscle', muscles, 'Muscle group'),
+        makeSelect('muscle', muscles,'Select Muscle Group'),
     );
     return toolbar;
 }
@@ -134,8 +194,8 @@ function buildToolbar(muscles) {
  * @returns {void}
  */
 function applyFilters() {
-    const muscleSel = document.querySelector('#filter-muscle').value;
-
+    const muscleSel = document.querySelector('#filter-muscle')?.dataset.selected || 'all';
+    
     /** @type {NodeListOf<HTMLElement>} */
     const cards = document.querySelectorAll('workout-card');
 
