@@ -1,4 +1,4 @@
-describe('create deck test', () => {
+describe('create arm workout deck test', () => {
     // First, visit the website
     beforeAll(async () => {
       await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28');
@@ -7,7 +7,7 @@ describe('create deck test', () => {
       const deck4 = await page.$$eval('.deck-box', (decks) => {
         return decks[3];
       });
-      await deck4.click();
+      await page.click(deck4);
     }, 40000);
   
     // Each it() call is a separate test

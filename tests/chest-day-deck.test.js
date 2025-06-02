@@ -1,4 +1,4 @@
-describe('create deck test', () => {
+describe('create chest day deck test', () => {
     // First, visit the website
     beforeAll(async () => {
       await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28');
@@ -7,14 +7,15 @@ describe('create deck test', () => {
       const deck1 = await page.$$eval('.deck-box', (decks) => {
         return decks[0];
       });
-      await deck1.click();
+      await page.click(deck1);
     }, 40000);
   
     // Each it() call is a separate test
     // Here, we check to make sure that all workouts have loaded
     it('Checking the workout values', async () => {  
+      console.log("spot1");
       await page.waitForSelector('#card-display', { timeout: 10000 });
-
+      console.log('spot 2');
       // Select Workout
       const workout1 = await page.$eval('#card-display', (workout) => {
         return workout;
