@@ -1,9 +1,9 @@
 describe('create deck test', () => {
   beforeAll(async () => {
-    await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28', {
-    });
+    await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28');
 
- 
+    
+
     // Reload the page so localStorage changes take effect
     await page.reload({ waitUntil: 'domcontentloaded' });
   });
@@ -11,7 +11,10 @@ describe('create deck test', () => {
   it('Get initial workout decks', async () => {
     console.log('initialization');
 
-    const numWorkoutSets = await page.$$eval('.deck-box', (decks) => decks.length);
+    await page.waitForFunction(() => document.querySelector('.deck-box') !== null);
+
+    const numWorkoutSets = await page.$$eval('#default-deck-container .deck-box', boxes => boxes.length);
     expect(numWorkoutSets).toBe(4);
   }, 10000);
 });
+
