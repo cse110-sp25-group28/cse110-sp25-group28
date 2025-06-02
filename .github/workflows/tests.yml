@@ -18,6 +18,6 @@ jobs: # the things being executed
       - name: Legs Deck Test
         run: npm test ./tests/legs-deck.test.js
       - name: Core Blast Deck Test
-        run: npm test ./tests/cire-blast-deck.test.js
+        run: npm test ./tests/core-blast-deck.test.js
       - name: Arm Workout Deck Test
         run: npm test ./tests/arm-workout-deck.test.js
