@@ -18,6 +18,10 @@ describe('Basic user flow for Website', () => {
 
   it('Testing Filtering System', async () => {
     await page.waitForSelector('.create-deck', { timeout: 10000 });
+    const exists = await page.$('.create-deck');
+    if (!exists) {
+      throw new Error('Element .create-deck not found!');
+    }
     await page.click('.create-deck');
 
   
