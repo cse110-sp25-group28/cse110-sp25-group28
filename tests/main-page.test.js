@@ -1,22 +1,26 @@
 describe('create deck test', () => {
-    // First, visit the website
-    beforeAll(async () => {
-      await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28');
+  beforeAll(async () => {
+    await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28', {
+      waitUntil: 'domcontentloaded',
     });
-  
-    // Each it() call is a separate test
-    // Here, we check to make sure that all 4 <deck-box> class elements have loaded
-    it('Get intial workout decks', async () => {
-      console.log('initialization');
 
+    // Clear localStorage in case a previous test run interfered
+    await page.evaluate(() => {
+      localStorage.clear();
+    });
 
-      // Query select all of the <deck-box> class elements and return the length of that array
-      const numWorkoutSets = await page.$$eval('.deck-box', (decks) => {
-        return decks.length;
-      });
-  
-      // Expect there that array from earlier to be of length 4, meaning 4 <deck-box> class elements were found
-      expect(numWorkoutSets).toBe(4);
-    }, 40000);
+    // Reload the page so localStorage changes take effect
+    await page.reload({ waitUntil: 'domcontentloaded' });
+
+    // Wait for deck-box elements to be rendered
+    await page.waitForSelector('.deck-box', { timeout: 5000 });
+  });
+
+  it('Get initial workout decks', async () => {
+    console.log('initialization');
+
+    const numWorkoutSets = await page.$$eval('.deck-box', (decks) => decks.length);
+    expect(numWorkoutSets).toBe(4);
+  }, 10000);
 });
   
