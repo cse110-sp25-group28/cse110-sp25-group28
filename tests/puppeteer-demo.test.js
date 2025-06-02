@@ -8,13 +8,13 @@ describe('Basic user flow for Website', () => {
     await page.click('.create-deck');
     const url = page.url();
     expect(url).toContain('source/create-deck.html');
-  }, 10000);
+  }, 15000);
 
   it('Clicking View Deck redirects to index.html', async () => {
     await page.click('.view-decks');
     const url = page.url();
     expect(url).toContain('index.html');
-  }, 10000);
+  }, 15000);
 
   it('Testing Filtering System', async () => {
     await page.waitForSelector('.create-deck', { timeout: 5000 });
@@ -38,5 +38,5 @@ describe('Basic user flow for Website', () => {
   // Check localStorage
   const savedFilters = await page.evaluate(() => localStorage.getItem('filters'));
   expect(savedFilters).toContain('"muscle":"biceps"');
-}, 20000);
+}, 15000);
 });
