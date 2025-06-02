@@ -17,7 +17,7 @@ describe('Basic user flow for Website', () => {
   }, 15000);
 
   it('Testing Filtering System', async () => {
-    //await page.waitForSelector('.create-deck', { timeout: 5000 });
+    await page.waitForSelector('.create-deck', { timeout: 10000 });
     await page.click('.create-deck');
 
   
