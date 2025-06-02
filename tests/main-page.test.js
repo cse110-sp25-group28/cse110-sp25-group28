@@ -1,13 +1,32 @@
 describe('create deck test', () => {
   beforeAll(async () => {
-    await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28');
+  await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28', {
+    waitUntil: 'load',
+  }); // Start on blank page
 
-    
-
-    // Reload the page so localStorage changes take effect
-    await page.reload({ waitUntil: 'domcontentloaded' });
+  // Preload decks into localStorage
+  await page.evaluate(() => {
+    localStorage.setItem("decks", JSON.stringify([
+      {
+        name: "Chest Day", cards: []
+      },
+      {
+        name: "Legs", cards: []
+      },
+      {
+        name: "Core Blast", cards: []
+      },
+      {
+        name: "Arm Workout", cards: []
+      }
+    ]));
   });
 
+  // Now load your real site with localStorage already populated
+  await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28', {
+    waitUntil: 'domcontentloaded'
+  });
+});
   it('Get initial workout decks', async () => {
     console.log('initialization');
 
@@ -17,4 +36,3 @@ describe('create deck test', () => {
     expect(numWorkoutSets).toBe(4);
   }, 10000);
 });
-
