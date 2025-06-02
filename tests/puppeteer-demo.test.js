@@ -20,23 +20,34 @@ describe('Basic user flow for Website', () => {
     await page.waitForSelector('.create-deck', { timeout: 5000 });
     await page.click('.create-deck');
 
-    // ⏳ Wait for dropdown to be injected
-    await page.waitForSelector('select#filter-muscle');
+    await page.waitForSelector('#filter-muscle');
 
-    // ✅ Now it's safe to select
-    await page.select('select#filter-muscle', 'biceps');
+    await page.click('#filter-muscle .custom-dropdown-selected');
+
+    await page.waitForSelector('#filter-muscle .custom-dropdown-options');
+
+    await page.evaluate(() => {
+      const options = document.querySelectorAll('#filter-muscle .custom-dropdown-option');
+      for (const opt of options) {
+        if (opt.dataset.value === 'biceps') {
+          opt.click();
+          break;
+        }
+      }
+    });
 
     // Check visible cards
-    const visibleMuscles = await page.$$eval('workout-card', cards =>
-      cards
+    const visibleMuscles = await page.evaluate(() => {
+      const cards = document.querySelectorAll('workout-card');
+      return Array.from(cards)
         .filter(card => getComputedStyle(card).display !== 'none')
-        .map(card => card.dataset.muscle)
-  );
+        .map(card => card.dataset.muscle);
+    });
+    
+    expect(visibleMuscles.every(muscle => muscle === 'biceps')).toBe(true);
 
-  expect(visibleMuscles.every(muscle => muscle === 'biceps')).toBe(true);
-
-  // Check localStorage
-  const savedFilters = await page.evaluate(() => localStorage.getItem('filters'));
-  expect(savedFilters).toContain('"muscle":"biceps"');
-}, 15000);
+    // Check localStorage
+    const savedFilters = await page.evaluate(() => localStorage.getItem('filters'));
+    expect(savedFilters).toContain('"muscle":"biceps"');
+  }, 15000);
 });
