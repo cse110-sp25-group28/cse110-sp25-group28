@@ -1,5 +1,4 @@
 describe('create legs deck test', () => {
-  // Visit the website and click the second deck (index 1)
   beforeAll(async () => {
     await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28');
     await page.reload({ waitUntil: 'domcontentloaded' });
@@ -9,7 +8,8 @@ describe('create legs deck test', () => {
   }, 40000);
 
   it('Checking the workout values', async () => {
-    // Wait until first workout loads
+    const nextSelector = '.next-button'; // Update this!
+
     await page.waitForFunction(
       () => document.querySelector('#card-display')?.textContent.trim() !== 'Loading...',
       { timeout: 10000 }
@@ -17,8 +17,9 @@ describe('create legs deck test', () => {
     const workout1 = await page.$eval('#card-display', el => el.textContent.trim());
     expect(workout1).toBe("Squat");
 
-    // Click next and wait for second workout
-    await page.click('.next-button');
+    await page.waitForSelector(nextSelector, { timeout: 10000 });
+    await page.click(nextSelector);
+
     await page.waitForFunction(
       () => document.querySelector('#card-display')?.textContent.trim() !== 'Loading...',
       { timeout: 10000 }
@@ -26,8 +27,9 @@ describe('create legs deck test', () => {
     const workout2 = await page.$eval('#card-display', el => el.textContent.trim());
     expect(workout2).toBe("Calf Raises");
 
-    // Click next and wait for third workout
-    await page.click('.next-button');
+    await page.waitForSelector(nextSelector, { timeout: 10000 });
+    await page.click(nextSelector);
+
     await page.waitForFunction(
       () => document.querySelector('#card-display')?.textContent.trim() !== 'Loading...',
       { timeout: 10000 }
