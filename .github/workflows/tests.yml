@@ -10,4 +10,4 @@ jobs: # the things being executed
       - name: Install Dependencies
         run: npm install
       - name: Create Deck Test
-        run: npm test ./tests/create-deck.test.js
+        run: npm test 
