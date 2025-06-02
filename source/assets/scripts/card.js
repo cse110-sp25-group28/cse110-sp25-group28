@@ -36,6 +36,7 @@ class WorkoutCard extends HTMLElement {
       if (!this._disableFlip) {
         articleEl.classList.toggle("flipped");
       }
+      articleEl.classList.toggle("active");
       // Always dispatch the event so selection works!
       this.dispatchEvent(new CustomEvent("workout-card-clicked", {
         bubbles: true,
@@ -74,10 +75,14 @@ class WorkoutCard extends HTMLElement {
     const front = this.shadowRoot.querySelector(".card-front");
     const back = this.shadowRoot.querySelector(".card-back");
     front.innerHTML = `
-      <img src="${data.image}" alt="${data.name}">
-      <h2 class="name"><a>${data.name}</a></h2>
-      <p class="muscle">${data.muscle}</p>
-      <p class="description">${data.description}</p>
+      <div class="image-wrapper">
+        <img src="${data.image}" alt="${data.name}">
+      </div>
+      <div class="text-content">
+        <h2 class="name"><a>${data.name}</a></h2>
+        <p class="muscle">${data.muscle}</p>
+        <p class="description">${data.description}</p>
+      </div>
     `;
     back.innerHTML = `
       <div class="muscle-label">${data.muscle}</div>
@@ -97,13 +102,11 @@ class WorkoutCard extends HTMLElement {
   set disableFlip(val) {
     this._disableFlip = val;
     if (val) {
-      // Selection mode: always show workout (face up)
-      this._articleEl.classList.toggle("flipped");
+      // Selection mode: flipping is disabled, show default cursor
       this._articleEl.style.cursor = "default";
     } else {
-      // Browsing: allow flipping, start face up (workout showing)
+      // Flipping is enabled, show pointer cursor
       this._articleEl.style.cursor = "pointer";
-      this._articleEl.classList.toggle("flipped");
     }
   }
 }

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 * {
   box-sizing: border-box;
@@ -16,10 +16,16 @@ body {
 
 main {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+.cards-container {
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1.5rem;
-  padding: 2rem;
+  gap: 2rem;
 }
 
 /* Header */
@@ -39,10 +45,21 @@ main {
 }
 
 .logo {
-  width: 40px;
-  height: 40px;
+  width: 64px;
+  height: 64px;
   background-color: #9ca3af;
   border-radius: 50%;
+  overflow: hidden;         /* Ensures image is clipped to the circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;        /* Ensures the image covers the area without distortion */
+  display: block;
 }
 
 .app-name {
@@ -60,13 +77,18 @@ h2 {
 
 .card {
   background-color: #fff;
-  padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
-  min-width: 300px;
-  min-height: 200px;
+  width: 300px;
+  height: 420px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
 }
+
 
 .card h2 {
   margin-top: 0;
@@ -89,7 +111,7 @@ button {
   transition: background-color 0.2s ease;
 }
 
-.create-deck{
+.create-deck {
   margin: 0 auto;
 }
 
@@ -112,23 +134,34 @@ button:hover {
 }
 
 article {
-    background-color: transparent;
-    border-radius: 12px;
-    width: 250px;
-    height: 320px;
-    perspective: 1000px;
-    margin: 1rem;
-    cursor: pointer;
-    position: relative;
+  background-color: transparent;
+  border-radius: 12px;
+  width: 250px;
+  height: 320px;
+  perspective: 1000px;
+  margin: 1rem;
+  cursor: pointer;
+  position: relative;
+  transition: box-shadow 0.15s ease-out;
 }
 
 article:hover {
-    transform: translateY(-4px);
+  transform: scale(1.03);
+  transition: transform 0.25s ease-in-out;
+}
+
+article:hover:not(.active) {
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+  transition: box-shadow 0.3s ease-in;
+}
+
+article.active {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
 }
 
 .card-inner {
-  position: relative;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
   height: 100%;
   transition: transform 0.6s;
   transform-style: preserve-3d;
@@ -138,7 +171,23 @@ article:hover {
   transform: rotateY(180deg);
 }
 
-.card-front, .card-back {
+.image-wrapper {
+  flex: 1 1 auto;
+  max-height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.image-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.card-front,
+.card-back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -149,7 +198,7 @@ article:hover {
   align-items: center;
   justify-content: center;
   background: #fff;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .card-front img {
@@ -199,4 +248,150 @@ article:hover {
   color: #444;
   text-align: center;
   padding: 1rem;
+  font-weight: bold;
+  transition: all 0.1s ease;
+}
+
+.flipped:hover .card-back .muscle-label {
+  font-weight: bolder;
+  color: #111;
+}
+
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* ← this adds height spacing between child elements */
+}
+
+.modal-buttons {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+#deck-name-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#deck-name-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  gap: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.custom-dropdown-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.filter-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.custom-dropdown {
+  position: relative;
+  background: white;
+  border: 2px solid #aaa;
+  border-radius: 999px;  
+  cursor: pointer;
+  min-width: 200px;
+  user-select: none;
+}
+
+.custom-dropdown-selected {
+  padding: 0.75rem;
+  border-radius: 999px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+}
+
+.custom-dropdown-options {
+  display: none;
+  position: absolute;
+  width: 100%;
+  top: 110%;
+  left: 0;
+  background: white;
+  border: 2px solid #aaa;
+  border-radius: 1rem;
+  z-index: 100;
+  max-height: 300px;
+  overflow-y: auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.custom-dropdown.open .custom-dropdown-options {
+  display: block;
+}
+
+.custom-dropdown-option {
+  padding: 0.75rem;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.custom-dropdown-option:hover {
+  background: #f0f0f0;
+}
+
+.custom-dropdown-option:last-child {
+  border-bottom: none;
 }
