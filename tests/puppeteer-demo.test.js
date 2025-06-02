@@ -18,7 +18,6 @@ describe('Basic user flow for Website', () => {
 
   it('Testing Filtering System', async () => {
     await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28/');
-    await page.waitForSelector('.create-deck', { timeout: 5000 });
     await page.click('.create-deck');
 
   
