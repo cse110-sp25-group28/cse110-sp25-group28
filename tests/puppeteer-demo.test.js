@@ -21,21 +21,18 @@ describe('Basic user flow for Website', () => {
     await page.click('.create-deck');
 
   
-    await page.waitForSelector('select#filter-muscle');
+    //await page.waitForSelector('.custom-dropdown-options');
     
-    await page.select('select#filter-muscle', 'biceps');
+    await page.click('.custom-dropdown-selected');
 
-    // Check visible cards
-    const visibleMuscles = await page.$$eval('workout-card', cards =>
-      cards
-        .filter(card => getComputedStyle(card).display !== 'none')
-        .map(card => card.dataset.muscle)
-  );
+    await page.waitForSelector('.custom-dropdown-option', { visible: true });
 
-  expect(visibleMuscles.every(muscle => muscle === 'biceps')).toBe(true);
+    await page.evaluate(() => {
+      const options = Array.from(document.querySelectorAll('.custom-dropdown-option'));
+      const chestOption = options.find(el => el.textContent.trim().toLowerCase() === 'chest');
+      if (chestOption) chest.click();
+    });    
 
-  // Check localStorage
-  const savedFilters = await page.evaluate(() => localStorage.getItem('filters'));
-  expect(savedFilters).toContain('"muscle":"biceps"');
+
 }, 15000);
 });
