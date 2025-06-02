@@ -17,7 +17,7 @@ describe('create core blast deck test', () => {
     expect(workout1).toBe("Plank");
 
     // Next workout
-    await page.click('.next-button');
+    await page.click('#next-button');
     await page.waitForFunction(
       () => document.querySelector('#card-display')?.textContent.trim() !== 'Loading...',
       { timeout: 10000 }
@@ -26,7 +26,7 @@ describe('create core blast deck test', () => {
     expect(workout2).toBe("Oblique Crunch");
 
     // Next workout
-    await page.click('.next-button');
+    await page.click('#next-button');
     await page.waitForFunction(
       () => document.querySelector('#card-display')?.textContent.trim() !== 'Loading...',
       { timeout: 10000 }
