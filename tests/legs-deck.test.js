@@ -8,7 +8,7 @@ describe('create legs deck test', () => {
   }, 40000);
 
   it('Checking the workout values', async () => {
-    const nextSelector = '.next-button'; // Update this!
+    const nextSelector = '#next-button'; // Update this!
 
     await page.waitForFunction(
       () => document.querySelector('#card-display')?.textContent.trim() !== 'Loading...',
