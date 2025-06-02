@@ -17,13 +17,12 @@ describe('Basic user flow for Website', () => {
   }, 15000);
 
   it('Testing Filtering System', async () => {
-    await page.waitForSelector('.create-deck', { timeout: 5000 });
+    //await page.waitForSelector('.create-deck', { timeout: 5000 });
     await page.click('.create-deck');
 
-    // ⏳ Wait for dropdown to be injected
+  
     await page.waitForSelector('select#filter-muscle');
-
-    // ✅ Now it's safe to select
+    
     await page.select('select#filter-muscle', 'biceps');
 
     // Check visible cards
