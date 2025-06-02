@@ -10,24 +10,30 @@ describe('create chest day deck test', () => {
   }, 40000);
 
   it('Checking the workout values', async () => {
-    console.log("spot 1");
-    await page.waitForSelector('#card-display', { timeout: 10000 });
-    console.log('spot 2');
+  // Wait until first workout loads
+  await page.waitForFunction(
+    () => document.querySelector('#card-display')?.textContent.trim() !== 'Loading...',
+    { timeout: 10000 }
+  );
+  const workout1 = await page.$eval('#card-display', el => el.textContent.trim());
+  expect(workout1).toBe("Push-Up");
 
-    // Check first workout
-    const workout1 = await page.$eval('#card-display', el => el.textContent.trim());
-    expect(workout1).toBe("Push-Up");
+  // Click next and wait for second workout to load
+  await page.click('#next-button');
+  await page.waitForFunction(
+    () => document.querySelector('#card-display')?.textContent.trim() !== 'Loading...',
+    { timeout: 10000 }
+  );
+  const workout2 = await page.$eval('#card-display', el => el.textContent.trim());
+  expect(workout2).toBe("Bench Press");
 
-    // Click next and check second workout
-    await page.click('#next-button');
-    await page.waitForSelector('#card-display', { timeout: 10000 });
-    const workout2 = await page.$eval('#card-display', el => el.textContent.trim());
-    expect(workout2).toBe("Bench Press");
-
-    // Click next and check third workout
-    await page.click('#next-button');
-    await page.waitForSelector('#card-display', { timeout: 10000 });
-    const workout3 = await page.$eval('#card-display', el => el.textContent.trim());
-    expect(workout3).toBe("Incline Press");
-  }, 90000);
+  // Click next and wait for third workout to load
+  await page.click('#next-button');
+  await page.waitForFunction(
+    () => document.querySelector('#card-display')?.textContent.trim() !== 'Loading...',
+    { timeout: 10000 }
+  );
+  const workout3 = await page.$eval('#card-display', el => el.textContent.trim());
+  expect(workout3).toBe("Incline Press");
+}, 90000);
 });
