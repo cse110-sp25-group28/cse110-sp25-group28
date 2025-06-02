@@ -16,4 +16,4 @@ jobs:
 
       - run: npm install
 
-      - run: npm test ./tests/puppeteer-demo.test.js
+      - run: npm test 
