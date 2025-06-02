@@ -1,3 +1,6 @@
+const puppeteer = require('puppeteer');
+const path = require('path');
+
 describe('create deck test', () => {
     // First, visit the website
     beforeAll(async () => {
@@ -44,5 +47,47 @@ describe('create deck test', () => {
             expect(allArePopulated).toBe(true);
         }
     }, 20000);
+
+
+
+     it('should load workout cards from JSON', async () => {
+        await page.waitForSelector('workout-card');
+        const cards = await page.$$('workout-card');
+        expect(cards.length).toBeGreaterThan(0);
+      });
+
+
+
+  it('should toggle selection mode and allow selecting a card', async () => {
+  await page.click('#selectorOn');
+  await page.waitForSelector('workout-card');
+
+  const cards = await page.$$('workout-card');
+  const firstCard = cards[0];
+
+  // Simulate a click on the card
+  await firstCard.click();
+
+
+  const isSelected = await page.evaluate(card => card.classList.contains('selected'), firstCard);
+  expect(isSelected).toBe(true);
+});
+
+
+
+  it('should show an error if Create Deck is clicked with no selection', async () => {
+    // Deselect all cards
+    await page.evaluate(() => {
+      document.querySelectorAll('.selected').forEach(card => card.classList.remove('selected'));
+    });
+
+    await page.click('#create-deck-button');
+
+    const errorText = await page.$eval('#create-deck-error', el => el.textContent);
+    expect(errorText).toContain('Please select a card');
+  });
+
+
+  
 });
   

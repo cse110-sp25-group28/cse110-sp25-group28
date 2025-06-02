@@ -1,4 +1,4 @@
-import { initFiltering } from "./filter-control.js";
+const { initFiltering } = require("./filter-control.js");
 
 /**
  * Starts the page
@@ -212,3 +212,13 @@ function closeModal() {
   document.getElementById("deck-name-input").value = "";
   document.getElementById("deck-name-error").classList.add("hidden");
 }
+
+module.exports = {
+  getCardData,
+  setCardsDisableFlip,
+  unselectCards,
+  saveSelectedCards,
+  closeModal,
+  getWorkoutsFromStorage,
+  addWorkoutsToDocument
+};

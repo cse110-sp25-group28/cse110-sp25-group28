@@ -1,3 +1,5 @@
+const { TestEnvironment } = require("jest-environment-jsdom");
+
 module.exports = {
   launch: {
     headless: 'new',
@@ -11,4 +13,5 @@ module.exports = {
       '--no-zygote',
     ],
   },
+  testEnvironment: 'jsdom',
 };
