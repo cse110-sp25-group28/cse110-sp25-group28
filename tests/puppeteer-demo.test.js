@@ -17,7 +17,7 @@ describe('Basic user flow for Website', () => {
   }, 15000);
 
   it('Testing Filtering System', async () => {
-    await page.waitForSelector('.create-deck', { timeout: 5000 });
+    await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28/');
     await page.click('.create-deck');
 
     await page.waitForSelector('#filter-muscle');
