@@ -16,22 +16,37 @@ describe('Basic user flow for Website', () => {
     expect(url).toContain('index.html');
   }, 15000);
 
-  it('Testing Filtering System', async () => {
-    await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28/');
-    await page.click('.create-deck');
-
-  
-    //await page.waitForSelector('.custom-dropdown-options');
-    
+  it('should filter cards when a muscle group is selected', async () => {
+    // Click the dropdown to open it
     await page.click('.custom-dropdown-selected');
 
-    await page.waitForSelector('.custom-dropdown-option', { visible: true });
+    // Wait for the options to be visible
+    await page.waitForSelector('.custom-dropdown-options', { visible: true });
 
-    await page.evaluate(() => {
-      const options = Array.from(document.querySelectorAll('.custom-dropdown-option'));
-      const chestOption = options.find(el => el.textContent.trim().toLowerCase() === 'chest');
-      if (chestOption) chest.click();
-    });    
+    // Click the "Biceps" option (or any you choose)
+    await page.click('.custom-dropdown-option[data-value="biceps"]');
+
+    // Wait for the dropdown to update the selected text
+    const selectedText = await page.$eval(
+      '.custom-dropdown-selected',
+      el => el.textContent
+    );
+
+    expect(selectedText).toBe('Biceps');
+
+    // Wait for the filtering to take effect (optional, adjust selector as needed)
+    await page.waitForTimeout(500); // or waitForSelector if there’s a filtered result
+
+    // Example: Verify that only cards with data-value="biceps" are visible
+    const visibleCards = await page.$$eval(
+      '.card', // adjust selector to your card container
+      cards => cards.map(card => card.getAttribute('data-muscle'))
+    );
+
+    // All cards should have 'biceps' as the muscle group
+    visibleCards.forEach(muscle => {
+      expect(muscle).toBe('biceps');
+    });
 
 
 }, 15000);
