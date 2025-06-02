@@ -1,5 +1,3 @@
-const puppeteer = require('puppeteer');
-const path = require('path');
 
 describe('create deck test', () => {
     // First, visit the website
