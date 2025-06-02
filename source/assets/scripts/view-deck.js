@@ -20,7 +20,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const showCard = (index) => {
     const card = deck.cards[index];
-    cardDisplay.textContent = card.name || `Card #${index + 1}`;
+
+    cardDisplay.innerHTML = "";
+
+    const workoutCard = document.createElement("workout-card");
+    workoutCard.data = card;
+
+    cardDisplay.appendChild(workoutCard);
     counter.textContent = `${index + 1} / ${deck.cards.length}`;
   };
 

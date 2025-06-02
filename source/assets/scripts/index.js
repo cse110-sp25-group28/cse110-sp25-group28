@@ -59,7 +59,7 @@ function init() {
   const decks = JSON.parse(localStorage.getItem("decks")) || [];
   const customDecks = JSON.parse(localStorage.getItem("custom-decks"));
 
-  
+ 
   localStorage.setItem("decks", JSON.stringify(DEFAULT_DECKS));
 
   decks.forEach((deck, index) => {

@@ -69,6 +69,8 @@ class WorkoutCard extends HTMLElement {
    */
     set data(data) {
     if (!data) return;
+    this._data = data;
+
     this.dataset.muscle = data.muscle?.toLowerCase() || '';
     const front = this.shadowRoot.querySelector(".card-front");
     const back = this.shadowRoot.querySelector(".card-back");
@@ -85,6 +87,10 @@ class WorkoutCard extends HTMLElement {
     back.innerHTML = `
       <div class="muscle-label">${data.muscle}</div>
     `;
+  }
+
+  get data(){
+    return this._data;
   }
 
   /**
