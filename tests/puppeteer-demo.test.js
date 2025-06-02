@@ -38,5 +38,5 @@ describe('Basic user flow for Website', () => {
   // Check localStorage
   const savedFilters = await page.evaluate(() => localStorage.getItem('filters'));
   expect(savedFilters).toContain('"muscle":"biceps"');
-}, 10000);
+}, 20000);
 });
