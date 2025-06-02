@@ -1,57 +1,37 @@
 describe('create arm workout deck test', () => {
-    // First, visit the website
-    beforeAll(async () => {
-      await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28');
-      // Reload the page so localStorage changes take effect
-      await page.reload({ waitUntil: 'domcontentloaded' });
-      const deck4 = await page.$$eval('.deck-box', (decks) => {
-        return decks[3];
-      });
-      await page.click(deck4);
-    }, 40000);
-  
-    // Each it() call is a separate test
-    // Here, we check to make sure that all workouts have loaded
-    it('Checking the workout values', async () => {  
-      await page.waitForSelector('#card-display', { timeout: 20000 });
+  beforeAll(async () => {
+    await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28');
+    await page.reload({ waitUntil: 'domcontentloaded' });
 
-      // Select Workout
-      const workout1 = await page.$eval('#card-display', (workout) => {
-        return workout;
-      });
-  
-      // Expect that workout1 will be Bicep Curl
-      expect(workout1).toBe("Bicep Curl");
+    const deckElements = await page.$$('.deck-box');
+    await deckElements[3].click();
+  }, 40000);
 
-      let next = await page.$eval('.next-button', (nextButton) => {
-        return nextButton;
-      });
-      await next.click();
+  it('Checking the workout values', async () => {
+    // Wait for first workout to load
+    await page.waitForFunction(
+      () => document.querySelector('#card-display')?.textContent.trim() !== 'Loading...',
+      { timeout: 20000 }
+    );
+    const workout1 = await page.$eval('#card-display', el => el.textContent.trim());
+    expect(workout1).toBe("Bicep Curl");
 
-      await page.waitForSelector('#card-display', { timeout: 10000 });
+    // Next workout
+    await page.click('.next-button');
+    await page.waitForFunction(
+      () => document.querySelector('#card-display')?.textContent.trim() !== 'Loading...',
+      { timeout: 10000 }
+    );
+    const workout2 = await page.$eval('#card-display', el => el.textContent.trim());
+    expect(workout2).toBe("Tricep Dip");
 
-      // Select the workout
-      const workout2 = await page.$eval('#card-display', (workout) => {
-        return workout;
-      });
-  
-      // Expect that workout2 will be Tricep Dip
-      expect(workout2).toBe("Tricep Dip");
-
-      next = await page.$eval('.next-button', (nextButton) => {
-        return nextButton;
-      });
-      await next.click();
-
-      await page.waitForSelector('#card-display', { timeout: 10000 });
-
-      // Select the workout
-      const workout3 = await page.$eval('#card-display', (workout) => {
-        return workout;
-      });
-  
-      // Expect that workout3 will be Shoulder Press
-      expect(workout3).toBe("Shoulder Press");
-    }, 90000);
+    // Next workout
+    await page.click('.next-button');
+    await page.waitForFunction(
+      () => document.querySelector('#card-display')?.textContent.trim() !== 'Loading...',
+      { timeout: 10000 }
+    );
+    const workout3 = await page.$eval('#card-display', el => el.textContent.trim());
+    expect(workout3).toBe("Shoulder Press");
+  }, 90000);
 });
-  
