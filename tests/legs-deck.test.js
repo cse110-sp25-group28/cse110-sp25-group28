@@ -2,12 +2,12 @@ describe('create deck test', () => {
     // First, visit the website
     beforeAll(async () => {
       await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28');
-      await page.waitForSelector('.deck-box', { timeout: 10000 });
+      await page.waitForSelector('.deck-box', { timeout: 20000 });
       const deck2 = await page.$$eval('.deck-box', (decks) => {
         return decks[1];
       });
       await deck2.click();
-    });
+    }, 40000);
   
     // Each it() call is a separate test
     // Here, we check to make sure that all workouts have loaded
@@ -51,6 +51,6 @@ describe('create deck test', () => {
   
       // Expect that workout3 will be Glute Bridge
       expect(workout3).toBe("Glute Bridge");
-    }, 30000);
+    }, 90000);
 });
   

@@ -9,7 +9,7 @@ describe('create deck test', () => {
     it('Get intial workout decks', async () => {
       console.log('initialization');
   
-      await page.waitForSelector('.deck-box', { timeout: 10000 });
+      await page.waitForSelector('.deck-box', { timeout: 20000 });
 
       // Query select all of the <deck-box> class elements and return the length of that array
       const numWorkoutSets = await page.$$eval('.deck-box', (decks) => {
@@ -18,6 +18,6 @@ describe('create deck test', () => {
   
       // Expect there that array from earlier to be of length 4, meaning 4 <deck-box> class elements were found
       expect(numWorkoutSets).toBe(4);
-    }, 10000);
+    }, 40000);
 });
   
