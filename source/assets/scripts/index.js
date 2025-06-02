@@ -25,30 +25,76 @@ const DEFAULT_DECKS = [
        },
     ],
   },
-  {
+  
+  { 
     name: "Legs",
     cards: [
-      { name: "Squat" },
-      { name: "Calf Raises" },
-      { name: "Glute Bridge" },
-    ],
+      {
+        name: "Squat",
+        muscle: "Quadriceps",
+        description: "Compound movement that strengthens legs and glutes.",
+        image: "workouts/images/Squat.webp"
+      },
+      {   
+        name: "Calf Raises",
+        muscle: "Calves",
+        description: "Simple exercise to strengthen the calves.",
+        image: "workouts/images/Calf-Raises.webp"
+      },
+      {   
+        name: "Glute Bridge",
+        muscle: "Glutes",
+        description: "Targets glutes and hamstrings from a supine position.",
+        image: "workouts/images/Glute-Bridge.webp"
+      }
+    ]
   },
-  {
+  { 
     name: "Core Blast",
     cards: [
-      { name: "Plank" },
-      { name: "Oblique Crunch" },
-      { name: "Leg Raises" },
-    ],
+      {
+        name: "Plank",
+        muscle: "Abdominals",
+        description: "Isometric core exercise that improves stability and endurance.",
+        image: "workouts/images/Plank.webp"
+      },
+      {
+        name: "Oblique Crunch",
+        muscle: "Obliques",
+        description: "Rotational ab move to target the obliques.",
+        image: "workouts/images/Oblique-Crunch.webp" 
+      },
+      { 
+        name: "Leg Raises",
+        muscle: "Abs",
+        description: "Hanging leg raise to activate lower abs.",
+        image: "workouts/images/Leg-Raises.webp"
+      }
+    ]
   },
-  {
+  { 
     name: "Arm Workout",
     cards: [
-      { name: "Bicep Curl" },
-      { name: "Tricep Dip" },
-      { name: "Shoulder Press" },
-    ],
-  },
+      {
+        name: "Bicep Curl",
+        muscle: "Biceps",
+        description: "Isolation movement to develop arm strength.",
+        image: "workouts/images/Bicep-Curl.webp"
+      },
+      {
+        name: "Tricep Dip",
+        muscle: "Triceps",
+        description: "Bodyweight exercise to isolate the triceps.",
+        image: "workouts/images/Tricep-Dip.webp"
+      },
+      {
+        name: "Shoulder Press",
+        muscle: "Shoulders",
+        description: "Overhead pressing movement to build deltoid strength.",
+        image: "workouts/images/Shoulder-Press.webp"
+      }
+    ]
+  }
 ];
 
 function init() {
