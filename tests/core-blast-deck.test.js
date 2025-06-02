@@ -2,7 +2,8 @@ describe('create deck test', () => {
     // First, visit the website
     beforeAll(async () => {
       await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28');
-      await page.waitForSelector('.deck-box', { timeout: 20000 });
+      // Reload the page so localStorage changes take effect
+      await page.reload({ waitUntil: 'domcontentloaded' });
       const deck3 = await page.$$eval('.deck-box', (decks) => {
         return decks[2];
       });
