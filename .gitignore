@@ -3,3 +3,4 @@ specs/
 admin/branding
 admin/videos
 admin/misc
+.DS_Store
