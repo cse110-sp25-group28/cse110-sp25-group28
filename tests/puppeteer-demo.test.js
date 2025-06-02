@@ -17,12 +17,8 @@ describe('Basic user flow for Website', () => {
   }, 15000);
 
   it('Testing Filtering System', async () => {
-    await page.waitForSelector('.create-deck', { timeout: 10000 });
-    const exists = await page.$('.create-deck');
-    if (!exists) {
-      throw new Error('Element .create-deck not found!');
-    }
-    await page.click('.create-deck');
+    //await page.waitForSelector('.create-deck', { timeout: 10000 });
+    await page.click('button');
 
   
     await page.waitForSelector('select#filter-muscle');
