@@ -1,7 +1,44 @@
-/* Font Import (Poppins from Google) */
+/* Font Import */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
-/* Clean Slate (get rid of default fonts) */
+/* Light Mode (Color Variables) */
+
+:root {
+  --background: #f7f8fa;
+  --foreground: #222;
+  --header-bg: #fff;
+  --box-bg: #fff;
+  --box-border: #e6eaf0;
+  --primary: #2b4d8c;
+  --primary-dark: #1a2e4c;
+  --deck-hover: #f0f4fa;
+  --shadow: 0 2px 8px rgba(0,0,0,0.04);
+  --card-shadow: 0 4px 32px rgba(44, 62, 80, 0.10);
+  --deck-shadow: 0 2px 12px rgba(44, 62, 80, 0.08);
+  --deck-hover-shadow: 0 6px 24px rgba(44, 62, 80, 0.16);
+  --summary: #555;
+}
+
+/* Dark Mode (Color Variables) */
+
+[data-theme="dark"] {
+  --background: #181a1b;
+  --foreground: #f5f6fa;
+  --header-bg: #23272f;
+  --box-bg: #23272f;
+  --box-border: #353b48;
+  --primary: #6ea8fe;
+  --primary-dark: #3b5b8c;
+  --deck-hover: #232c3a;
+  --shadow: 0 2px 8px rgba(0,0,0,0.4);
+  --card-shadow: 0 4px 32px rgba(20, 30, 40, 0.40);
+  --deck-shadow: 0 2px 12px rgba(20, 30, 40, 0.24);
+  --deck-hover-shadow: 0 6px 24px rgba(20, 30, 40, 0.32);
+  --summary: #bfc9d1;
+}
+
+/* Clean Slate (revert default styling) */
 
 * {
   box-sizing: border-box;
@@ -11,16 +48,16 @@
 
 body {
   font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
-  background: #f7f8fa;
-  color: #222;
+  background: var(--background);
+  color: var(--foreground);
   min-height: 100vh;
 }
 
 /* Header Section */
 
 .header {
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  background: var(--header-bg);
+  box-shadow: var(--shadow);
   padding: 24px 40px 16px 40px;
   display: flex;
   justify-content: space-between;
@@ -48,12 +85,12 @@ body {
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: 1px;
-  color: #2b4d8c;
+  color: var(--primary);
   margin: 0;
 }
 
 .create-deck {
-  background: #2b4d8c;
+  background: var(--primary);
   color: #fff;
   border: none;
   padding: 12px 24px;
@@ -66,35 +103,51 @@ body {
 }
 
 .create-deck:hover {
-  background: #1a2e4c;
+  background: var(--primary-dark);
 }
 
-/* Main-Content */
+/* Style Mode Toggle Button */
+
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  margin-left: 12px;
+  cursor: pointer;
+  color: var(--primary);
+  transition: color 0.2s;
+  outline: none;
+}
+.theme-toggle:hover {
+  color: var(--primary-dark);
+}
+
+/* Main Content Section (container for all decks) */
 
 .main-content {
   max-width: 1100px;
   margin: 40px auto 0 auto;
   padding: 40px 32px 40px 32px;
-  background: #fff;
+  background: var(--box-bg);
   border-radius: 18px;
-  box-shadow: 0 4px 32px rgba(44, 62, 80, 0.10);
-  border: 1px solid #e6eaf0;
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--box-border);
 }
 
 .catch-phrase {
   font-size: 1.5rem;
-  color: #2b4d8c;
+  color: var(--primary);
   margin-bottom: 8px;
   font-weight: 600;
 }
 
 .summary {
-  color: #555;
+  color: var(--summary);
   margin: 12px 0 18px 0;
   font-size: 1rem;
 }
 
-/* Deck Container */
+/* Deck Containers (by type) */
 
 .decks {
   display: flex;
@@ -104,18 +157,18 @@ body {
   justify-content: flex-start;
 }
 
-/* Deck Card */
+/* Individual Deck Cards */
 
 .deck-box {
-  background: #fff;
+  background: var(--box-bg);
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(44, 62, 80, 0.08);
+  box-shadow: var(--deck-shadow);
   padding: 32px 24px;
   font-size: 1.15rem;
   font-weight: 500;
-  color: #2b4d8c;
+  color: var(--primary);
   cursor: pointer;
-  transition: box-shadow 0.2s, transform 0.2s;
+  transition: box-shadow 0.2s, transform 0.2s, background 0.2s;
   width: 220px;
   text-align: center;
   outline: none;
@@ -123,9 +176,9 @@ body {
 }
 
 .deck-box:hover, .deck-box:focus {
-  box-shadow: 0 6px 24px rgba(44, 62, 80, 0.16);
+  box-shadow: var(--deck-hover-shadow);
   transform: translateY(-4px) scale(1.03);
-  background: #f0f4fa;
+  background: var(--deck-hover);
 }
 
 /* Responsive Design */
@@ -152,6 +205,10 @@ body {
   }
   .create-deck {
     margin: 0 0 8px 0;
+  }
+  .theme-toggle {
+    margin-left: 0;
+    margin-bottom: 8px;
   }
   .main-content {
     padding: 8px 2px 16px 2px;
