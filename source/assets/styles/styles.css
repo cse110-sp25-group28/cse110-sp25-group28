@@ -118,8 +118,19 @@ body {
   transition: color 0.2s;
   outline: none;
 }
+
 .theme-toggle:hover {
   color: var(--primary-dark);
+}
+
+/* Smoother Theme Transition */
+
+body, .header, .main-content, .deck-box {
+  transition:
+    background 0.3s cubic-bezier(.4,0,.2,1),
+    color 0.3s cubic-bezier(.4,0,.2,1),
+    border-color 0.3s cubic-bezier(.4,0,.2,1),
+    box-shadow 0.3s cubic-bezier(.4,0,.2,1);
 }
 
 /* Main Content Section (container for all decks) */
@@ -168,7 +179,7 @@ body {
   font-weight: 500;
   color: var(--primary);
   cursor: pointer;
-  transition: box-shadow 0.2s, transform 0.2s, background 0.2s;
+  /* transition: box-shadow 0.2s, transform 0.2s, background 0.2s; */
   width: 220px;
   text-align: center;
   outline: none;
