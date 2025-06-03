@@ -89,6 +89,13 @@ body {
   margin: 0;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  margin-right: 32px;
+}
+
 .create-deck {
   background: var(--primary);
   color: #fff;
@@ -112,7 +119,7 @@ body {
   background: none;
   border: none;
   font-size: 1.5rem;
-  margin-left: 12px;
+  margin-left: 0px;
   cursor: pointer;
   color: var(--primary);
   transition: color 0.2s;
