@@ -18,6 +18,7 @@
   --deck-shadow: 0 2px 12px rgba(44, 62, 80, 0.08);
   --deck-hover-shadow: 0 6px 24px rgba(44, 62, 80, 0.16);
   --summary: #555;
+  --deck-bg:rgb(213, 222, 236);
 }
 
 /* Dark Mode (Color Variables) */
@@ -36,6 +37,7 @@
   --deck-shadow: 0 2px 12px rgba(20, 30, 40, 0.24);
   --deck-hover-shadow: 0 6px 24px rgba(20, 30, 40, 0.32);
   --summary: #bfc9d1;
+  --deck-bg: #2b313a;
 }
 
 /* Clean Slate (revert default styling) */
@@ -188,9 +190,13 @@ body, .header, .main-content, .deck-box {
   cursor: pointer;
   /* transition: box-shadow 0.2s, transform 0.2s, background 0.2s; */
   width: 220px;
+  height: 300px;
   text-align: center;
+  display: grid;
+  place-items: center;
   outline: none;
   flex: 0 0 auto;
+  background-color: var(--deck-bg);
 }
 
 .deck-box:hover, .deck-box:focus {
