@@ -79,7 +79,7 @@
   },
   {
     "name": "Leg Raises",
-    "muscle": "Abs",
+    "muscle": "Abdominals",
     "description": "Hanging leg raise to activate lower abs.",
     "image": "workouts/images/Leg-Raises.webp"
   },
@@ -217,7 +217,7 @@
   },
   {
     "name": "Reverse Crunch",
-    "muscle": "Lower Abs",
+    "muscle": "Abdominals",
     "description": "Lying ab move bringing knees toward chest.",
     "image": "workouts/images/Reverse-Crunch.webp"
   },
@@ -253,7 +253,7 @@
   },
   {
     "name": "Crunch Machine",
-    "muscle": "Abs",
+    "muscle": "Abdominals",
     "description": "Sit-up performed with added weight for resistance.",
     "image": "workouts/images/Crunch-Machine.webp"
   }

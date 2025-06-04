@@ -1,152 +1,250 @@
-/* Reset and Base */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/* Font Import */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* Light Mode (Color Variables) */
+
+:root {
+  --background: #f7f8fa;
+  --foreground: #222;
+  --header-bg: #fff;
+  --box-bg: #fff;
+  --box-border: #e6eaf0;
+  --primary: #2b4d8c;
+  --primary-dark: #1a2e4c;
+  --deck-hover: #f0f4fa;
+  --shadow: 0 2px 8px rgba(0,0,0,0.04);
+  --card-shadow: 0 4px 32px rgba(44, 62, 80, 0.10);
+  --deck-shadow: 0 2px 12px rgba(44, 62, 80, 0.08);
+  --deck-hover-shadow: 0 6px 24px rgba(44, 62, 80, 0.16);
+  --summary: #555;
+  --deck-bg:rgb(213, 222, 236);
+}
+
+/* Dark Mode (Color Variables) */
+
+[data-theme="dark"] {
+  --background: #181a1b;
+  --foreground: #f5f6fa;
+  --header-bg: #23272f;
+  --box-bg: #23272f;
+  --box-border: #353b48;
+  --primary: #6ea8fe;
+  --primary-dark: #3b5b8c;
+  --deck-hover: #232c3a;
+  --shadow: 0 2px 8px rgba(0,0,0,0.4);
+  --card-shadow: 0 4px 32px rgba(20, 30, 40, 0.40);
+  --deck-shadow: 0 2px 12px rgba(20, 30, 40, 0.24);
+  --deck-hover-shadow: 0 6px 24px rgba(20, 30, 40, 0.32);
+  --summary: #bfc9d1;
+  --deck-bg: #2b313a;
+}
+
+/* Clean Slate (revert default styling) */
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Poppins", sans-serif;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  background-color: #f6f6f6;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
+  background: var(--background);
+  color: var(--foreground);
+  min-height: 100vh;
 }
 
-/* Header */
+/* Header Section */
+
 .header {
+  background: var(--header-bg);
+  box-shadow: var(--shadow);
+  padding: 24px 40px 16px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 32px;
-  background-color: #f6f6f6;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
 }
 
 .logo-section {
   display: flex;
   align-items: center;
   gap: 16px;
-}
-
-.logo {
-  width: 64px;
-  height: 64px;
-  background-color: #9ca3af;
-  border-radius: 50%;
-  overflow: hidden;         /* Ensures image is clipped to the circle */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-left: 32px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .logo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;        /* Ensures the image covers the area without distortion */
-  display: block;
+  height: 48px;
+  width: 48px;
+  object-fit: contain;
+  border-radius: 8px;
 }
 
 .app-name {
-  font-size: 1.25rem;
-  font-weight: bold;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--primary);
+  margin: 0;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  margin-right: 32px;
+}
 
-/* Main */
-.main-content {
-  background-color: white;
-  margin: 32px auto;
-  padding: 40px;
-  max-width: 1000px;
-  text-align: center;
+.create-deck {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin: 0 24px 0 0;
+}
+
+.create-deck:hover {
+  background: var(--primary-dark);
+}
+
+/* Style Mode Toggle Button */
+
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  margin-left: 0px;
+  cursor: pointer;
+  color: var(--primary);
+  transition: color 0.2s;
+  outline: none;
+}
+
+.theme-toggle:hover {
+  color: var(--primary-dark);
+}
+
+/* Smoother Theme Transition */
+
+body, .header, .main-content, .deck-box {
+  transition:
+    background 0.3s cubic-bezier(.4,0,.2,1),
+    color 0.3s cubic-bezier(.4,0,.2,1),
+    border-color 0.3s cubic-bezier(.4,0,.2,1),
+    box-shadow 0.3s cubic-bezier(.4,0,.2,1);
+}
+
+/* Main Content Section (container for all decks) */
+
+.main-content {
+  max-width: 1100px;
+  margin: 40px auto 0 auto;
+  padding: 40px 32px 40px 32px;
+  background: var(--box-bg);
+  border-radius: 18px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--box-border);
 }
 
 .catch-phrase {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 16px;
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin-bottom: 8px;
+  font-weight: 600;
 }
 
 .summary {
-  color: #4b5563;
-  margin-bottom: 24px;
+  color: var(--summary);
+  margin: 12px 0 18px 0;
+  font-size: 1rem;
 }
+
+/* Deck Containers (by type) */
 
 .decks {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* auto-fill ensures wrapping */
-  gap: 20px;
-  margin-top: 40px;
-  justify-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 32px;
+  justify-content: flex-start;
 }
+
+/* Individual Deck Cards */
 
 .deck-box {
-  width: 200px;             /* Fixed width */
-  height: 270px;            /* Fixed height */
-  background-color: #e5e7eb;
-  padding: 20px;
+  background: var(--box-bg);
   border-radius: 12px;
-  font-weight: bold;
+  box-shadow: var(--deck-shadow);
+  padding: 32px 24px;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--primary);
+  cursor: pointer;
+  /* transition: box-shadow 0.2s, transform 0.2s, background 0.2s; */
+  width: 220px;
+  height: 300px;
   text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  cursor: pointer;
-}
-
-.custom-decks {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* auto-fill ensures wrapping */
-  gap: 20px;
-  margin-top: 40px;
-  justify-items: center;
+  place-items: center;
+  outline: none;
+  flex: 0 0 auto;
+  background-color: var(--deck-bg);
 }
 
-/* Hover effect */
-.deck-box:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+.deck-box:hover, .deck-box:focus {
+  box-shadow: var(--deck-hover-shadow);
+  transform: translateY(-4px) scale(1.03);
+  background: var(--deck-hover);
 }
 
-/* Click (active) effect */
-.deck-box:active {
-  transform: scale(0.97);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+/* Responsive Design */
+
+@media (max-width: 700px) {
+  .main-content {
+    max-width: 100%;
+    padding: 16px 4px 24px 4px;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+  }
 }
 
-button {
-  padding: 0.6rem 1.2rem;
-  border: none;
-  border-radius: 8px;
-  background-color: #005281;
-  color: white;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.2s ease;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-.selectbutton {
-  padding: 0.6rem 1.2rem;
-  border: none;
-  border-radius: 8px;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.2s ease;
-}
-
-.selectbutton:hover {
-  background-color: #0056b3;
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 8px 8px 8px;
+  }
+  .logo-section {
+    margin-left: 0;
+    margin-bottom: 8px;
+  }
+  .create-deck {
+    margin: 0 0 8px 0;
+  }
+  .theme-toggle {
+    margin-left: 0;
+    margin-bottom: 8px;
+  }
+  .main-content {
+    padding: 8px 2px 16px 2px;
+  }
+  .decks {
+    gap: 12px;
+  }
+  .deck-box {
+    width: 100%;
+    min-width: unset;
+    max-width: unset;
+    padding: 20px 10px;
+    font-size: 1rem;
+  }
 }
