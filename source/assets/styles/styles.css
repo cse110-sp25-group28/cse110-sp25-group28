@@ -40,6 +40,10 @@
   --deck-bg: #2b313a;
 }
 
+[data-theme="dark"] body {
+  background-image: url('../images/gym.webp');
+}
+
 /* Clean Slate (revert default styling) */
 
 * {
@@ -51,9 +55,10 @@
 body {
   font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
   background: var(--background);
-  background-image: url('../images/gym.webp');
+  background-image: url('../images/gym-light-mode.webp');
   color: var(--foreground);
   min-height: 100vh;
+  transition: background 0.3s, background-image 0.3s;
 }
 
 /* Header Section */
