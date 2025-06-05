@@ -6,15 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Workout Cards</title>
     <link rel="stylesheet" href="assets/styles/view-deck-styles.css">
+    <script type="module" src="./assets/scripts/delete-deck.js"></script>
   </head>
   <body>
       <!-- Header -->
     <header class="header">
       <div class="logo-section">
-        <div class="logo">
-          <img src="assets/images/sweat-deck-logo.png" alt="Sweat Deck Logo">
-        </div>
+        <div class="logo"></div>
         <h1 class="app-name">SweatDeck</h1>
+      </div>
+      <div class="button-group">
+        <button class="create-deck">Delete Deck</button>
+        <button id="home-button">View Decks</button>
       </div>
     </header>
     <main id="cards-container" class="main-content">
@@ -24,17 +27,31 @@
           Loading...
         </div>
         <p id="card-counter">1 / N</p>
-
-        <button id="prev-button">← Previous</button>
-        <button id="next-button">Next →</button>
-        <button class="create-deck">Delete Deck</button>
-
-        <!--<script src="assets/scripts/view-deck.js"></script>-->
+        <div class="button-group">
+          <button id="prev-button">← Previous</button>
+          <button id="next-button">Next →</button>
+          <button id="shuffle-button">Shuffle</button>
+        </div>
+        <script type="module" src="./assets/scripts/view-deck.js"></script>
       </div>
     </main>
     <footer class="footer">
+      
     </footer>
-    <script src="assets/scripts/card.js"></script>
-    <script src="assets/scripts/view-deck.js"></script>
+    <div id="delete-modal" class="modal hidden">
+      <div class="modal-content">
+        <h3>Are you sure you want to delete this deck?</h3>
+        <div class="modal-buttons">
+          <button id="confirm-delete">Yes, Delete</button>
+          <button id="cancel-delete">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <div id="deleted-message" class="modal hidden">
+      <div class="modal-content">
+        <h3>This deck has been deleted</h3>
+        <button id="go-home">Go to Home</button>
+      </div>
+    </div>
   </body>
 </html>
