@@ -369,7 +369,8 @@ article.active {
   transform: translateX(-50%);
   color: red;
   font-size: 0.9rem;
-  margin: 0;
+  margin-top: 0.35rem;
+  margin-bottom: 0.35rem;
   z-index: 101;
   background: #fff;
   padding: 0.2rem 0.8rem;
