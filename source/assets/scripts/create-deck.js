@@ -34,6 +34,17 @@ document.getElementById("create-deck-button").addEventListener("click", () => {
     const errorEl = document.getElementById("create-deck-error");
     errorEl.textContent = `Please select a card before creating a deck`;
     errorEl.classList.remove("hidden");
+    errorEl.style.opacity = "1";
+
+    // Hide after 2s, then fade out over 2s
+    setTimeout(() => {
+      errorEl.style.opacity = "0";
+      // After fade out, hide completely
+      setTimeout(() => {
+        errorEl.classList.add('hidden');
+        errorEl.style.opacity = "1"; // Reset for next time
+      }, 1000);
+    }, 1000);
   }
 });
 
