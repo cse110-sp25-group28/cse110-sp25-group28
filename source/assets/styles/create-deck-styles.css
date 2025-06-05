@@ -152,13 +152,11 @@ button {
   transition: background-color 0.2s ease;
 }
 
-.create-deck {
-  position: fixed;
-  left: 50%;
-  bottom: 2rem;
-  transform: translateX(-50%);
-  margin: 0;
-  z-index: 100;
+.controls-toolbar {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
 button:hover {

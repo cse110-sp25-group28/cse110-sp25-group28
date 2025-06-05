@@ -19,7 +19,6 @@
         <h1 class="app-name">SweatDeck</h1>
       </div>
       <div class="buttons">
-        <button id="selectorOn">Select Cards</button>
         <button
           class="view-decks"
           onclick="window.location.href='../index.html'"
@@ -33,10 +32,13 @@
       <h2>Choose some cards!</h2>
     
       <section class="cards-area">
-        <!-- JS will insert the toolbar here -->
+        <div class="controls-toolbar">
+          <!-- The filter toolbar will be inserted here by JS -->
+          <button id="selectorOn">Select Cards</button>
+          <button id="create-deck-button" class="create-deck">Create Deck</button>
+        </div>
         <div class="cards-container"></div>
       </section>
-      <button id="create-deck-button" class="create-deck">Create Deck</button>
       <p id="create-deck-error" class="error-message hidden"></p>
       <!--The container for cards-->
     </main>
