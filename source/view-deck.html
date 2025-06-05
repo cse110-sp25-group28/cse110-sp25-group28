@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Workout Cards</title>
     <link rel="stylesheet" href="assets/styles/view-deck-styles.css">
+    <script type="module" src="./assets/scripts/delete-deck.js"></script>
   </head>
   <body>
       <!-- Header -->
@@ -35,5 +36,20 @@
     <footer class="footer">
       
     </footer>
+    <div id="delete-modal" class="modal hidden">
+      <div class="modal-content">
+        <h3>Are you sure you want to delete this deck?</h3>
+        <div class="modal-buttons">
+          <button id="confirm-delete">Yes, Delete</button>
+          <button id="cancel-delete">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <div id="deleted-message" class="modal hidden">
+      <div class="modal-content">
+        <h3>This deck has been deleted.</h3>
+        <button id="go-home">Go to Home</button>
+      </div>
+    </div>
   </body>
 </html>
