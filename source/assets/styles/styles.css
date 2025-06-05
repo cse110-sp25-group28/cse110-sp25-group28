@@ -51,6 +51,7 @@
 body {
   font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
   background: var(--background);
+  background-image: url('../images/gym.webp');
   color: var(--foreground);
   min-height: 100vh;
 }
@@ -154,12 +155,28 @@ body, .header, .main-content, .deck-box {
   border: 1px solid var(--box-border);
 }
 
+.intro {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 8px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.sub-intro {
+  color: var(--summary);
+  margin: 12px 0 18px 0;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
 .catch-phrase {
   font-size: 1.5rem;
   color: var(--primary);
   margin-bottom: 8px;
   font-weight: 600;
 }
+
 
 .summary {
   color: var(--summary);

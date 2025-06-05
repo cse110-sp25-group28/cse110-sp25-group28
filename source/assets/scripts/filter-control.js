@@ -41,8 +41,8 @@ export function initFiltering(workouts) {
 
     // ─── 3. Toolbar  ────────────────────────────
     const toolbar = buildToolbar(muscles);
-    const main = document.querySelector('main');
-    main.prepend(toolbar);      // Insert on top of cards
+    const cardsArea = document.querySelector('.cards-area');
+    cardsArea.insertBefore(toolbar, cardsArea.firstChild);
 
     // ─── 4. Restore saved filter state and apply  ─────────────────
     restoreSelections(toolbar);

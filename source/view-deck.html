@@ -11,10 +11,12 @@
       <!-- Header -->
     <header class="header">
       <div class="logo-section">
-        <div class="logo">
-          <img src="assets/images/sweat-deck-logo.png" alt="Sweat Deck Logo">
-        </div>
+        <div class="logo"></div>
         <h1 class="app-name">SweatDeck</h1>
+      </div>
+      <div class="button-group">
+        <button class="create-deck">Delete Deck</button>
+        <button id="home-button">View Decks</button>
       </div>
     </header>
     <main id="cards-container" class="main-content">
@@ -24,17 +26,16 @@
           Loading...
         </div>
         <p id="card-counter">1 / N</p>
-
-        <button id="prev-button">← Previous</button>
-        <button id="next-button">Next →</button>
-        <button class="create-deck">Delete Deck</button>
-
-        <!--<script src="assets/scripts/view-deck.js"></script>-->
+        <div class="button-group">
+          <button id="prev-button">← Previous</button>
+          <button id="next-button">Next →</button>
+          <button id="shuffle-button">Shuffle</button>
+        </div>
+        <script type="module" src="./assets/scripts/view-deck.js"></script>
       </div>
     </main>
     <footer class="footer">
+      
     </footer>
-    <script src="assets/scripts/card.js"></script>
-    <script src="assets/scripts/view-deck.js"></script>
   </body>
 </html>
