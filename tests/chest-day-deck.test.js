@@ -10,11 +10,12 @@ describe('create chest day deck test', () => {
 
   it('should display the correct workout names in the carousel', async () => {
     async function getWorkoutName() {
-      return await page.evaluate(() => {
-        const card = document.querySelector('#card-display workout-card');
-        const shadow = card?.shadowRoot;
-        return shadow?.querySelector('h2.name a')?.textContent.trim();
-      });
+        return await page.evaluate(() => {
+          const cards = Array.from(document.querySelectorAll('#card-display workout-card'));
+          const visibleCard = cards.find(c => getComputedStyle(c).display !== 'none');
+          const shadow = visibleCard?.shadowRoot;
+          return shadow?.querySelector('h2.name a')?.textContent.trim() || null;
+        });
     }
 
     // Wait until first workout is loaded
@@ -26,12 +27,12 @@ describe('create chest day deck test', () => {
 
     const workout1 = await getWorkoutName();
     expect(workout1).toBe("Push-Up");
-
     // Go to next card
     await page.click('#next-button');
     await page.waitForFunction(() => {
-      const card = document.querySelector('#card-display workout-card');
-      const shadow = card?.shadowRoot;
+      const cards = Array.from(document.querySelectorAll('#card-display workout-card'));
+      const visibleCard = cards.find(c => getComputedStyle(c).display !== 'none');
+      const shadow = visibleCard?.shadowRoot;
       const name = shadow?.querySelector('h2.name a')?.textContent.trim();
       return name && name !== "Push-Up";
     }, { timeout: 15000 });

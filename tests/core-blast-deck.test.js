@@ -11,16 +11,18 @@ describe('create core blast deck test', () => {
   it('Checking the core workouts in the carousel', async () => {
     async function getWorkoutName() {
       return await page.evaluate(() => {
-        const card = document.querySelector('#card-display workout-card');
-        const shadow = card?.shadowRoot;
-        return shadow?.querySelector('h2.name a')?.textContent.trim();
+        const cards = Array.from(document.querySelectorAll('#card-display workout-card'));
+        const visibleCard = cards.find(c => getComputedStyle(c).display !== 'none');
+        const shadow = visibleCard?.shadowRoot;
+        return shadow?.querySelector('h2.name a')?.textContent.trim() || null;
       });
     }
 
     // Wait for first workout to load
     await page.waitForFunction(() => {
-      const card = document.querySelector('#card-display workout-card');
-      const shadow = card?.shadowRoot;
+      const cards = Array.from(document.querySelectorAll('#card-display workout-card'));
+      const visibleCard = cards.find(c => getComputedStyle(c).display !== 'none');
+      const shadow = visibleCard?.shadowRoot;
       const name = shadow?.querySelector('h2.name a')?.textContent.trim();
       return name?.length > 0;
     }, { timeout: 15000 });
@@ -28,10 +30,12 @@ describe('create core blast deck test', () => {
     const workout1 = await getWorkoutName();
     expect(workout1).toBe("Plank");
 
-    // Next workout
+    // Go to next card
     await page.click('#next-button');
     await page.waitForFunction(() => {
-      const shadow = document.querySelector('workout-card')?.shadowRoot;
+      const cards = Array.from(document.querySelectorAll('#card-display workout-card'));
+      const visibleCard = cards.find(c => getComputedStyle(c).display !== 'none');
+      const shadow = visibleCard?.shadowRoot;
       const name = shadow?.querySelector('h2.name a')?.textContent.trim();
       return name && name !== "Plank";
     }, { timeout: 15000 });
@@ -39,10 +43,12 @@ describe('create core blast deck test', () => {
     const workout2 = await getWorkoutName();
     expect(workout2).toBe("Oblique Crunch");
 
-    // Next workout
+    // Go to next card
     await page.click('#next-button');
     await page.waitForFunction(() => {
-      const shadow = document.querySelector('workout-card')?.shadowRoot;
+      const cards = Array.from(document.querySelectorAll('#card-display workout-card'));
+      const visibleCard = cards.find(c => getComputedStyle(c).display !== 'none');
+      const shadow = visibleCard?.shadowRoot;
       const name = shadow?.querySelector('h2.name a')?.textContent.trim();
       return name && name !== "Oblique Crunch";
     }, { timeout: 15000 });
