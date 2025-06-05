@@ -1,4 +1,44 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+/* Font Import */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* Light Mode (Color Variables) */
+
+:root {
+  --background: #f7f8fa;
+  --foreground: #222;
+  --header-bg: #fff;
+  --box-bg: #fff;
+  --box-border: #e6eaf0;
+  --primary: #2b4d8c;
+  --primary-dark: #1a2e4c;
+  --deck-hover: #f0f4fa;
+  --shadow: 0 2px 8px rgba(0,0,0,0.04);
+  --card-shadow: 0 4px 32px rgba(44, 62, 80, 0.10);
+  --deck-shadow: 0 2px 12px rgba(44, 62, 80, 0.08);
+  --deck-hover-shadow: 0 6px 24px rgba(44, 62, 80, 0.16);
+  --summary: #555;
+  --deck-bg:rgb(213, 222, 236);
+}
+
+/* Dark Mode (Color Variables) */
+
+[data-theme="dark"] {
+  --background: #181a1b;
+  --foreground: #f5f6fa;
+  --header-bg: #23272f;
+  --box-bg: #23272f;
+  --box-border: #353b48;
+  --primary: #6ea8fe;
+  --primary-dark: #3b5b8c;
+  --deck-hover: #232c3a;
+  --shadow: 0 2px 8px rgba(0,0,0,0.4);
+  --card-shadow: 0 4px 32px rgba(20, 30, 40, 0.40);
+  --deck-shadow: 0 2px 12px rgba(20, 30, 40, 0.24);
+  --deck-hover-shadow: 0 6px 24px rgba(20, 30, 40, 0.32);
+  --summary: #bfc9d1;
+  --deck-bg: #2b313a;
+}
 
 * {
   box-sizing: border-box;
@@ -8,10 +48,11 @@
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  background-color: #f0f2f5;
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
+  background: var(--background);
+  background-image: url('../images/gym.webp');
+  color: var(--foreground);
+  min-height: 100vh;
 }
 
 main {
@@ -99,6 +140,7 @@ h2 {
   justify-content: center;
   gap: 1rem;
 }
+
 button {
   padding: 0.6rem 1.2rem;
   border: none;

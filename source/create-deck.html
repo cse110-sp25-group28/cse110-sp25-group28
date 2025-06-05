@@ -28,16 +28,18 @@
         </button>
       </div>
     </header>
-    <h2>Choose some cards!</h2>
-    <main id="cards-container" class="main-content">
-      <div class="cards-container"></div>
+    
+    <main class="main-content">
+      <h2>Choose some cards!</h2>
+    
+      <section class="cards-area">
+        <!-- JS will insert the toolbar here -->
+        <div class="cards-container"></div>
+      </section>
+      <button id="create-deck-button" class="create-deck">Create Deck</button>
+      <p id="create-deck-error" class="error-message hidden"></p>
       <!--The container for cards-->
     </main>
-    <footer class="footer">
-    
-        <p id="create-deck-error" class="error-message hidden"></p>
-        <button id="create-deck-button" class="create-deck">Create Deck</button>
-    </footer>
 
     <!--Pop up window that asks user to name the custom deck created-->
     <div id="deck-name-modal" class="modal hidden">
