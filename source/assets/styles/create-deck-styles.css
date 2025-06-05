@@ -28,7 +28,6 @@ main {
   gap: 2rem;
 }
 
-/* Header */
 .header {
   display: flex;
   justify-content: space-between;
@@ -49,7 +48,7 @@ main {
   height: 64px;
   background-color: #9ca3af;
   border-radius: 50%;
-  overflow: hidden;         /* Ensures image is clipped to the circle */
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,7 +57,7 @@ main {
 .logo img {
   width: 100%;
   height: 100%;
-  object-fit: cover;        /* Ensures the image covers the area without distortion */
+  object-fit: cover;
   display: block;
 }
 
@@ -112,7 +111,12 @@ button {
 }
 
 .create-deck {
-  margin: 0 auto;
+  position: fixed;
+  left: 50%;
+  bottom: 2rem;
+  transform: translateX(-50%);
+  margin: 0;
+  z-index: 100;
 }
 
 button:hover {
@@ -317,9 +321,20 @@ article.active {
 }
 
 .error-message {
+  position: fixed;
+  left: 50%;
+  bottom: calc(2rem - 2.2rem); /* Adjust this value as needed */
+  transform: translateX(-50%);
   color: red;
   font-size: 0.9rem;
-  margin-top: 0.5rem;
+  margin: 0;
+  z-index: 101;
+  background: #fff;
+  padding: 0.2rem 0.8rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  opacity: 1;
+  transition: opacity 3s;
 }
 
 .hidden {
