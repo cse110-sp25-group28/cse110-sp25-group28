@@ -1,5 +1,13 @@
 const DEFAULT_DECKS = ["Chest Day", "Legs", "Core Blast", "Arm Workout"];
 
+/**
+ * Initializes the delete deck functionality.
+ *  - Disables delete for default decks
+ *  - Shows a confirmation modal when delete is clicked
+ *  - Deletes (custom) decks from localStorage if confirmed
+ *  - Displays a message after deletion
+ *  - Redirects to home page after deletion
+ */
 window.addEventListener("DOMContentLoaded", () => {
   const deck = JSON.parse(localStorage.getItem("selected-deck"));
   const deleteBtn = document.querySelector(".create-deck"); // Delete Deck button
@@ -17,20 +25,28 @@ window.addEventListener("DOMContentLoaded", () => {
     deleteBtn.style.cursor = "not-allowed";
   }
 
-  // Show modal on delete click
+  /**
+   * Shows the delete confirmation modal.
+   * @returns {void}
+   */
   deleteBtn.addEventListener("click", () => {
     if (deleteBtn.disabled) return;
     modal.classList.remove("hidden");
   });
 
-  // Cancel delete
+  /**
+   * Hides the delete confirmation modal.
+   * @returns {void}
+   */
   cancelBtn.addEventListener("click", () => {
     modal.classList.add("hidden");
   });
 
-  // Confirm delete
+  /**
+   * Deletes the selected custom deck from localStorage and shows the deleted message.
+   * @returns {void}
+   */
   confirmBtn.addEventListener("click", () => {
-    // Remove from custom-decks
     let customDecks = JSON.parse(localStorage.getItem("custom-decks") || "[]");
     customDecks = customDecks.filter(d => d.name !== deck.name);
     localStorage.setItem("custom-decks", JSON.stringify(customDecks));
@@ -38,7 +54,10 @@ window.addEventListener("DOMContentLoaded", () => {
     deletedMsg.classList.remove("hidden");
   });
 
-  // Go home after deletion
+  /**
+   * Redirects the user to the home page.
+   * @returns {void}
+   */
   goHomeBtn.addEventListener("click", () => {
     window.location.href = "../index.html";
   });
