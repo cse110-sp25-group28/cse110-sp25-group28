@@ -8,43 +8,51 @@ describe('create arm workout deck test', () => {
   }, 40000);
 
   it('Checking the arm workout carousel values', async () => {
+    const nextSelector = '#next-button';
+
     async function getWorkoutName() {
       return await page.evaluate(() => {
-        const card = document.querySelector('#card-display workout-card');
-        const shadow = card?.shadowRoot;
-        return shadow?.querySelector('h2.name a')?.textContent.trim();
+        const cards = Array.from(document.querySelectorAll('#card-display workout-card'));
+        const visibleCard = cards.find(c => getComputedStyle(c).display !== 'none');
+        const shadow = visibleCard?.shadowRoot;
+        return shadow?.querySelector('h2.name a')?.textContent.trim() || null;
       });
     }
 
-    // Wait for first card to load
+    async function waitForNewWorkout(prevName) {
+      await page.waitForFunction((prev) => {
+        const cards = Array.from(document.querySelectorAll('#card-display workout-card'));
+        const visibleCard = cards.find(c => getComputedStyle(c).display !== 'none');
+        const shadow = visibleCard?.shadowRoot;
+        const name = shadow?.querySelector('h2.name a')?.textContent.trim();
+        return name && name !== prev;
+      }, { timeout: 15000 }, prevName);
+
+    }
+
+    // Wait for and flip the first card
+    await page.waitForSelector('#card-display workout-card', { timeout: 15000 });
+    await page.click('#card-display workout-card');
+
     await page.waitForFunction(() => {
-      const card = document.querySelector('#card-display workout-card');
-      const shadow = card?.shadowRoot;
+      const cards = Array.from(document.querySelectorAll('#card-display workout-card'));
+      const visibleCard = cards.find(c => getComputedStyle(c).display !== 'none');
+      const shadow = visibleCard?.shadowRoot;
       return shadow?.querySelector('h2.name a')?.textContent.trim()?.length > 0;
-    }, { timeout: 20000 });
+    });
 
     const workout1 = await getWorkoutName();
     expect(workout1).toBe("Bicep Curl");
 
     // Next workout
-    await page.click('#next-button');
-    await page.waitForFunction(() => {
-      const shadow = document.querySelector('workout-card')?.shadowRoot;
-      const name = shadow?.querySelector('h2.name a')?.textContent.trim();
-      return name && name !== "Bicep Curl";
-    }, { timeout: 15000 });
-
+    await page.click(nextSelector);
+    await waitForNewWorkout("Bicep Curl");
     const workout2 = await getWorkoutName();
     expect(workout2).toBe("Tricep Dip");
 
     // Next workout
-    await page.click('#next-button');
-    await page.waitForFunction(() => {
-      const shadow = document.querySelector('workout-card')?.shadowRoot;
-      const name = shadow?.querySelector('h2.name a')?.textContent.trim();
-      return name && name !== "Tricep Dip";
-    }, { timeout: 15000 });
-
+    await page.click(nextSelector);
+    await waitForNewWorkout("Tricep Dip");
     const workout3 = await getWorkoutName();
     expect(workout3).toBe("Shoulder Press");
   }, 90000);
