@@ -19,6 +19,8 @@
   --deck-hover-shadow: 0 6px 24px rgba(44, 62, 80, 0.16);
   --summary: #555;
   --deck-bg:rgb(213, 222, 236);
+  --carousel-img-bg: white; 
+  --carousel-bg: rgb(213, 222, 236);;
 }
 
 /* Dark Mode (Color Variables) */
@@ -38,6 +40,8 @@
   --deck-hover-shadow: 0 6px 24px rgba(20, 30, 40, 0.32);
   --summary: #bfc9d1;
   --deck-bg: #2b313a;
+  --carousel-img-bg: #2b313a; 
+  --carousel-bg: #23272f;
 }
 
 /* Clean Slate (revert default styling) */
@@ -277,7 +281,7 @@ body, .header, .main-content, .deck-box {
   overflow: hidden;            /* Hide overflowing images */
   border-radius: 12px;         /* Rounded corners */
   box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Subtle shadow */
-  background: #23272f;            /* White background */
+  background: var(--carousel-bg);            /* carousel background */
   position: relative;
   height: 220px;               /* Height of carousel */
   display: flex;              
@@ -293,8 +297,8 @@ body, .header, .main-content, .deck-box {
 
 /* Individual images inside the carousel. */
 .carousel-track img {
-  background: #2b313a;
-  border: 5px solid #2b313a; /* White border around images */
+  background: var(--carousel-img-bg);           /* Background color for images */ 
+  border: 5px solid var(--carousel-img-bg);  /* border around images */
   border-radius: 10px;
   max-width: 200px;            /* Prevent from getting too large */
   min-width: 200px;           /* Prevent from getting too small */
