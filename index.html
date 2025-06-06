@@ -11,15 +11,23 @@
   <header class="header">
     <div class="logo-section">
       <div class="logo">
-        <img src="source/assets/images/sweat-deck-logo.png" alt="Sweat Deck Logo">
+        <img src="source/assets/images/sweat-deck-logo.png" alt="SweatDeck Logo">
       </div>
       <h1 class="app-name">SweatDeck</h1>
     </div>
-    <button class="create-deck" onclick="window.location.href='source/create-deck.html'">Create New Deck</button>
+    <div class="header-actions">
+      <button class="create-deck" onclick="window.location.href='source/create-deck.html'">Create New Deck</button>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+    </div>
   </header>
 
   <!-- Main Content -->
   <main class="main-content">
+    <h2 class="intro">Welcome to SweatDeck!</h2>
+    <p class="sub-intro">
+      Here, you can make your workouts interesting, consistent, and personalized!
+      Shuffle, flip, and sweat through custom exercise decks designed to keep you moving and motivated!
+    </p>
     <h2 class="catch-phrase">Check out your Decks!</h2>
     <p class="summary">
       Check out our recommended decks! Click on any to expand.
@@ -31,5 +39,12 @@
     </p>
     <div id="custom-deck-container" class="decks"></div>
   </main>
+
+  <!-- Light/Dark Mode Toggle Functionality -->
+  <script type="module">
+    import { setupThemeToggle } from './source/assets/scripts/theme-toggle.js';
+    setupThemeToggle();
+  </script>
+
 </body>
 </html>

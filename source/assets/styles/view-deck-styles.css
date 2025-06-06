@@ -10,6 +10,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: #f0f2f5;
+  background-image: url('../images/gym.webp');
   font-family: Arial, sans-serif;
 }
 
@@ -59,8 +60,9 @@ body {
   margin: 32px auto;
   padding: 40px;
   max-width: 1000px;
+  max-height: 600px;
   text-align: center;
-  border-radius: 8px;
+  border-radius: 18px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
@@ -78,7 +80,14 @@ button {
   color: white;
   cursor: pointer;
   font-size: 1rem;
+  height: 3rem;
   transition: background-color 0.2s ease;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px; 
 }
 
 #card-display{
@@ -107,4 +116,122 @@ button {
 
 .carousel-counter{
   margin-bottom: 12px; font-size: 0.9rem; color: #6b7280;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal-buttons {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+.modal-buttons button,
+#go-home {
+  background: #4666d1;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.5s;
+}
+
+.modal-buttons button:hover,
+#go-home:hover {
+  background: #2d4ca3;
+}
+
+/* Slide Animations */
+
+.card-slide-in-right {
+  animation: cardInRight 0.4s forwards;
+}
+.card-slide-in-left {
+  animation: cardInLeft 0.4s forwards;
+}
+.card-slide-out-left {
+  animation: cardOutLeft 0.4s forwards;
+}
+.card-slide-out-right {
+  animation: cardOutRight 0.4s forwards;
+}
+
+@keyframes cardInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+@keyframes cardInLeft {
+  from { transform: translateX(-100%); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+@keyframes cardOutLeft {
+  from { transform: translateX(0);     opacity: 1; }
+  to   { transform: translateX(-100%); opacity: 0; }
+}
+@keyframes cardOutRight {
+  from { transform: translateX(0);    opacity: 1; }
+  to   { transform: translateX(100%); opacity: 0; }
+}
+
+/* Spin Animations */
+
+.card-spin-in-right {
+  animation: cardSpinInRight 0.6s forwards;
+}
+.card-spin-in-left {
+  animation: cardSpinInLeft 0.6s forwards;
+}
+.card-spin-out-left {
+  animation: cardSpinOutLeft 0.6s forwards;
+}
+.card-spin-out-right {
+  animation: cardSpinOutRight 0.6s forwards;
+}
+
+@keyframes cardSpinInRight {
+  from { transform: translateX(100%) rotateY(360deg); opacity: 0; }
+  to   { transform: translateX(0)    rotateY(0deg);   opacity: 1; }
+}
+@keyframes cardSpinInLeft {
+  from { transform: translateX(-100%) rotateY(-360deg); opacity: 0; }
+  to   { transform: translateX(0)     rotateY(0deg);    opacity: 1; }
+}
+@keyframes cardSpinOutLeft {
+  from { transform: translateX(0)     rotateY(0deg);    opacity: 1; }
+  to   { transform: translateX(-100%) rotateY(-360deg); opacity: 0; }
+}
+@keyframes cardSpinOutRight {
+  from { transform: translateX(0)    rotateY(0deg);     opacity: 1; }
+  to   { transform: translateX(100%) rotateY(360deg);   opacity: 0; }
 }

@@ -41,8 +41,8 @@ export function initFiltering(workouts) {
 
     // ─── 3. Toolbar  ────────────────────────────
     const toolbar = buildToolbar(muscles);
-    const main = document.querySelector('main');
-    main.prepend(toolbar);      // Insert on top of cards
+    const controlsToolbar = document.querySelector('.controls-toolbar');
+    controlsToolbar.insertBefore(toolbar, controlsToolbar.firstChild);
 
     // ─── 4. Restore saved filter state and apply  ─────────────────
     restoreSelections(toolbar);
@@ -92,6 +92,7 @@ function makeSelect(type, values, labelText) {
   wrapper.className = 'custom-dropdown-wrapper filter-control';
 
   const label = document.createElement('span');
+  label.style.color = 'white';
   label.textContent = labelText;
   label.className = 'filter-label';
   wrapper.appendChild(label);
@@ -179,11 +180,12 @@ function buildToolbar(muscles) {
         display: 'flex',
         gap: '1rem',
         margin: '1rem 0',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        color: 'black'
     });
-
+    
     toolbar.append(
-        makeSelect('muscle', muscles,'Select Muscle Group'),
+        makeSelect('muscle', muscles,'Filter Category: '),
     );
     return toolbar;
 }

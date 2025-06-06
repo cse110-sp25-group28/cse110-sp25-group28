@@ -1,6 +1,7 @@
 // Example structure: localStorage.setItem("decks", JSON.stringify([{ name: "Deck 1" }, { name: "Deck 2" }]));
 
 //The start of the webpage.
+//event listener logo
 window.addEventListener("DOMContentLoaded", init);
 document.addEventListener("DOMContentLoaded", () => {
   const logo = document.querySelector(".logo-section .logo"); 
