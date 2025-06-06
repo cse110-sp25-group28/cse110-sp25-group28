@@ -1,6 +1,7 @@
 // code for light + dark mode theme toggle functionality
 
-export function setupThemeToggle(buttonId = 'theme-toggle') {
+export function setupThemeToggle(buttonId = 'theme-toggle') 
+{
   const themeToggle = document.getElementById(buttonId);
   if (!themeToggle) return;
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -8,7 +9,8 @@ export function setupThemeToggle(buttonId = 'theme-toggle') {
   document.documentElement.setAttribute('data-theme', currentTheme);
   themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
 
-  themeToggle.addEventListener('click', () => {
+  themeToggle.addEventListener('click', () => 
+  {
     const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);

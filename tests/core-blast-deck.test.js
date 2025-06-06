@@ -1,5 +1,7 @@
-describe('create core blast deck test', () => {
-  beforeAll(async () => {
+describe('create core blast deck test', () => 
+{
+  beforeAll(async () => 
+  {
     await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28');
     await page.reload({ waitUntil: 'domcontentloaded' });
 
@@ -8,52 +10,58 @@ describe('create core blast deck test', () => {
     await deckElements[2].click();
   }, 40000);
 
-  it('Checking the core workouts in the carousel', async () => {
-    async function getWorkoutName() {
-      return await page.evaluate(() => {
+  it('Checking the core workouts in the carousel', async () => 
+  {
+    async function getWorkoutName() 
+    {
+      return await page.evaluate(() => 
+      {
         const cards = Array.from(document.querySelectorAll('#card-display workout-card'));
-        const visibleCard = cards.find(c => getComputedStyle(c).display !== 'none');
+        const visibleCard = cards.find((c) => getComputedStyle(c).display !== 'none');
         const shadow = visibleCard?.shadowRoot;
         return shadow?.querySelector('h2.name a')?.textContent.trim() || null;
       });
     }
 
     // Wait for first workout to load
-    await page.waitForFunction(() => {
+    await page.waitForFunction(() => 
+    {
       const cards = Array.from(document.querySelectorAll('#card-display workout-card'));
-      const visibleCard = cards.find(c => getComputedStyle(c).display !== 'none');
+      const visibleCard = cards.find((c) => getComputedStyle(c).display !== 'none');
       const shadow = visibleCard?.shadowRoot;
       const name = shadow?.querySelector('h2.name a')?.textContent.trim();
       return name?.length > 0;
     }, { timeout: 15000 });
 
     const workout1 = await getWorkoutName();
-    expect(workout1).toBe("Plank");
+    expect(workout1).toBe('Plank');
 
     // Go to next card
     await page.click('#next-button');
-    await page.waitForFunction(() => {
+    await page.waitForFunction(() => 
+    {
       const cards = Array.from(document.querySelectorAll('#card-display workout-card'));
-      const visibleCard = cards.find(c => getComputedStyle(c).display !== 'none');
+      const visibleCard = cards.find((c) => getComputedStyle(c).display !== 'none');
       const shadow = visibleCard?.shadowRoot;
       const name = shadow?.querySelector('h2.name a')?.textContent.trim();
-      return name && name !== "Plank";
+      return name && name !== 'Plank';
     }, { timeout: 15000 });
 
     const workout2 = await getWorkoutName();
-    expect(workout2).toBe("Oblique Crunch");
+    expect(workout2).toBe('Oblique Crunch');
 
     // Go to next card
     await page.click('#next-button');
-    await page.waitForFunction(() => {
+    await page.waitForFunction(() => 
+    {
       const cards = Array.from(document.querySelectorAll('#card-display workout-card'));
-      const visibleCard = cards.find(c => getComputedStyle(c).display !== 'none');
+      const visibleCard = cards.find((c) => getComputedStyle(c).display !== 'none');
       const shadow = visibleCard?.shadowRoot;
       const name = shadow?.querySelector('h2.name a')?.textContent.trim();
-      return name && name !== "Oblique Crunch";
+      return name && name !== 'Oblique Crunch';
     }, { timeout: 15000 });
 
     const workout3 = await getWorkoutName();
-    expect(workout3).toBe("Leg Raises");
+    expect(workout3).toBe('Leg Raises');
   }, 90000);
 });

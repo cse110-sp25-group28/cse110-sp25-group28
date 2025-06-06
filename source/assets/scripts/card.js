@@ -8,17 +8,19 @@
  * @class
  * @extends HTMLElement
  */
-class WorkoutCard extends HTMLElement {
+class WorkoutCard extends HTMLElement 
+{
   // Called once when document.createElement('workout-card') is called, or
   // the element is written into the DOM directly as <workout-card>
-  constructor() {
+  constructor() 
+  {
     super(); // Inherit everything from HTMLElement
-    let shadowEl = this.attachShadow({ mode: "open" });
-    let articleEl = document.createElement("article");
-    let styleEl = document.createElement("style");
-    let linkEl = document.createElement("link");
-    linkEl.setAttribute("rel", "stylesheet");
-    linkEl.setAttribute("href", "./assets/styles/create-deck-styles.css");
+    let shadowEl = this.attachShadow({ mode: 'open' });
+    let articleEl = document.createElement('article');
+    let styleEl = document.createElement('style');
+    let linkEl = document.createElement('link');
+    linkEl.setAttribute('rel', 'stylesheet');
+    linkEl.setAttribute('href', './assets/styles/create-deck-styles.css');
 
     articleEl.innerHTML = `
       <div class="card-inner">
@@ -32,13 +34,15 @@ class WorkoutCard extends HTMLElement {
      * Flips the card unless flipping is disabled, and always dispatches a custom event.
      * @event workout-card-clicked
      */
-    articleEl.addEventListener("click", () => {
-      if (!this._disableFlip) {
-        articleEl.classList.toggle("flipped");
+    articleEl.addEventListener('click', () => 
+    {
+      if (!this._disableFlip) 
+      {
+        articleEl.classList.toggle('flipped');
       }
-      articleEl.classList.toggle("active");
+      articleEl.classList.toggle('active');
       // Always dispatch the event so selection works!
-      this.dispatchEvent(new CustomEvent("workout-card-clicked", {
+      this.dispatchEvent(new CustomEvent('workout-card-clicked', {
         bubbles: true,
         composed: true,
         detail: { card: this }
@@ -67,13 +71,14 @@ class WorkoutCard extends HTMLElement {
                                     "image": "string"
                                 },
    */
-    set data(data) {
+  set data(data) 
+  {
     if (!data) return;
     this._data = data;
 
     this.dataset.muscle = data.muscle?.toLowerCase() || '';
-    const front = this.shadowRoot.querySelector(".card-front");
-    const back = this.shadowRoot.querySelector(".card-back");
+    const front = this.shadowRoot.querySelector('.card-front');
+    const back = this.shadowRoot.querySelector('.card-back');
     front.innerHTML = `
       <div class="image-wrapper">
         <img src="${data.image}" alt="${data.name}">
@@ -89,7 +94,8 @@ class WorkoutCard extends HTMLElement {
     `;
   }
 
-  get data(){
+  get data()
+  {
     return this._data;
   }
 
@@ -99,16 +105,20 @@ class WorkoutCard extends HTMLElement {
    * When set to false, the card can be flipped.
    * @param {boolean} val - Whether to disable flipping.
    */
-  set disableFlip(val) {
+  set disableFlip(val) 
+  {
     this._disableFlip = val;
-    if (val) {
+    if (val) 
+    {
       // Selection mode: flipping is disabled, show default cursor
-      this._articleEl.style.cursor = "default";
-    } else {
+      this._articleEl.style.cursor = 'default';
+    }
+    else 
+    {
       // Flipping is enabled, show pointer cursor
-      this._articleEl.style.cursor = "pointer";
+      this._articleEl.style.cursor = 'pointer';
     }
   }
 }
 
-customElements.define("workout-card", WorkoutCard);
+customElements.define('workout-card', WorkoutCard);

@@ -1,22 +1,27 @@
-describe('Basic user flow for Website', () => {
+describe('Basic user flow for Website', () => 
+{
 
-  beforeAll(async () => {
+  beforeAll(async () => 
+  {
     await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28/');
   });
 
-  it('Clicking Create New Deck redirects to create-deck.html', async () => {
+  it('Clicking Create New Deck redirects to create-deck.html', async () => 
+  {
     await page.click('.create-deck');
     const url = page.url();
     expect(url).toContain('source/create-deck.html');
   }, 15000);
 
-  it('Clicking View Deck redirects to index.html', async () => {
+  it('Clicking View Deck redirects to index.html', async () => 
+  {
     await page.click('.view-decks');
     const url = page.url();
     expect(url).toContain('index.html');
   }, 15000);
 
-  it('Testing Filtering System', async () => {
+  it('Testing Filtering System', async () => 
+  {
     await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28/');
     await page.click('.create-deck');
 
@@ -26,10 +31,13 @@ describe('Basic user flow for Website', () => {
 
     await page.waitForSelector('#filter-muscle .custom-dropdown-options');
 
-    await page.evaluate(() => {
+    await page.evaluate(() => 
+    {
       const options = document.querySelectorAll('#filter-muscle .custom-dropdown-option');
-      for (const opt of options) {
-        if (opt.dataset.value === 'biceps') {
+      for (const opt of options) 
+      {
+        if (opt.dataset.value === 'biceps') 
+        {
           opt.click();
           break;
         }
@@ -37,14 +45,15 @@ describe('Basic user flow for Website', () => {
     });
 
     // Check visible cards
-    const visibleMuscles = await page.evaluate(() => {
+    const visibleMuscles = await page.evaluate(() => 
+    {
       const cards = document.querySelectorAll('workout-card');
       return Array.from(cards)
-        .filter(card => getComputedStyle(card).display !== 'none')
-        .map(card => card.dataset.muscle);
+        .filter((card) => getComputedStyle(card).display !== 'none')
+        .map((card) => card.dataset.muscle);
     });
     
-    expect(visibleMuscles.every(muscle => muscle === 'biceps')).toBe(true);
+    expect(visibleMuscles.every((muscle) => muscle === 'biceps')).toBe(true);
 
     // Check localStorage
     const savedFilters = await page.evaluate(() => localStorage.getItem('filters'));
