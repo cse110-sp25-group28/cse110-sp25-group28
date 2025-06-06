@@ -171,3 +171,67 @@ button {
 #go-home:hover {
   background: #2d4ca3;
 }
+
+/* Slide Animations */
+
+.card-slide-in-right {
+  animation: cardInRight 0.4s forwards;
+}
+.card-slide-in-left {
+  animation: cardInLeft 0.4s forwards;
+}
+.card-slide-out-left {
+  animation: cardOutLeft 0.4s forwards;
+}
+.card-slide-out-right {
+  animation: cardOutRight 0.4s forwards;
+}
+
+@keyframes cardInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+@keyframes cardInLeft {
+  from { transform: translateX(-100%); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+@keyframes cardOutLeft {
+  from { transform: translateX(0);     opacity: 1; }
+  to   { transform: translateX(-100%); opacity: 0; }
+}
+@keyframes cardOutRight {
+  from { transform: translateX(0);    opacity: 1; }
+  to   { transform: translateX(100%); opacity: 0; }
+}
+
+/* Spin Animations */
+
+.card-spin-in-right {
+  animation: cardSpinInRight 0.6s forwards;
+}
+.card-spin-in-left {
+  animation: cardSpinInLeft 0.6s forwards;
+}
+.card-spin-out-left {
+  animation: cardSpinOutLeft 0.6s forwards;
+}
+.card-spin-out-right {
+  animation: cardSpinOutRight 0.6s forwards;
+}
+
+@keyframes cardSpinInRight {
+  from { transform: translateX(100%) rotateY(360deg); opacity: 0; }
+  to   { transform: translateX(0)    rotateY(0deg);   opacity: 1; }
+}
+@keyframes cardSpinInLeft {
+  from { transform: translateX(-100%) rotateY(-360deg); opacity: 0; }
+  to   { transform: translateX(0)     rotateY(0deg);    opacity: 1; }
+}
+@keyframes cardSpinOutLeft {
+  from { transform: translateX(0)     rotateY(0deg);    opacity: 1; }
+  to   { transform: translateX(-100%) rotateY(-360deg); opacity: 0; }
+}
+@keyframes cardSpinOutRight {
+  from { transform: translateX(0)    rotateY(0deg);     opacity: 1; }
+  to   { transform: translateX(100%) rotateY(360deg);   opacity: 0; }
+}
