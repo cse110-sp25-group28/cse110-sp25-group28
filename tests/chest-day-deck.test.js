@@ -18,6 +18,35 @@ describe('create chest day deck test', () => {
         });
     }
 
+    async function confirmFlipped() {
+        return await page.evaluate(() => {
+          const cards = Array.from(document.querySelectorAll('#card-display workout-card'));
+          const visibleCard = cards.find(c => getComputedStyle(c).display !== 'none');
+          const shadow = visibleCard?.shadowRoot;
+          const article = shadow?.querySelector('article');
+          return article.classList.contains('flipped');
+        });
+    }
+
+    async function confirmActive() {
+        return await page.evaluate(() => {
+          const cards = Array.from(document.querySelectorAll('#card-display workout-card'));
+          const visibleCard = cards.find(c => getComputedStyle(c).display !== 'none');
+          const shadow = visibleCard?.shadowRoot;
+          const article = shadow?.querySelector('article');
+          return article.classList.contains('active');
+        });
+    }
+
+    async function getCard() {
+        return await page.evaluate(() => {
+          const cards = Array.from(document.querySelectorAll('#card-display workout-card'));
+          const visibleCard = cards.find(c => getComputedStyle(c).display !== 'none');
+          const shadow = visibleCard?.shadowRoot;
+          return shadow?.querySelector('article');
+        });
+    }
+
     // Wait until first workout is loaded
     await page.waitForFunction(() => {
       const card = document.querySelector('#card-display workout-card');
@@ -27,6 +56,17 @@ describe('create chest day deck test', () => {
 
     const workout1 = await getWorkoutName();
     expect(workout1).toBe("Push-Up");
+
+    // Make sure we can click the card
+    const card1 = await getCard();
+
+    // Confirm the back is facing us, flip the card, and confirm it flips
+    let orientation = await confirmFlipped();
+    expect(orientation).toBe(true);
+    await page.click(card1);
+    orientation = await confirmActive();
+    expect(orientation).toBe(true);
+
     // Go to next card
     await page.click('#next-button');
     await page.waitForFunction(() => {
@@ -40,6 +80,16 @@ describe('create chest day deck test', () => {
     const workout2 = await getWorkoutName();
     expect(workout2).toBe("Bench Press");
 
+    // Make sure we can click the card
+    const card2 = await getCard();
+
+    // Confirm the back is facing us, flip the card, and confirm it flips
+    orientation = await confirmFlipped();
+    expect(orientation).toBe(true);
+    await page.click(card2);
+    orientation = await confirmActive();
+    expect(orientation).toBe(true);
+
     // Go to next card
     await page.click('#next-button');
     await page.waitForFunction(() => {
@@ -51,5 +101,15 @@ describe('create chest day deck test', () => {
 
     const workout3 = await getWorkoutName();
     expect(workout3).toBe("Incline Press");
+
+    // Make sure we can click the card
+    const card3 = await getCard();
+    
+    // Confirm the back is facing us, flip the card, and confirm it flips
+    orientation = await confirmFlipped();
+    expect(orientation).toBe(true);
+    await page.click(card3);
+    orientation = await confirmActive();
+    expect(orientation).toBe(true);
   }, 60000);
 });
