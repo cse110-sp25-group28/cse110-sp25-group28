@@ -131,4 +131,78 @@ function init() {
       customContainer.appendChild(div);
     });
   }
+
+}
+
+// Functionality for Theme Toggle Button 
+
+const themeToggle = document.getElementById('theme-toggle');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+const currentTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+document.documentElement.setAttribute('data-theme', currentTheme);
+themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+
+themeToggle.addEventListener('click', () => {
+  const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+  themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+});
+
+// =========================
+// Carousel Image Setup
+// =========================
+
+// Array of image paths for all workout cards to be shown in the carousel
+const workoutImages = [
+  'source/workouts/images/Bench-Press.webp',
+  'source/workouts/images/Bicep-Curl.webp',
+  'source/workouts/images/Burpees.webp',
+  'source/workouts/images/Cable-Kickback.webp',
+  'source/workouts/images/Cable-Lateral-Raise.webp',
+  'source/workouts/images/Cable-Row.webp',
+  'source/workouts/images/Calf-Raises.webp',
+  'source/workouts/images/Chest-Fly.webp',
+  'source/workouts/images/Crunch-Machine.webp',
+  'source/workouts/images/Deadlift.webp',
+  'source/workouts/images/Donkey-Kicks.webp',
+  'source/workouts/images/Dumbbell-Pullover.webp',
+  'source/workouts/images/Dumbbell-Rows.webp',
+  'source/workouts/images/Fire-Hydrant.webp',
+  'source/workouts/images/Front-Raise.webp',
+  'source/workouts/images/Glute-Bridge.webp',
+  'source/workouts/images/Goblet-Squat.webp',
+  'source/workouts/images/Hammer-Curl.webp',
+  'source/workouts/images/Hip-Thrust.webp',
+  'source/workouts/images/Incline-Dumbbell-Curl.webp',
+  'source/workouts/images/Incline-Press.webp',
+  'source/workouts/images/Jump-Squat.webp',
+  'source/workouts/images/Lat-Pulldown.webp',
+  'source/workouts/images/Lateral-Raise.webp',
+  'source/workouts/images/Leg-Curl-Machine.webp',
+  'source/workouts/images/Leg-Extension-Machine.webp',
+
+];
+
+// Get the carousel container from the DOM
+const carousel = document.getElementById('workout-carousel');
+
+// If the carousel exists and there are images to show
+if (carousel && workoutImages.length > 0) {
+  // Create the track that will hold all the images in a row
+  const track = document.createElement('div');
+  track.className = 'carousel-track';
+  carousel.appendChild(track);
+
+  // Duplicate the images array for seamless looping animation
+  // This allows the animation to scroll halfway and then reset without a jump
+  const images = [...workoutImages, ...workoutImages];
+
+  // Add each image to the track
+  images.forEach((src, i) => {
+    const img = document.createElement('img');
+    img.src = src;                // Set image source
+    img.alt = `Workout ${i+1}`;   // Set alt text for accessibility
+    track.appendChild(img);       // Add image to the track
+  });
 }
