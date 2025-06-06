@@ -272,7 +272,7 @@ body, .header, .main-content, .deck-box {
 
 /* Container for the carousel. Centers it, sets size, and hides overflow. */
 .carousel {
-  width: 640px;                /* Carousel width */
+  width: 100%;                /* Carousel width */ /* Scale with parent */
   margin: 2rem auto;           /* Center horizontally with margin */
   overflow: hidden;            /* Hide overflowing images */
   border-radius: 12px;         /* Rounded corners */
@@ -296,7 +296,8 @@ body, .header, .main-content, .deck-box {
   background: #2b313a;
   border: 5px solid #2b313a; /* White border around images */
   border-radius: 10px;
-  width: 200px;                /* Image width */
+  max-width: 200px;            /* Prevent from getting too large */
+  min-width: 200px;           /* Prevent from getting too small */
   height: 200px;               /* Image height */
   object-fit: contain;         /* Keep aspect ratio, fit inside box */
   margin: 0 25px;               /* Space between images */
