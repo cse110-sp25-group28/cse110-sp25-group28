@@ -111,6 +111,7 @@ function makeSelect(type, values, labelText) {
   const optionsContainer = document.createElement('div');
   optionsContainer.className = 'custom-dropdown-options';
 
+  // Prevent scrolling past dropdown container bounds
   optionsContainer.addEventListener('wheel', (e) => {
   const isScrollingDown = e.deltaY > 0;
   const atBottom = optionsContainer.scrollTop + optionsContainer.clientHeight >= optionsContainer.scrollHeight;
@@ -121,12 +122,14 @@ function makeSelect(type, values, labelText) {
     }
   }, { passive: false });
 
+  // Default "All" option
   const allOption = document.createElement('div');
   allOption.className = 'custom-dropdown-option';
   allOption.dataset.value = 'all';
   allOption.textContent = `All Muscle Groups`;
   optionsContainer.appendChild(allOption);
 
+  // Add muscle-specific options
   values.forEach(val => {
     const opt = document.createElement('div');
     opt.className = 'custom-dropdown-option';
@@ -138,11 +141,13 @@ function makeSelect(type, values, labelText) {
   dropdown.appendChild(optionsContainer);
   wrapper.appendChild(dropdown);
 
+  // Toggle dropdown open/closed
   selected.addEventListener('click', () => {
     optionsContainer.classList.toggle('open');
     dropdown.classList.toggle('open');
   });
 
+  // Close dropdown on outside click
   document.addEventListener('click', (event) => {
   const isClickInside = dropdown.contains(event.target);
   if (!isClickInside) {
@@ -151,6 +156,7 @@ function makeSelect(type, values, labelText) {
     }
   });
 
+  // Handle option selection
   optionsContainer.addEventListener('click', e => {
     if (e.target.classList.contains('custom-dropdown-option')) {
       selected.textContent = e.target.textContent;
@@ -221,7 +227,10 @@ function applyFilters() {
     }));
 }
 
-/** Restores saved dropdown selections */
+/**
+ * Restores previously saved dropdown selections from localStorage
+ * @param {HTMLElement} toolbar - Filter toolbar element
+ */
 function restoreSelections(toolbar) {
     try {
         const saved = JSON.parse(localStorage.getItem('filters') || '{}');
@@ -234,5 +243,9 @@ function restoreSelections(toolbar) {
     }
 }
 
-/** Capitalize first letter */
+/**
+ * Capitalizes the first letter of a string
+ * @param {string} s
+ * @returns {string}
+ */
 const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
