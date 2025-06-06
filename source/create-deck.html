@@ -59,23 +59,12 @@
         </div>
       </div>
     </div>
-  <!-- Light/Dark Mode Toggle Functionality -->
-<script type="module">
-  import { setupThemeToggle } from './assets/scripts/theme-toggle.js';
-  setupThemeToggle();
-</script>
 
-<!-- Logo Click Handler -->
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const logo = document.querySelector(".logo-section .logo");
-    if (logo) {
-      logo.style.cursor = "pointer";
-      logo.addEventListener("click", () => {
-        window.location.href = "../index.html"; 
-      });
-    }
-  });
-</script>
+    <!-- Light/Dark Mode Toggle Functionality -->
+    <script type="module">
+      import { setupThemeToggle } from './assets/scripts/theme-toggle.js';
+      setupThemeToggle();
+    </script>
+
   </body>
 </html>
