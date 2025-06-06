@@ -92,6 +92,7 @@ function makeSelect(type, values, labelText) {
   wrapper.className = 'custom-dropdown-wrapper filter-control';
 
   const label = document.createElement('span');
+  label.style.color = 'white';
   label.textContent = labelText;
   label.className = 'filter-label';
   wrapper.appendChild(label);
@@ -179,11 +180,12 @@ function buildToolbar(muscles) {
         display: 'flex',
         gap: '1rem',
         margin: '1rem 0',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        color: 'black'
     });
-
+    
     toolbar.append(
-        makeSelect('muscle', muscles,'Filter by Muscle Group: '),
+        makeSelect('muscle', muscles,'Filter Category: '),
     );
     return toolbar;
 }
