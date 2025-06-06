@@ -89,9 +89,12 @@ window.addEventListener('DOMContentLoaded', async () => {
   function showCard() {
     for (let i = 0; i < cards.length; i++) {
       const card = cards[i];
-
       if (i === currentIndex) {
         card.style.display = '';      // show
+        // resets flip to have card ALWAYS face down
+        if (card._articleEl) {
+          card._articleEl.classList.add('flipped');
+        }
       } else {
         card.style.display = 'none';  // hide
       }
@@ -158,60 +161,6 @@ window.addEventListener('DOMContentLoaded', async () => {
    * @param {HTMLElement} newCard - The card to display next.
    * @param {'next'|'prev'} direction - The direction of the animation.
    */
-
-  /** 
-   * DECIDE WETHER WE WANT SLIDE, SPIN OR BOTH
-   * COMMENTED OUT = SLIDE (By itself) and SPIN (by itself)
-   * UNCOMMENTED = BOTH TOGETHER
-  */
-
-  /*function animateCardTransition(oldCard, newCard, direction) {
-    if (!oldCard || !newCard) return;
-
-    // Remove any previous animation classes
-    oldCard.classList.remove('card-slide-in-left', 'card-slide-in-right', 'card-slide-out-left', 'card-slide-out-right');
-    newCard.classList.remove('card-slide-in-left', 'card-slide-in-right', 'card-slide-out-left', 'card-slide-out-right');
-
-    // Animate old card out
-    oldCard.classList.add(direction === 'next' ? 'card-slide-out-left' : 'card-slide-out-right');
-
-    // Animate new card in
-    newCard.classList.add(direction === 'next' ? 'card-slide-in-right' : 'card-slide-in-left');
-
-    // After animation, clean up
-    setTimeout(() => {
-      oldCard.classList.remove('card-slide-out-left', 'card-slide-out-right');
-      newCard.classList.remove('card-slide-in-left', 'card-slide-in-right');
-    }, 400); // Match animation duration
-  }*/
-
-
-
-  /*function animateCardTransition(oldCard, newCard, direction) {
-    if (!oldCard || !newCard) return;
-
-    // Remove any previous animation classes
-    oldCard.classList.remove(
-      'card-spin-in-left', 'card-spin-in-right', 'card-spin-out-left', 'card-spin-out-right'
-    );
-    newCard.classList.remove(
-      'card-spin-in-left', 'card-spin-in-right', 'card-spin-out-left', 'card-spin-out-right'
-    );
-
-    // Animate old card out
-    oldCard.classList.add(direction === 'next' ? 'card-spin-out-left' : 'card-spin-out-right');
-
-    // Animate new card in
-    newCard.classList.add(direction === 'next' ? 'card-spin-in-right' : 'card-spin-in-left');
-
-    // After animation, clean up
-    setTimeout(() => {
-      oldCard.classList.remove('card-spin-out-left', 'card-spin-out-right');
-      newCard.classList.remove('card-spin-in-left', 'card-spin-in-right');
-    }, 600); // Match animation duration
-  }*/
-
-
   function animateCardTransition(oldCard, newCard, direction, animationType) {
     if (!oldCard || !newCard) return;
 
@@ -288,7 +237,5 @@ async function findWorkout(path) {
 function buildCard (workoutData) {
   const card = document.createElement('workout-card');
   card.data = workoutData;
-
-  card._articleEl.classList.toggle('flipped');
   return card;
 }
