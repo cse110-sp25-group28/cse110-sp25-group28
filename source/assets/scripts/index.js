@@ -2,7 +2,15 @@
 
 //The start of the webpage.
 window.addEventListener("DOMContentLoaded", init);
-
+document.addEventListener("DOMContentLoaded", () => {
+  const logo = document.querySelector(".logo-section .logo"); 
+  if (logo) {
+    logo.style.cursor = "pointer"; 
+    logo.addEventListener("click", () => {
+      window.location.href = "index.html";
+    });
+  }
+});
 //Default decks the program starts with
 const DEFAULT_DECKS = [
   {
