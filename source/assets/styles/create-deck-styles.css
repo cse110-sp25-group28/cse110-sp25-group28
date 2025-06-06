@@ -4,7 +4,7 @@
 
 /* Light Mode (Color Variables) */
 
-:root {
+/* :root {
   --background: #f7f8fa;
   --foreground: #222;
   --header-bg: #fff;
@@ -19,11 +19,11 @@
   --deck-hover-shadow: 0 6px 24px rgba(44, 62, 80, 0.16);
   --summary: #555;
   --deck-bg:rgb(213, 222, 236);
-}
+} */
 
 /* Dark Mode (Color Variables) */
 
-[data-theme="dark"] {
+/* [data-theme="dark"] {
   --background: #181a1b;
   --foreground: #f5f6fa;
   --header-bg: #23272f;
@@ -38,73 +38,63 @@
   --deck-hover-shadow: 0 6px 24px rgba(20, 30, 40, 0.32);
   --summary: #bfc9d1;
   --deck-bg: #2b313a;
+} */
+
+/* Various Buttons (+ Container) */
+
+.controls-toolbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: "Poppins", sans-serif;
+.sticky-controls {
+  position: sticky;
+  top: 1rem;
+  z-index: 100;
+  background: var(--box-bg);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  border-radius: 12px;
+  padding: 0.5rem 2em;
+  /* margin-bottom: 1rem; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-body {
-  font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
-  background: var(--background);
-  background-image: url('../images/gym.webp');
-  color: var(--foreground);
-  min-height: 100vh;
+.view-decks,
+.modal-buttons button,
+.select-cards {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
 }
+
+.view-decks {
+  margin: 0 24px 0 0;
+}
+
+.view-decks:hover,
+.modal-buttons button:hover,
+.select-cards:hover {
+  background: var(--primary-dark);
+}
+
+/* Main Content Section */
 
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2rem;
-}
-
-.cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 32px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.logo-section {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.logo {
-  width: 64px;
-  height: 64px;
-  background-color: #9ca3af;
-  border-radius: 50%;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.logo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.app-name {
-  font-size: 1.25rem;
-  font-weight: bold;
 }
 
 h2 {
@@ -114,6 +104,15 @@ h2 {
   text-align: center;
   margin-top: 16px;
 }
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+/* Individual Card Styling */
 
 .card {
   background-color: #fff;
@@ -129,38 +128,8 @@ h2 {
   overflow: hidden;
 }
 
-
 .card h2 {
   margin-top: 0;
-}
-
-.button-container {
-  margin-top: 1.5rem;
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
-
-button {
-  padding: 0.6rem 1.2rem;
-  border: none;
-  border-radius: 8px;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.2s ease;
-}
-
-.controls-toolbar {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-button:hover {
-  background-color: #0056b3;
 }
 
 .footer {
@@ -301,6 +270,7 @@ article.active {
   color: #111;
 }
 
+/* Deck Naming Pop-up */
 
 .modal {
   position: fixed;
@@ -325,7 +295,7 @@ article.active {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
-  gap: 1rem; /* ← this adds height spacing between child elements */
+  gap: 1rem;
 }
 
 .modal-buttons {
@@ -360,10 +330,12 @@ article.active {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Style Error Message */
+
 .error-message {
   position: fixed;
   left: 50%;
-  bottom: calc(2rem - 2.2rem); /* Adjust this value as needed */
+  bottom: calc(2rem - 2.2rem);
   transform: translateX(-50%);
   color: red;
   font-size: 0.9rem;
@@ -378,17 +350,22 @@ article.active {
   transition: opacity 3s;
 }
 
+/* Hide or Show Elements */
+
 .hidden {
   display: none;
 }
 
+/* Muscle Filter Dropdown */
+
 .custom-dropdown-wrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
   width: 100%;
 }
+
 
 .filter-label {
   font-weight: 600;
@@ -399,15 +376,15 @@ article.active {
   position: relative;
   background: white;
   border: 2px solid #aaa;
-  border-radius: 999px;  
+  border-radius: 8px;  
   cursor: pointer;
   min-width: 200px;
   user-select: none;
 }
 
 .custom-dropdown-selected {
-  padding: 0.75rem;
-  border-radius: 999px;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
   text-align: center;
   display: flex;
   align-items: center;
@@ -422,9 +399,9 @@ article.active {
   left: 0;
   background: white;
   border: 2px solid #aaa;
-  border-radius: 1rem;
+  border-radius: 8px;
   z-index: 100;
-  max-height: 300px;
+  max-height: 250px;
   overflow-y: auto;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }

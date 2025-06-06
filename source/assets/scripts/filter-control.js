@@ -183,7 +183,7 @@ function buildToolbar(muscles) {
     });
 
     toolbar.append(
-        makeSelect('muscle', muscles,'Select Muscle Group'),
+        makeSelect('muscle', muscles,'Filter by Muscle Group: '),
     );
     return toolbar;
 }

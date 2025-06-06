@@ -12,12 +12,15 @@
       <!-- Header -->
     <header class="header">
       <div class="logo-section">
-        <div class="logo"></div>
+        <div class="logo">
+          <img src="assets/images/sweat-deck-logo.png" alt="SweatDeck Logo">
+        </div>
         <h1 class="app-name">SweatDeck</h1>
       </div>
-      <div class="button-group">
+      <div class="header-actions">
         <button class="create-deck">Delete Deck</button>
         <button id="home-button">View Decks</button>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>      
       </div>
     </header>
     <main id="cards-container" class="main-content">
@@ -53,5 +56,12 @@
         <button id="go-home">Go to Home</button>
       </div>
     </div>
+
+    <!-- Light/Dark Mode Toggle Functionality -->
+    <script type="module">
+      import { setupThemeToggle } from './source/assets/scripts/theme-toggle.js';
+      setupThemeToggle();
+    </script>
+
   </body>
 </html>
