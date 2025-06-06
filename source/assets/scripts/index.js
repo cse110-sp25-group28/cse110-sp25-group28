@@ -1,9 +1,19 @@
-// Example structure: localStorage.setItem("decks", JSON.stringify([{ name: "Deck 1" }, { name: "Deck 2" }]));
+/**
+ * @fileoverview
+ * Initializes the main page by displaying default and custom decks.
+ * 
+ * ─────────────────────────────────────────────────────
+ * How it Works:
+ * 1. Sets up default decks if not already in localStorage
+ * 2. Displays default and custom decks as clickable elements
+ * 3. On deck click, saves selected deck and navigates to detail view
+ */
 
-//The start of the webpage.
+
+// Load DOM content and initialize deck rendering
 window.addEventListener("DOMContentLoaded", init);
 
-//Default decks the program starts with
+// Default decks to seed the application with
 const DEFAULT_DECKS = [
   {
     name: "Chest Day",
@@ -97,17 +107,25 @@ const DEFAULT_DECKS = [
   }
 ];
 
+/**
+ * Initializes the page:
+ * - Seeds localStorage with default decks
+ * - Loads and displays both default and custom decks
+ * - Adds click listeners to each deck element
+ */
 function init() {
 
   const defaultContainer = document.getElementById("default-deck-container");
   const customContainer = document.getElementById("custom-deck-container");
 
+  // Load stored decks or empty array if none found
   const decks = JSON.parse(localStorage.getItem("decks")) || [];
   const customDecks = JSON.parse(localStorage.getItem("custom-decks"));
 
- 
+  // Always reset default decks
   localStorage.setItem("decks", JSON.stringify(DEFAULT_DECKS));
 
+  // Display default decks
   decks.forEach((deck, index) => {
     const div = document.createElement("div");
     div.className = "deck-box";
@@ -118,7 +136,8 @@ function init() {
     });
     defaultContainer.appendChild(div);
   });
-
+  
+  // Display custom decks (if any)
   if (customDecks != null) {
     customDecks.forEach((customDeck, index) => {
       const div = document.createElement("div");

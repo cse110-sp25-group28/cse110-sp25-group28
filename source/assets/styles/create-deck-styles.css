@@ -2,46 +2,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
-/* Light Mode (Color Variables) */
-
-/* :root {
-  --background: #f7f8fa;
-  --foreground: #222;
-  --header-bg: #fff;
-  --box-bg: #fff;
-  --box-border: #e6eaf0;
-  --primary: #2b4d8c;
-  --primary-dark: #1a2e4c;
-  --deck-hover: #f0f4fa;
-  --shadow: 0 2px 8px rgba(0,0,0,0.04);
-  --card-shadow: 0 4px 32px rgba(44, 62, 80, 0.10);
-  --deck-shadow: 0 2px 12px rgba(44, 62, 80, 0.08);
-  --deck-hover-shadow: 0 6px 24px rgba(44, 62, 80, 0.16);
-  --summary: #555;
-  --deck-bg:rgb(213, 222, 236);
-} */
-
-/* Dark Mode (Color Variables) */
-
-/* [data-theme="dark"] {
-  --background: #181a1b;
-  --foreground: #f5f6fa;
-  --header-bg: #23272f;
-  --box-bg: #23272f;
-  --box-border: #353b48;
-  --primary: #6ea8fe;
-  --primary-dark: #3b5b8c;
-  --deck-hover: #232c3a;
-  --shadow: 0 2px 8px rgba(0,0,0,0.4);
-  --card-shadow: 0 4px 32px rgba(20, 30, 40, 0.40);
-  --deck-shadow: 0 2px 12px rgba(20, 30, 40, 0.24);
-  --deck-hover-shadow: 0 6px 24px rgba(20, 30, 40, 0.32);
-  --summary: #bfc9d1;
-  --deck-bg: #2b313a;
-} */
-
-/* Various Buttons (+ Container) */
-
 .controls-toolbar {
   display: flex;
   flex-direction: row;
@@ -58,7 +18,6 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.07);
   border-radius: 12px;
   padding: 0.5rem 2em;
-  /* margin-bottom: 1rem; */
   display: flex;
   justify-content: center;
   align-items: center;
