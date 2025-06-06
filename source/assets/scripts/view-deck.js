@@ -93,7 +93,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         card.style.display = '';      // show
         // resets flip to have card ALWAYS face down
         if (card._articleEl) {
-          card._articleEl.classList.add('flipped');
+          card._articleEl.classList.add('flipped', 'instant');
         }
       } else {
         card.style.display = 'none';  // hide
@@ -146,6 +146,9 @@ window.addEventListener('DOMContentLoaded', async () => {
    * Shuffles the cards and resets the view to the first card.
    */
   shuffleButton.addEventListener('click', () => {
+    // Hide the card display to prevent visual flash
+    cardDisplay.style.visibility = 'hidden';
+
     const shuffled = shuffle([...cards]);   
     cards.length   = 0;                    
     cards.push(...shuffled);               
@@ -153,6 +156,11 @@ window.addEventListener('DOMContentLoaded', async () => {
     cardDisplay.replaceChildren(...cards)
     currentIndex = 0;
     showCard();
+
+    // Allow the DOM to update, then show the card display again
+    setTimeout(() => {
+      cardDisplay.style.visibility = 'visible';
+    }, 10);
   });
 
   /**

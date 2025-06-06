@@ -235,3 +235,9 @@ button {
   from { transform: translateX(0)    rotateY(0deg);     opacity: 1; }
   to   { transform: translateX(100%) rotateY(360deg);   opacity: 0; }
 }
+
+.card.shuffle-anim {
+  /* Random displacement and rotation will be set inline via JS */
+  transition: transform 0.5s cubic-bezier(0.4,0.2,0.2,1);
+  z-index: 10;
+}
