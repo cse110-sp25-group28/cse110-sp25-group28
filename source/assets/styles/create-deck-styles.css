@@ -4,7 +4,7 @@
 
 /* Light Mode (Color Variables) */
 
-:root {
+/* :root {
   --background: #f7f8fa;
   --foreground: #222;
   --header-bg: #fff;
@@ -19,11 +19,11 @@
   --deck-hover-shadow: 0 6px 24px rgba(44, 62, 80, 0.16);
   --summary: #555;
   --deck-bg:rgb(213, 222, 236);
-}
+} */
 
 /* Dark Mode (Color Variables) */
 
-[data-theme="dark"] {
+/* [data-theme="dark"] {
   --background: #181a1b;
   --foreground: #f5f6fa;
   --header-bg: #23272f;
@@ -38,7 +38,7 @@
   --deck-hover-shadow: 0 6px 24px rgba(20, 30, 40, 0.32);
   --summary: #bfc9d1;
   --deck-bg: #2b313a;
-}
+} */
 
 main {
   display: flex;
@@ -54,9 +54,11 @@ main {
   gap: 2rem;
 }
 
-/* Header Section */
+/* Various Buttons */
 
-.view-decks {
+.view-decks,
+.modal-buttons button,
+.select-cards {
   background: var(--primary);
   color: #fff;
   border: none;
@@ -69,7 +71,9 @@ main {
   margin: 0 24px 0 0;
 }
 
-.view-decks:hover {
+.view-decks:hover,
+.modal-buttons button:hover,
+.select-cards:hover {
   background: var(--primary-dark);
 }
 
@@ -109,27 +113,12 @@ h2 {
   gap: 1rem;
 }
 
-/* button {
-  padding: 0.6rem 1.2rem;
-  border: none;
-  border-radius: 8px;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.2s ease;
-} */
-
 .controls-toolbar {
   display: flex;
   gap: 1rem;
   align-items: center;
   margin-bottom: 1rem;
 }
-
-/* button:hover {
-  background-color: #0056b3;
-} */
 
 .footer {
   display: flex;
@@ -144,6 +133,8 @@ h2 {
   box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
   transition: border 0.2s, box-shadow 0.2s;
 }
+
+/* Card Styling */
 
 article {
   background-color: transparent;
@@ -269,6 +260,7 @@ article.active {
   color: #111;
 }
 
+/* Deck Naming Pop-up */
 
 .modal {
   position: fixed;
@@ -328,6 +320,8 @@ article.active {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Style Error Message */
+
 .error-message {
   position: fixed;
   left: 50%;
@@ -346,9 +340,13 @@ article.active {
   transition: opacity 3s;
 }
 
+/* Hide or Show Elements */
+
 .hidden {
   display: none;
 }
+
+/* Muscle Filter Dropdown */
 
 .custom-dropdown-wrapper {
   display: flex;
