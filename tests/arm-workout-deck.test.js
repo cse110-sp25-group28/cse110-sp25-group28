@@ -1,4 +1,15 @@
+/**
+ * @file arm-deck.test.js
+ * @description
+ * End-to-end test for validating the workout card carousel for the "Arm Workout" deck.
+ * This test ensures that:
+ * - The deck page loads properly
+ * - Each card is rendered correctly
+ * - Carousel navigation updates the visible workout card
+ */
+
 describe('create arm workout deck test', () => {
+  // Navigate to homepage and open the Arm Workout deck
   beforeAll(async () => {
     await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28/');
     await page.reload({ waitUntil: 'domcontentloaded' });
@@ -10,6 +21,10 @@ describe('create arm workout deck test', () => {
   it('Checking the arm workout carousel values', async () => {
     const nextSelector = '#next-button';
 
+    /**
+     * Gets the name of the currently visible workout card.
+     * @returns {Promise<string|null>}
+     */
     async function getWorkoutName() {
       return await page.evaluate(() => {
         const cards = Array.from(document.querySelectorAll('#card-display workout-card'));
@@ -19,6 +34,11 @@ describe('create arm workout deck test', () => {
       });
     }
 
+    /**
+     * Waits until the currently visible card has a name different from the previous one.
+     * @param {string} prevName - The previous workout name
+     * @returns {Promise<void>}
+     */
     async function waitForNewWorkout(prevName) {
       await page.waitForFunction((prev) => {
         const cards = Array.from(document.querySelectorAll('#card-display workout-card'));
@@ -34,6 +54,7 @@ describe('create arm workout deck test', () => {
     await page.waitForSelector('#card-display workout-card', { timeout: 15000 });
     await page.click('#card-display workout-card');
 
+    // Wait until rendered
     await page.waitForFunction(() => {
       const cards = Array.from(document.querySelectorAll('#card-display workout-card'));
       const visibleCard = cards.find(c => getComputedStyle(c).display !== 'none');

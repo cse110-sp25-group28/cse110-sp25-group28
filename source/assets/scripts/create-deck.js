@@ -1,7 +1,18 @@
+/**
+ * @file create-deck.js
+ * @description
+ * Main script for the "Create Deck" page. 
+ * Handles loading workouts, card rendering, selection mode, filtering, 
+ * deck creation, and saving to localStorage.
+ */
+
 import { initFiltering } from "./filter-control.js";
 
 /**
- * Starts the page
+ * Initialize the page once the DOM is fully loaded:
+ * - Load workouts from storage
+ * - Add cards to the document
+ * - Set up filtering
  */
 window.addEventListener("DOMContentLoaded", async () => {
   const workouts = await getWorkoutsFromStorage();
@@ -12,7 +23,13 @@ window.addEventListener("DOMContentLoaded", async () => {
 });
 
 let selection = false;
-// Sets a "selection" mode, giving the ability to add cards to a deck
+
+/**
+ * Toggle selection mode:
+ * - Enables card selection for deck creation
+ * - Disables card flipping while active
+ * - Clears selected cards on cancel
+ */
 document.getElementById("selectorOn").addEventListener("click", () => {
   selection = !selection;
   const toggle = document.getElementById("selectorOn");
@@ -24,7 +41,11 @@ document.getElementById("selectorOn").addEventListener("click", () => {
   }
 });
 
-//Triggered when Create Deck button is clicked and pops up the modal
+/**
+ * Open the deck creation modal when "Create Deck" is clicked:
+ * - Only if at least one card is selected
+ * - Otherwise, show temporary error message
+ */
 document.getElementById("create-deck-button").addEventListener("click", () => {
   const selectedCards = document.querySelectorAll(".selected");
   if (selectedCards.length > 0) {
@@ -48,13 +69,17 @@ document.getElementById("create-deck-button").addEventListener("click", () => {
   }
 });
 
-//When the deck is saved in the pop-up, save to the data to localStorage
+/**
+ * Save selected cards as a new deck when "Confirm" is clicked in the modal
+ */
 document.getElementById("confirm-deck-name").addEventListener("click", () => {
   const name = document.getElementById("deck-name-input").value.trim();
   saveSelectedCards(name);
 });
 
-//Closes the pop-up modal
+/**
+ * Close the deck name input modal
+ */
 document
   .getElementById("cancel-deck-name")
   .addEventListener("click", closeModal);
@@ -97,7 +122,10 @@ function addWorkoutsToDocument(workouts) {
   main.appendChild(cardsContainer);
 }
 
-// Listen for custom events dispatched from any card
+/**
+ * Handle workout card clicks in selection mode
+ * - Toggles 'selected' class on card
+ */
 document.addEventListener("workout-card-clicked", (e) => {
   // e is the custom event
   if (selection) {
@@ -107,6 +135,9 @@ document.addEventListener("workout-card-clicked", (e) => {
   }
 });
 
+/**
+ * Remove 'selected' class from all workout cards
+ */
 function unselectCards() {
   document.querySelectorAll(".selected").forEach((card) => {
     card.classList.remove("selected");
@@ -216,7 +247,7 @@ function saveSelectedCards(deckName) {
 }
 
 /**
- * Closes the pop-up modal
+ * Closes the pop-up modal and clears content
  */
 function closeModal() {
   document.getElementById("deck-name-modal").classList.add("hidden");
