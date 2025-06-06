@@ -40,21 +40,21 @@
   --deck-bg: #2b313a;
 } */
 
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem;
-}
+/* Various Buttons (+ Container) */
 
-.cards-container {
+.button-container {
+  margin-top: 1.5rem;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem;
+  gap: 1rem;
 }
 
-/* Various Buttons */
+.controls-toolbar {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
 
 .view-decks,
 .modal-buttons button,
@@ -79,6 +79,13 @@ main {
 
 /* Main Content Section */
 
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
 h2 {
   font-size: 2rem;
   font-weight: bold;
@@ -86,6 +93,15 @@ h2 {
   text-align: center;
   margin-top: 16px;
 }
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+/* Individual Card Styling */
 
 .card {
   background-color: #fff;
@@ -101,23 +117,8 @@ h2 {
   overflow: hidden;
 }
 
-
 .card h2 {
   margin-top: 0;
-}
-
-.button-container {
-  margin-top: 1.5rem;
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.controls-toolbar {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  margin-bottom: 1rem;
 }
 
 .footer {
@@ -133,8 +134,6 @@ h2 {
   box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
   transition: border 0.2s, box-shadow 0.2s;
 }
-
-/* Card Styling */
 
 article {
   background-color: transparent;
