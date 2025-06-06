@@ -131,6 +131,7 @@ function init() {
       customContainer.appendChild(div);
     });
   }
+
 }
 
 // Functionality for Theme Toggle Button 

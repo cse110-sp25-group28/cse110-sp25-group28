@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Workout Cards</title>
+    <link rel="stylesheet" href="./assets/styles/styles.css" />
     <link rel="stylesheet" href="./assets/styles/create-deck-styles.css" />
     <script src="./assets/scripts/card.js" type="module"></script>
     <script src="./assets/scripts/create-deck.js" type="module"></script>
@@ -14,18 +15,13 @@
     <header class="header">
       <div class="logo-section">
         <div class="logo">
-          <img src="assets/images/sweat-deck-logo.png" alt="Sweat Deck Logo">
+          <img src="assets/images/sweat-deck-logo.png" alt="SweatDeck Logo">
         </div>
         <h1 class="app-name">SweatDeck</h1>
       </div>
-      <div class="buttons">
-        <button id="selectorOn">Select Cards</button>
-        <button
-          class="view-decks"
-          onclick="window.location.href='../index.html'"
-        >
-          View Decks
-        </button>
+      <div class="header-actions">
+        <button class="view-decks" onclick="window.location.href='../index.html'">View Decks</button>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>      
       </div>
     </header>
     
@@ -33,12 +29,18 @@
       <h2>Choose some cards!</h2>
     
       <section class="cards-area">
-        <!-- JS will insert the toolbar here -->
-        <div class="cards-container"></div>
+        <!--The container for cards-->
+        <div class="cards-container">
+          <div class="sticky-controls">
+            <div class="controls-toolbar">
+              <!-- The filter toolbar will be inserted here by JS -->
+              <button id="selectorOn" class="select-cards">Select Cards</button>
+              <button id="create-deck-button" class="create-deck">Create Deck</button>
+            </div>
+          </div>
+        </div>
       </section>
-      <button id="create-deck-button" class="create-deck">Create Deck</button>
       <p id="create-deck-error" class="error-message hidden"></p>
-      <!--The container for cards-->
     </main>
 
     <!--Pop up window that asks user to name the custom deck created-->
@@ -57,5 +59,12 @@
         </div>
       </div>
     </div>
+
+    <!-- Light/Dark Mode Toggle Functionality -->
+    <script type="module">
+      import { setupThemeToggle } from './assets/scripts/theme-toggle.js';
+      setupThemeToggle();
+    </script>
+
   </body>
 </html>

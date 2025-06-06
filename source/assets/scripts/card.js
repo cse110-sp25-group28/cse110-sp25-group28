@@ -85,7 +85,7 @@ class WorkoutCard extends HTMLElement {
       </div>
     `;
     back.innerHTML = `
-      <div class="muscle-label">${data.muscle}</div>
+      <div class="muscle-label">${data.name}</div>
     `;
   }
 
