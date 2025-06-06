@@ -29,15 +29,18 @@
       <h2>Choose some cards!</h2>
     
       <section class="cards-area">
-        <div class="controls-toolbar">
-          <!-- The filter toolbar will be inserted here by JS -->
-          <button id="selectorOn" class="select-cards">Select Cards</button>
-          <button id="create-deck-button" class="create-deck">Create Deck</button>
+        <!--The container for cards-->
+        <div class="cards-container">
+          <div class="sticky-controls">
+            <div class="controls-toolbar">
+              <!-- The filter toolbar will be inserted here by JS -->
+              <button id="selectorOn" class="select-cards">Select Cards</button>
+              <button id="create-deck-button" class="create-deck">Create Deck</button>
+            </div>
+          </div>
         </div>
-        <div class="cards-container"></div>
       </section>
       <p id="create-deck-error" class="error-message hidden"></p>
-      <!--The container for cards-->
     </main>
 
     <!--Pop up window that asks user to name the custom deck created-->
