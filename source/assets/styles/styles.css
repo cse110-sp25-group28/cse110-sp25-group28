@@ -277,24 +277,29 @@ body, .header, .main-content, .deck-box {
   overflow: hidden;            /* Hide overflowing images */
   border-radius: 12px;         /* Rounded corners */
   box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Subtle shadow */
-  background: #fff;            /* White background */
+  background: #23272f;            /* White background */
   position: relative;
   height: 220px;               /* Height of carousel */
+  display: flex;              
+  align-items: center;        
 }
 
 /* The track that holds all images in a row and animates them. */
 .carousel-track {
   display: flex;               /* Arrange images in a row */
   width: max-content;          /* Width grows with content */
-  animation: scroll-left 80s linear infinite; /* Smooth, infinite left scroll */
+  animation: scroll-left 90s linear infinite; /* Smooth, infinite left scroll */
 }
 
 /* Individual images inside the carousel. */
 .carousel-track img {
+  background: #2b313a;
+  border: 5px solid #2b313a; /* White border around images */
+  border-radius: 10px;
   width: 200px;                /* Image width */
   height: 200px;               /* Image height */
   object-fit: contain;         /* Keep aspect ratio, fit inside box */
-  margin: 0 5px;               /* Space between images */
+  margin: 0 25px;               /* Space between images */
   flex-shrink: 0;              /* Prevent images from shrinking */
 }
 
