@@ -91,7 +91,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         card.style.display = '';      // show
         // resets flip to have card ALWAYS face down
         if (card._articleEl) {
-          card._articleEl.classList.add('flipped');
+          card._articleEl.classList.add('flipped', 'instant');
         }
       } else {
         card.style.display = 'none';  // hide
@@ -144,13 +144,31 @@ window.addEventListener('DOMContentLoaded', async () => {
    * Shuffles the cards and resets the view to the first card.
    */
   shuffleButton.addEventListener('click', () => {
-    const shuffled = shuffle([...cards]);   
-    cards.length   = 0;                    
-    cards.push(...shuffled);               
+    const firstCard = cards[currentIndex];
+    if (firstCard) {
+      // Animate the current card flipping out
+      firstCard.classList.add('card-flip-out-top');
+      setTimeout(() => {
+        firstCard.classList.remove('card-flip-out-top');
+        // Shuffle after the card flips out
+        const shuffled = shuffle([...cards]);
+        cards.length = 0;
+        cards.push(...shuffled);
 
-    cardDisplay.replaceChildren(...cards)
-    currentIndex = 0;
-    showCard();
+        cardDisplay.replaceChildren(...cards);
+        currentIndex = 0;
+        showCard();
+
+        // Animate the new first card flipping in
+        const newFirstCard = cards[0];
+        if (newFirstCard) {
+          newFirstCard.classList.add('card-flip-in-top');
+          setTimeout(() => {
+            newFirstCard.classList.remove('card-flip-in-top');
+          }, 450);
+        }
+      }, 450); // Match the animation duration
+    }
   });
 
   /**

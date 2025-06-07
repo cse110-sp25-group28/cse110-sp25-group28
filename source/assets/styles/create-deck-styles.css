@@ -143,6 +143,11 @@ article.active {
   transform: rotateY(180deg);
 }
 
+article.flipped.instant .card-inner,
+article.instant.flipped .card-inner {
+  transition: transform 0s !important;
+}
+
 .image-wrapper {
   flex: 1 1 auto;
   max-height: 50%;

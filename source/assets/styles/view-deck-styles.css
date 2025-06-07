@@ -235,3 +235,19 @@ button {
   from { transform: translateX(0)    rotateY(0deg);     opacity: 1; }
   to   { transform: translateX(100%) rotateY(360deg);   opacity: 0; }
 }
+
+.card-flip-out-top {
+  animation: cardFlipOutTop 0.5s forwards;
+}
+.card-flip-in-top {
+  animation: cardFlipInTop 0.5s forwards;
+}
+
+@keyframes cardFlipOutTop {
+  from { transform: translateY(0) rotateX(0deg);    opacity: 1; }
+  to   { transform: translateY(-120%) rotateX(90deg); opacity: 0; }
+}
+@keyframes cardFlipInTop {
+  from { transform: translateY(-120%) rotateX(-90deg); opacity: 0; }
+  to   { transform: translateY(0)     rotateX(0deg);    opacity: 1; }
+}
