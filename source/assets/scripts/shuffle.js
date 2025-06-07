@@ -7,7 +7,7 @@
  * @returns {Array} New array with the elements shuffled
  * @throws {TypeError} If the input is not array
  */
-export function shuffle(cards) {
+function shuffle(cards) {
     if (!Array.isArray(cards)) {
         throw new TypeError('Cards must be an array');
     }
@@ -19,3 +19,7 @@ export function shuffle(cards) {
     }
     return result;
 }
+
+module.exports = {
+    shuffle,
+};

@@ -25,5 +25,9 @@ jobs: # the things being executed
         run: npm test ./tests/dom-functions-create-deck.test.js
       - name: Create Deck Unit Test
         run: npm test ./tests/unit-test-create-deck.test.js
-      - name: Theme Toggle Test
+      - name: Theme Toggle Unit Test
         run: npm test ./tests/theme-toggle.test.js
+      - name: Delete Deck Unit Test
+        run: npm test ./tests/delete-deck.test.js
+      - name: Shuffle Unit Test
+        run: npm test ./tests/shuffle.test.js
