@@ -57,6 +57,7 @@ main {
 }
 
 h2 {
+  color: var(--primary);
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 16px;
@@ -198,6 +199,7 @@ article.instant.flipped .card-inner {
 }
 
 .card-front p {
+  
   font-size: 0.9rem;
   margin: 0.3rem 0;
   color: #555;
@@ -210,7 +212,7 @@ article.instant.flipped .card-inner {
 }
 
 .card-back {
-  background: #e5e7eb;
+  background: var(--deck-bg);
   color: #333;
   transform: rotateY(180deg);
   font-size: 1.2rem;
@@ -222,7 +224,7 @@ article.instant.flipped .card-inner {
 
 .card-back .muscle-label {
   font-size: 1.5rem;
-  color: #444;
+  color: var(--primary);
   text-align: center;
   padding: 1rem;
   font-weight: bold;
@@ -231,7 +233,7 @@ article.instant.flipped .card-inner {
 
 .flipped:hover .card-back .muscle-label {
   font-weight: bolder;
-  color: #111;
+  color: #3d5fe0
 }
 
 /* Deck Naming Pop-up */
@@ -332,11 +334,13 @@ article.instant.flipped .card-inner {
 
 
 .filter-label {
+  color: var(--primary);
   font-weight: 600;
   font-size: 0.95rem;
 }
 
 .custom-dropdown {
+  background-color: var(--dropdown);
   position: relative;
   background: white;
   border: 2px solid #aaa;
@@ -347,6 +351,7 @@ article.instant.flipped .card-inner {
 }
 
 .custom-dropdown-selected {
+  background-color: var(--dropdown);
   padding: 0.75rem 1rem;
   border-radius: 8px;
   text-align: center;
@@ -361,7 +366,7 @@ article.instant.flipped .card-inner {
   width: 100%;
   top: 110%;
   left: 0;
-  background: white;
+  background: var(--dropdown);
   border: 2px solid #aaa;
   border-radius: 8px;
   z-index: 100;
