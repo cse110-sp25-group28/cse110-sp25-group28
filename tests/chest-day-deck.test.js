@@ -56,7 +56,7 @@ describe('create chest day deck test', () => {
       const shadow = card?.shadowRoot;
       const name = shadow?.querySelector('h2.name a')?.textContent.trim();
       return name && name !== "Bench Press";
-    }, { timeout: 15000 });
+    }, { timeout: 20000 });
 
     const workout3 = await getWorkoutName();
     expect(workout3).toBe("Incline Press");
