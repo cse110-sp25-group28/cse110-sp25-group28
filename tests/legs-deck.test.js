@@ -1,3 +1,10 @@
+/**
+ * @file legs-deck.test.js
+ * @description
+ * Tests functionality of the view deck page of the leg day deck
+ */
+
+
 describe('create legs deck test', () => {
   beforeAll(async () => {
     await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28');
@@ -54,6 +61,4 @@ describe('create legs deck test', () => {
     const workout3 = await getWorkoutName();
     expect(workout3).toBe("Glute Bridge");
   }, 90000);
-
-  
 });

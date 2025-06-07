@@ -1,3 +1,12 @@
+/**
+ * @file chest-day.test.js
+ * @description
+ * End-to-end test for verifying the carousel order of the "Chest Day" deck.
+ * This test checks:
+ * - Correct rendering of the first card
+ * - Proper navigation through all 3 cards
+ */
+
 describe('create chest day deck test', () => {
   beforeAll(async () => {
     await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28');
@@ -47,7 +56,7 @@ describe('create chest day deck test', () => {
       const shadow = card?.shadowRoot;
       const name = shadow?.querySelector('h2.name a')?.textContent.trim();
       return name && name !== "Bench Press";
-    }, { timeout: 15000 });
+    }, { timeout: 20000 });
 
     const workout3 = await getWorkoutName();
     expect(workout3).toBe("Incline Press");

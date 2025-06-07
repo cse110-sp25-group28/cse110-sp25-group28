@@ -1,7 +1,16 @@
 /**
  * @jest-environment jsdom
  */
-
+/**
+ * @file create-deck.test.js
+ * @description
+ * End-to-end tests for the "Create Deck" page.
+ * Verifies:
+ * - Workout cards load from JSON
+ * - Cards are populated correctly
+ * - Selection mode works
+ * - Error appears if no cards are selected for deck creation
+ */
 const DEFAULT_DECKS = ["Chest Day", "Legs", "Core Blast", "Arm Workout"];
 
 // Simulate the code snippet as a function to call in tests

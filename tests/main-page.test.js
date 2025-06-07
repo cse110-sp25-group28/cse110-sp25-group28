@@ -1,4 +1,10 @@
-describe('create deck test', () => {
+/**
+ * @file main-page.test.js
+ * @description
+ * Tests the visibility of the main page upon rendering
+ */
+
+describe('main page test', () => {
   beforeAll(async () => {
     await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28');
     // Reload the page so localStorage changes take effect
@@ -10,6 +16,4 @@ describe('create deck test', () => {
     const numWorkoutSets = await page.$$eval('#default-deck-container .deck-box', boxes => boxes.length);
     expect(numWorkoutSets).toBe(4);
   }, 10000);
-
-  
 });

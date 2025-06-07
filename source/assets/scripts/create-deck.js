@@ -1,5 +1,5 @@
-const { initFiltering } = require("./filter-control.js");
-const { getWorkoutsFromStorage, getCardData } = require('./deck-logic.js');
+import { initFiltering } from "./filter-control.js"
+import { getWorkoutsFromStorage, getCardData } from "./deck-logic.js"
 
 /**
  * Starts the page and sets up event listeners
@@ -127,7 +127,7 @@ function setCardsDisableFlip(disable) {
  * Collects all currently selected workout cards and saves their data to localStorage.
  * The saved data is stored under the key 'custom-decks'.
  */
-function saveSelectedCards(deckName) {
+export function saveSelectedCards(deckName) {
   const selectedCards = document.querySelectorAll(".selected");
   const selectedData = [];
 
@@ -179,7 +179,7 @@ function closeModal() {
   document.getElementById("deck-name-error").classList.add("hidden");
 }
 
-module.exports = {
+export default {
   setupCreateDeckPage,
   getWorkoutsFromStorage,
   getCardData,

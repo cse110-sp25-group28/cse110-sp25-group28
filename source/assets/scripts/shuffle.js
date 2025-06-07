@@ -20,6 +20,6 @@ function shuffle(cards) {
     return result;
 }
 
-module.exports = {
+export default {
     shuffle,
 };

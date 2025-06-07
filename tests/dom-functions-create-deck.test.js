@@ -2,8 +2,14 @@
  * @jest-environment jsdom
  */
 
-const { saveSelectedCards } = require('../source/assets/scripts/create-deck.js');
-const { getCardData } = require('../source/assets/scripts/deck-logic.js');
+/**
+ * @file dom-functions-create-deck.test.js
+ * @description
+ * Tests dom functions from the create deck functionality
+ */
+
+import { saveSelectedCards } from '../source/assets/scripts/create-deck.js';
+import { getCardData } from '../source/assets/scripts/deck-logic.js';
 
 // Mock getCardData
 jest.mock('../source/assets/scripts/deck-logic.js', () => ({

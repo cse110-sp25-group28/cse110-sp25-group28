@@ -2,46 +2,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
-/* Light Mode (Color Variables) */
-
-/* :root {
-  --background: #f7f8fa;
-  --foreground: #222;
-  --header-bg: #fff;
-  --box-bg: #fff;
-  --box-border: #e6eaf0;
-  --primary: #2b4d8c;
-  --primary-dark: #1a2e4c;
-  --deck-hover: #f0f4fa;
-  --shadow: 0 2px 8px rgba(0,0,0,0.04);
-  --card-shadow: 0 4px 32px rgba(44, 62, 80, 0.10);
-  --deck-shadow: 0 2px 12px rgba(44, 62, 80, 0.08);
-  --deck-hover-shadow: 0 6px 24px rgba(44, 62, 80, 0.16);
-  --summary: #555;
-  --deck-bg:rgb(213, 222, 236);
-} */
-
-/* Dark Mode (Color Variables) */
-
-/* [data-theme="dark"] {
-  --background: #181a1b;
-  --foreground: #f5f6fa;
-  --header-bg: #23272f;
-  --box-bg: #23272f;
-  --box-border: #353b48;
-  --primary: #6ea8fe;
-  --primary-dark: #3b5b8c;
-  --deck-hover: #232c3a;
-  --shadow: 0 2px 8px rgba(0,0,0,0.4);
-  --card-shadow: 0 4px 32px rgba(20, 30, 40, 0.40);
-  --deck-shadow: 0 2px 12px rgba(20, 30, 40, 0.24);
-  --deck-hover-shadow: 0 6px 24px rgba(20, 30, 40, 0.32);
-  --summary: #bfc9d1;
-  --deck-bg: #2b313a;
-} */
-
-/* Various Buttons (+ Container) */
-
 .controls-toolbar {
   display: flex;
   flex-direction: row;
@@ -58,7 +18,6 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.07);
   border-radius: 12px;
   padding: 0.5rem 2em;
-  /* margin-bottom: 1rem; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -98,6 +57,7 @@ main {
 }
 
 h2 {
+  color: var(--primary);
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 16px;
@@ -115,7 +75,7 @@ h2 {
 /* Individual Card Styling */
 
 .card {
-  background-color: #fff;
+  background: var(--box-bg);
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -184,7 +144,13 @@ article.active {
   transform: rotateY(180deg);
 }
 
+article.flipped.instant .card-inner,
+article.instant.flipped .card-inner {
+  transition: transform 0s !important;
+}
+
 .image-wrapper {
+  background: var(--deck-bg);
   flex: 1 1 auto;
   max-height: 50%;
   display: flex;
@@ -194,6 +160,7 @@ article.active {
 }
 
 .image-wrapper img {
+  background: var(--deck-bg);
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
@@ -201,6 +168,7 @@ article.active {
 
 .card-front,
 .card-back {
+  background: var(--deck-bg);
   position: absolute;
   width: 100%;
   height: 100%;
@@ -210,7 +178,6 @@ article.active {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #fff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -223,30 +190,33 @@ article.active {
 }
 
 .card-front h2.name {
+  background: var(--deck-bg);
   font-size: 1.1rem;
   margin: 1rem 0 0.5rem;
-  color: #333;
+  color: var(--card-text);
 }
 
 .card-front h2.name a {
+  background: var(--deck-bg);
   text-decoration: none;
   color: inherit;
 }
 
 .card-front p {
+  background: var(--deck-bg);
   font-size: 0.9rem;
   margin: 0.3rem 0;
-  color: #555;
+  color: var(--card-text);
   text-align: center;
   padding: 0 1rem;
 }
 
 .card-front .muscle {
-  color: #888;
+  color: var(--card-muscle);
 }
 
 .card-back {
-  background: #e5e7eb;
+  background: var(--deck-bg);
   color: #333;
   transform: rotateY(180deg);
   font-size: 1.2rem;
@@ -258,7 +228,7 @@ article.active {
 
 .card-back .muscle-label {
   font-size: 1.5rem;
-  color: #444;
+  color: var(--primary);
   text-align: center;
   padding: 1rem;
   font-weight: bold;
@@ -267,7 +237,7 @@ article.active {
 
 .flipped:hover .card-back .muscle-label {
   font-weight: bolder;
-  color: #111;
+  color: #3d5fe0
 }
 
 /* Deck Naming Pop-up */
@@ -368,11 +338,13 @@ article.active {
 
 
 .filter-label {
+  color: var(--primary);
   font-weight: 600;
   font-size: 0.95rem;
 }
 
 .custom-dropdown {
+  background-color: var(--dropdown);
   position: relative;
   background: white;
   border: 2px solid #aaa;
@@ -383,6 +355,7 @@ article.active {
 }
 
 .custom-dropdown-selected {
+  background-color: var(--dropdown);
   padding: 0.75rem 1rem;
   border-radius: 8px;
   text-align: center;
@@ -397,7 +370,7 @@ article.active {
   width: 100%;
   top: 110%;
   left: 0;
-  background: white;
+  background: var(--dropdown);
   border: 2px solid #aaa;
   border-radius: 8px;
   z-index: 100;
