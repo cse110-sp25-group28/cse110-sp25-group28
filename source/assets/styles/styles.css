@@ -22,6 +22,8 @@
   --carousel-img-bg: white; 
   --carousel-bg: rgb(213, 222, 236);;
   --dropdown: white;
+  --card-text: #333;
+  --card-muscle: #777777;
 }
 
 /* Dark Mode (Color Variables) */
@@ -44,6 +46,8 @@
   --carousel-img-bg: #2b313a; 
   --carousel-bg: #23272f;
   --dropdown: #cbcbd4;
+  --card-text:#ebefff;
+  --card-muscle:#999999;
 }
 
 /* Clean Slate (revert default styling) */
