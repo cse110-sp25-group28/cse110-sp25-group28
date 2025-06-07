@@ -13,14 +13,15 @@ async function setupCreateDeckPage() {
   }
 
   // Event listener: Toggle selection mode
-  let selection = false;
+  window.selection = false;
+
   const selectorOnBtn = document.getElementById("selectorOn");
   if (selectorOnBtn) {
     selectorOnBtn.addEventListener("click", () => {
-      selection = !selection;
-      selectorOnBtn.textContent = selection ? "Cancel Selection" : "Select Cards";
-      setCardsDisableFlip(selection);
-      if (!selection) {
+      window.selection = !window.selection;
+      selectorOnBtn.textContent = window.selection ? "Cancel Selection" : "Select Cards";
+      setCardsDisableFlip(window.selection);
+      if (!window.selection) {
         unselectCards();
       }
     });
