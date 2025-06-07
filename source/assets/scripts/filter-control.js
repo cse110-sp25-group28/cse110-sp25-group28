@@ -180,7 +180,7 @@ function makeSelect(type, values, labelText) {
  */
 function buildToolbar(muscles) {
     const toolbar = document.createElement('section');
-    toolbar.id = 'controls-toolbar';
+    toolbar.id = 'filter-toolbar';
     Object.assign(toolbar.style, {
         display: 'flex',
         gap: '1rem',
