@@ -1,4 +1,12 @@
+/**
+ * @file legs-deck.test.js
+ * @description
+ * End-to-end test for verifying the "Legs" workout deck carousel.
+ * Confirms workout card order: Squat → Calf Raises → Glute Bridge
+ */
+
 describe('create legs deck test', () => {
+  // Navigate to homepage and open the "Legs" deck
   beforeAll(async () => {
     await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28');
     await page.reload({ waitUntil: 'domcontentloaded' });
@@ -54,6 +62,4 @@ describe('create legs deck test', () => {
     const workout3 = await getWorkoutName();
     expect(workout3).toBe("Glute Bridge");
   }, 90000);
-
-  
 });

@@ -19,6 +19,11 @@
   --deck-hover-shadow: 0 6px 24px rgba(44, 62, 80, 0.16);
   --summary: #555;
   --deck-bg:rgb(213, 222, 236);
+  --carousel-img-bg: white; 
+  --carousel-bg: rgb(213, 222, 236);;
+  --dropdown: white;
+  --card-text: #333;
+  --card-muscle: #777777;
 }
 
 /* Dark Mode (Color Variables) */
@@ -38,6 +43,11 @@
   --deck-hover-shadow: 0 6px 24px rgba(20, 30, 40, 0.32);
   --summary: #bfc9d1;
   --deck-bg: #2b313a;
+  --carousel-img-bg: #2b313a; 
+  --carousel-bg: #23272f;
+  --dropdown: #cbcbd4;
+  --card-text:#ebefff;
+  --card-muscle:#999999;
 }
 
 /* Clean Slate (revert default styling) */
@@ -264,4 +274,49 @@ body, .header, .main-content, .deck-box {
     padding: 20px 10px;
     font-size: 1rem;
   }
+}
+
+/* =========================
+   Carousel Styles
+   ========================= */
+
+/* Container for the carousel. Centers it, sets size, and hides overflow. */
+.carousel {
+  width: 100%;                /* Carousel width */ /* Scale with parent */
+  margin: 2rem auto;           /* Center horizontally with margin */
+  overflow: hidden;            /* Hide overflowing images */
+  border-radius: 12px;         /* Rounded corners */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Subtle shadow */
+  background: var(--carousel-bg);            /* carousel background */
+  position: relative;
+  height: 220px;               /* Height of carousel */
+  display: flex;              
+  align-items: center;        
+}
+
+/* The track that holds all images in a row and animates them. */
+.carousel-track {
+  display: flex;               /* Arrange images in a row */
+  width: max-content;          /* Width grows with content */
+  animation: scroll-left 90s linear infinite; /* Smooth, infinite left scroll */
+}
+
+/* Individual images inside the carousel. */
+.carousel-track img {
+  background: var(--carousel-img-bg);           /* Background color for images */ 
+  border: 5px solid var(--carousel-img-bg);  /* border around images */
+  border-radius: 10px;
+  max-width: 200px;            /* Prevent from getting too large */
+  min-width: 200px;           /* Prevent from getting too small */
+  height: 200px;               /* Image height */
+  object-fit: contain;         /* Keep aspect ratio, fit inside box */
+  margin: 0 25px;               /* Space between images */
+  flex-shrink: 0;              /* Prevent images from shrinking */
+}
+
+/* Keyframes for smooth leftward scrolling animation.
+   Moves the track left by 50% of its width (since images are duplicated for seamless looping). */
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }

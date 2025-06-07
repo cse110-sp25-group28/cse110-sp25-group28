@@ -1,3 +1,11 @@
+/**
+ * @file core-blast.test.js
+ * @description
+ * End-to-end test for the "Core Blast" workout deck carousel.
+ * Verifies the correct order of workout cards:
+ * - Plank → Oblique Crunch → Leg Raises
+ */
+
 describe('create core blast deck test', () => {
   beforeAll(async () => {
     await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28');
@@ -9,6 +17,10 @@ describe('create core blast deck test', () => {
   }, 40000);
 
   it('Checking the core workouts in the carousel', async () => {
+    /**
+     * Retrieves the name of the currently visible workout card.
+     * @returns {Promise<string|null>}
+     */
     async function getWorkoutName() {
       return await page.evaluate(() => {
         const cards = Array.from(document.querySelectorAll('#card-display workout-card'));
@@ -56,6 +68,4 @@ describe('create core blast deck test', () => {
     const workout3 = await getWorkoutName();
     expect(workout3).toBe("Leg Raises");
   }, 90000);
-
- 
 });

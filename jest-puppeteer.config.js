@@ -11,6 +11,4 @@ module.exports = {
       '--no-zygote',
     ],
   },
-  detectOpenHandles: true,
-  forceExit: true
 };

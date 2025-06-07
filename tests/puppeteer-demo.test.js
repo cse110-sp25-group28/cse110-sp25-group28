@@ -1,3 +1,9 @@
+/**
+ * @file basic-flow.test.js
+ * @description
+ * Tests primary navigation and filtering functionality across the workout deck app.
+ */
+
 describe('Basic user flow for Website', () => {
 
   beforeAll(async () => {
