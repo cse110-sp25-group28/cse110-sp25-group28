@@ -11,4 +11,5 @@ module.exports = {
       '--no-zygote',
     ],
   },
+  testEnvironment: 'jsdom',
 };

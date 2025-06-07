@@ -127,7 +127,7 @@ function setCardsDisableFlip(disable) {
  * Collects all currently selected workout cards and saves their data to localStorage.
  * The saved data is stored under the key 'custom-decks'.
  */
-function saveSelectedCards(deckName) {
+export function saveSelectedCards(deckName) {
   const selectedCards = document.querySelectorAll(".selected");
   const selectedData = [];
 
