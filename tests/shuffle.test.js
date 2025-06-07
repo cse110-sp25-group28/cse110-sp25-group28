@@ -1,5 +1,7 @@
 /**
- * @jest-environment jsdom
+ * @file shuffle.test.js
+ * @description
+ * Tests the shuffle function with unit tests
  */
 
 const { shuffle } = require('../source/assets/scripts/shuffle.js'); // update the path accordingly

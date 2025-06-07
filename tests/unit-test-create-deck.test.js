@@ -1,3 +1,9 @@
+/**
+ * @file unit-test-create-deck.test.js
+ * @description
+ * Tests the functionality of creating deck
+ */
+
 const { getWorkoutsFromStorage } = require('../source/assets/scripts/deck-logic');
 
 describe('getWorkoutsFromStorage', () => {

@@ -1,3 +1,9 @@
+/**
+ * @file theme-toggle.test.js
+ * @description
+ * Tests e2e functionality of the light dark theme
+ */
+
 const puppeteer = require('puppeteer');
 
 describe('Theme Toggle Button', () => {

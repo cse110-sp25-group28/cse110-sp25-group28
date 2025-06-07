@@ -1,3 +1,13 @@
+/**
+ * @file arm-workout-deck.test.js
+ * @description
+ * End-to-end test for validating the workout card carousel for the "Arm Workout" deck.
+ * This test ensures that:
+ * - The deck page loads properly
+ * - Each card is rendered correctly
+ * - Carousel navigation updates the visible workout card
+ */
+
 describe('create arm workout deck test', () => {
   beforeAll(async () => {
     await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28/');

@@ -2,6 +2,12 @@
  * @jest-environment jsdom
  */
 
+/**
+ * @file dom-functions-create-deck.test.js
+ * @description
+ * Tests dom functions from the create deck functionality
+ */
+
 const { saveSelectedCards } = require('../source/assets/scripts/create-deck.js');
 const { getCardData } = require('../source/assets/scripts/deck-logic.js');
 
