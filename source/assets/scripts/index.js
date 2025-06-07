@@ -1,19 +1,9 @@
-/**
- * @fileoverview
- * Initializes the main page by displaying default and custom decks.
- * 
- * ─────────────────────────────────────────────────────
- * How it Works:
- * 1. Sets up default decks if not already in localStorage
- * 2. Displays default and custom decks as clickable elements
- * 3. On deck click, saves selected deck and navigates to detail view
- */
+// Example structure: localStorage.setItem("decks", JSON.stringify([{ name: "Deck 1" }, { name: "Deck 2" }]));
 
-
-// Load DOM content and initialize deck rendering
+//The start of the webpage.
 window.addEventListener("DOMContentLoaded", init);
 
-// Default decks to seed the application with
+//Default decks the program starts with
 const DEFAULT_DECKS = [
   {
     name: "Chest Day",
@@ -107,25 +97,17 @@ const DEFAULT_DECKS = [
   }
 ];
 
-/**
- * Initializes the page:
- * - Seeds localStorage with default decks
- * - Loads and displays both default and custom decks
- * - Adds click listeners to each deck element
- */
 function init() {
 
   const defaultContainer = document.getElementById("default-deck-container");
   const customContainer = document.getElementById("custom-deck-container");
 
-  // Load stored decks or empty array if none found
   const decks = JSON.parse(localStorage.getItem("decks")) || [];
   const customDecks = JSON.parse(localStorage.getItem("custom-decks"));
 
-  // Always reset default decks
+ 
   localStorage.setItem("decks", JSON.stringify(DEFAULT_DECKS));
 
-  // Display default decks
   decks.forEach((deck, index) => {
     const div = document.createElement("div");
     div.className = "deck-box";
@@ -136,8 +118,7 @@ function init() {
     });
     defaultContainer.appendChild(div);
   });
-  
-  // Display custom decks (if any)
+
   if (customDecks != null) {
     customDecks.forEach((customDeck, index) => {
       const div = document.createElement("div");
@@ -150,64 +131,4 @@ function init() {
       customContainer.appendChild(div);
     });
   }
-
-}
-
-
-// =========================
-// Carousel Image Setup
-// =========================
-
-// Array of image paths for all workout cards to be shown in the carousel
-const workoutImages = [
-  'source/workouts/images/Bench-Press.webp',
-  'source/workouts/images/Bicep-Curl.webp',
-  'source/workouts/images/Burpees.webp',
-  'source/workouts/images/Cable-Kickback.webp',
-  'source/workouts/images/Cable-Lateral-Raise.webp',
-  'source/workouts/images/Cable-Row.webp',
-  'source/workouts/images/Calf-Raises.webp',
-  'source/workouts/images/Chest-Fly.webp',
-  'source/workouts/images/Crunch-Machine.webp',
-  'source/workouts/images/Deadlift.webp',
-  'source/workouts/images/Donkey-Kicks.webp',
-  'source/workouts/images/Dumbbell-Pullover.webp',
-  'source/workouts/images/Dumbbell-Rows.webp',
-  'source/workouts/images/Fire-Hydrant.webp',
-  'source/workouts/images/Front-Raise.webp',
-  'source/workouts/images/Glute-Bridge.webp',
-  'source/workouts/images/Goblet-Squat.webp',
-  'source/workouts/images/Hammer-Curl.webp',
-  'source/workouts/images/Hip-Thrust.webp',
-  'source/workouts/images/Incline-Dumbbell-Curl.webp',
-  'source/workouts/images/Incline-Press.webp',
-  'source/workouts/images/Jump-Squat.webp',
-  'source/workouts/images/Lat-Pulldown.webp',
-  'source/workouts/images/Lateral-Raise.webp',
-  'source/workouts/images/Leg-Curl-Machine.webp',
-  'source/workouts/images/Leg-Extension-Machine.webp',
-
-];
-
-// Get the carousel container from the DOM
-const carousel = document.getElementById('workout-carousel');
-
-// If the carousel exists and there are images to show
-if (carousel && workoutImages.length > 0) {
-  // Create the track that will hold all the images in a row
-  const track = document.createElement('div');
-  track.className = 'carousel-track';
-  carousel.appendChild(track);
-
-  // Duplicate the images array for seamless looping animation
-  // This allows the animation to scroll halfway and then reset without a jump
-  const images = [...workoutImages, ...workoutImages];
-
-  // Add each image to the track
-  images.forEach((src, i) => {
-    const img = document.createElement('img');
-    img.src = src;                // Set image source
-    img.alt = `Workout ${i+1}`;   // Set alt text for accessibility
-    track.appendChild(img);       // Add image to the track
-  });
 }
