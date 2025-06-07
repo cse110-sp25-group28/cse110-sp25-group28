@@ -21,7 +21,7 @@
  *
  * @returns {void}
  */
-function initFiltering(workouts) {
+export function initFiltering(workouts) {
     // ─── 1. Check for edge cases  ───────────────────────────
     if (!Array.isArray(workouts) || workouts.length === 0) {
         console.warn('[filterControls] No workouts available; toolbar skipped.');
@@ -236,7 +236,3 @@ function restoreSelections(toolbar) {
 
 /** Capitalize first letter */
 const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
-
-module.exports = {
-  initFiltering,
-};

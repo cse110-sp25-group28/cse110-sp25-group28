@@ -10,6 +10,4 @@ describe('create deck test', () => {
     const numWorkoutSets = await page.$$eval('#default-deck-container .deck-box', boxes => boxes.length);
     expect(numWorkoutSets).toBe(4);
   }, 10000);
-
-  
 });

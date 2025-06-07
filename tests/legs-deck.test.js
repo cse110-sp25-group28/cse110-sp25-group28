@@ -54,6 +54,4 @@ describe('create legs deck test', () => {
     const workout3 = await getWorkoutName();
     expect(workout3).toBe("Glute Bridge");
   }, 90000);
-
-  
 });
