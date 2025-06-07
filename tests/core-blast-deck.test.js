@@ -17,6 +17,10 @@ describe('create core blast deck test', () => {
   }, 40000);
 
   it('Checking the core workouts in the carousel', async () => {
+    /**
+     * Retrieves the name of the currently visible workout card.
+     * @returns {Promise<string|null>}
+     */
     async function getWorkoutName() {
       return await page.evaluate(() => {
         const cards = Array.from(document.querySelectorAll('#card-display workout-card'));
@@ -64,6 +68,4 @@ describe('create core blast deck test', () => {
     const workout3 = await getWorkoutName();
     expect(workout3).toBe("Leg Raises");
   }, 90000);
-
- 
 });

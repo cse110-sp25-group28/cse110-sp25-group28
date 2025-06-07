@@ -1,5 +1,5 @@
 /**
- * @file puppeteer-demo.test.js
+ * @file basic-flow.test.js
  * @description
  * Tests primary navigation and filtering functionality across the workout deck app.
  */
