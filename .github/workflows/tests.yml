@@ -21,3 +21,7 @@ jobs: # the things being executed
         run: npm test ./tests/core-blast-deck.test.js
       - name: Arm Workout Deck Test
         run: npm test ./tests/arm-workout-deck.test.js
+      - name: Create Deck Dom Unit Test
+        run: npm test ./tests/arm-workout-deck.test.js
+      - name: Create Deck Unit Unit Test
+        run: npm test ./tests/arm-workout-deck.test.js
