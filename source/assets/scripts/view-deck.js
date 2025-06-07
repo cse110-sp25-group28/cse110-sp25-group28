@@ -146,21 +146,31 @@ window.addEventListener('DOMContentLoaded', async () => {
    * Shuffles the cards and resets the view to the first card.
    */
   shuffleButton.addEventListener('click', () => {
-    // Hide the card display to prevent visual flash
-    cardDisplay.style.visibility = 'hidden';
+    const firstCard = cards[currentIndex];
+    if (firstCard) {
+      // Animate the current card flipping out
+      firstCard.classList.add('card-flip-out-top');
+      setTimeout(() => {
+        firstCard.classList.remove('card-flip-out-top');
+        // Shuffle after the card flips out
+        const shuffled = shuffle([...cards]);
+        cards.length = 0;
+        cards.push(...shuffled);
 
-    const shuffled = shuffle([...cards]);   
-    cards.length = 0;                    
-    cards.push(...shuffled);               
+        cardDisplay.replaceChildren(...cards);
+        currentIndex = 0;
+        showCard();
 
-    cardDisplay.replaceChildren(...cards)
-    currentIndex = 0;
-    showCard();
-
-    // Allow the DOM to update, then show the card display again
-    setTimeout(() => {
-      cardDisplay.style.visibility = 'visible';
-    }, 10);
+        // Animate the new first card flipping in
+        const newFirstCard = cards[0];
+        if (newFirstCard) {
+          newFirstCard.classList.add('card-flip-in-top');
+          setTimeout(() => {
+            newFirstCard.classList.remove('card-flip-in-top');
+          }, 450);
+        }
+      }, 450); // Match the animation duration
+    }
   });
 
   /**

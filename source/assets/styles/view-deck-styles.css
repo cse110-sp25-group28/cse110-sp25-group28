@@ -236,8 +236,18 @@ button {
   to   { transform: translateX(100%) rotateY(360deg);   opacity: 0; }
 }
 
-.card.shuffle-anim {
-  /* Random displacement and rotation will be set inline via JS */
-  transition: transform 0.5s cubic-bezier(0.4,0.2,0.2,1);
-  z-index: 10;
+.card-flip-out-top {
+  animation: cardFlipOutTop 0.5s forwards;
+}
+.card-flip-in-top {
+  animation: cardFlipInTop 0.5s forwards;
+}
+
+@keyframes cardFlipOutTop {
+  from { transform: translateY(0) rotateX(0deg);    opacity: 1; }
+  to   { transform: translateY(-120%) rotateX(90deg); opacity: 0; }
+}
+@keyframes cardFlipInTop {
+  from { transform: translateY(-120%) rotateX(-90deg); opacity: 0; }
+  to   { transform: translateY(0)     rotateX(0deg);    opacity: 1; }
 }
