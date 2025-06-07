@@ -15,5 +15,8 @@ jobs:
           node-version: '20'
 
       - run: npm install
-
-      - run: npm test ./tests/puppeteer-demo.test.js
+      
+      - name: Standard Page Movement Test
+        run: npm test ./tests/puppeteer.test.js
+      - name: Theme Toggle Test
+        run: npm test ./tests/theme-toggle.test.js
