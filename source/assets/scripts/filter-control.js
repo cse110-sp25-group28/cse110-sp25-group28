@@ -92,7 +92,6 @@ function makeSelect(type, values, labelText) {
   wrapper.className = 'custom-dropdown-wrapper filter-control';
 
   const label = document.createElement('span');
-  label.style.color = 'white';
   label.textContent = labelText;
   label.className = 'filter-label';
   wrapper.appendChild(label);
@@ -181,7 +180,7 @@ function makeSelect(type, values, labelText) {
  */
 function buildToolbar(muscles) {
     const toolbar = document.createElement('section');
-    toolbar.id = 'filter-toolbar';
+    toolbar.id = 'controls-toolbar';
     Object.assign(toolbar.style, {
         display: 'flex',
         gap: '1rem',
