@@ -150,7 +150,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     cardDisplay.style.visibility = 'hidden';
 
     const shuffled = shuffle([...cards]);   
-    cards.length   = 0;                    
+    cards.length = 0;                    
     cards.push(...shuffled);               
 
     cardDisplay.replaceChildren(...cards)
