@@ -1,75 +1,84 @@
-const { initFiltering } = require("./filter-control.js");
-const { getWorkoutsFromStorage, getCardData } = require('./deck-logic.js');
+import { initFiltering } from "./filter-control.js";
 
 /**
- * Starts the page and sets up event listeners
+ * Starts the page
  */
-async function setupCreateDeckPage() {
-  // Load workouts and initialize filtering
+window.addEventListener("DOMContentLoaded", async () => {
   const workouts = await getWorkoutsFromStorage();
   if (workouts) {
     addWorkoutsToDocument(workouts);
     initFiltering(workouts);
   }
+});
 
-  // Event listener: Toggle selection mode
-  let selection = false;
-  const selectorOnBtn = document.getElementById("selectorOn");
-  if (selectorOnBtn) {
-    selectorOnBtn.addEventListener("click", () => {
-      selection = !selection;
-      selectorOnBtn.textContent = selection ? "Cancel Selection" : "Select Cards";
-      setCardsDisableFlip(selection);
-      if (!selection) {
-        unselectCards();
-      }
-    });
+let selection = false;
+// Sets a "selection" mode, giving the ability to add cards to a deck
+document.getElementById("selectorOn").addEventListener("click", () => {
+  selection = !selection;
+  const toggle = document.getElementById("selectorOn");
+  toggle.textContent = selection ? "Cancel Selection" : "Select Cards";
+  setCardsDisableFlip(selection);
+  // When we "Cancel Selection", we unselect the cards
+  if (!selection) {
+    unselectCards();
   }
+});
 
-  // Event listener: Create Deck button clicked
-  const createDeckBtn = document.getElementById("create-deck-button");
-  if (createDeckBtn) {
-    createDeckBtn.addEventListener("click", () => {
-      const selectedCards = document.querySelectorAll(".selected");
-      if (selectedCards.length > 0) {
-        document.getElementById("deck-name-modal").classList.remove("hidden");
-      } else {
-        const errorEl = document.getElementById("create-deck-error");
-        errorEl.textContent = `Please select a card before creating a deck`;
-        errorEl.classList.remove("hidden");
-        errorEl.style.opacity = "1";
-
-        setTimeout(() => {
-          errorEl.style.opacity = "0";
-          setTimeout(() => {
-            errorEl.classList.add('hidden');
-            errorEl.style.opacity = "1"; // Reset for next time
-          }, 1000);
-        }, 1000);
-      }
-    });
+//Triggered when Create Deck button is clicked and pops up the modal
+document.getElementById("create-deck-button").addEventListener("click", () => {
+  const selectedCards = document.querySelectorAll(".selected");
+  if (selectedCards.length > 0) {
+    document.getElementById("deck-name-modal").classList.remove("hidden");
   }
+  else {
+    const errorEl = document.getElementById("create-deck-error");
+    errorEl.textContent = `Please select a card before creating a deck`;
+    errorEl.classList.remove("hidden");
+    errorEl.style.opacity = "1";
 
-  // Event listener: Confirm Deck Name button clicked
-  const confirmDeckNameBtn = document.getElementById("confirm-deck-name");
-  if (confirmDeckNameBtn) {
-    confirmDeckNameBtn.addEventListener("click", () => {
-      const name = document.getElementById("deck-name-input").value.trim();
-      saveSelectedCards(name);
-    });
+    // Hide after 2s, then fade out over 2s
+    setTimeout(() => {
+      errorEl.style.opacity = "0";
+      // After fade out, hide completely
+      setTimeout(() => {
+        errorEl.classList.add('hidden');
+        errorEl.style.opacity = "1"; // Reset for next time
+      }, 1000);
+    }, 1000);
   }
+});
 
-  // Event listener: Cancel Deck Name button clicked
-  const cancelDeckNameBtn = document.getElementById("cancel-deck-name");
-  if (cancelDeckNameBtn) {
-    cancelDeckNameBtn.addEventListener("click", closeModal);
+//When the deck is saved in the pop-up, save to the data to localStorage
+document.getElementById("confirm-deck-name").addEventListener("click", () => {
+  const name = document.getElementById("deck-name-input").value.trim();
+  saveSelectedCards(name);
+});
+
+//Closes the pop-up modal
+document
+  .getElementById("cancel-deck-name")
+  .addEventListener("click", closeModal);
+
+/**
+ * Fetch workout data from JSON file and create workout cards
+ * Each card includes image &details about workout
+ * @returns {workouts} array containing information of all workouts
+ */
+async function getWorkoutsFromStorage() {
+  try {
+    const dataURL = "./workouts/workouts.json";
+    const response = await fetch(dataURL);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch workouts.json: ${response.status}`);
+    }
+
+    const workouts = await response.json();
+    return workouts;
+  } catch (err) {
+    console.error(err);
+    return null;
   }
 }
-
-// Run setupCreateDeckPage on actual page load
-window.addEventListener("DOMContentLoaded", () => {
-  setupCreateDeckPage();
-});
 
 /**
  * Create DOM elements representing workout cards and append them to the <main> element.
@@ -83,15 +92,19 @@ function addWorkoutsToDocument(workouts) {
     workoutCard.data = workout;
     workoutCard._articleEl.classList.toggle("flipped");
     cardsContainer.appendChild(workoutCard);
+    //main.appendChild(workoutCard);
   });
   main.appendChild(cardsContainer);
 }
 
 // Listen for custom events dispatched from any card
 document.addEventListener("workout-card-clicked", (e) => {
-  if (!window.selection) return; // If selection mode not enabled, ignore
-  const clickedCard = e.detail.card;
-  clickedCard.classList.toggle("selected");
+  // e is the custom event
+  if (selection) {
+    const clickedCard = e.detail.card;
+    clickedCard.classList.toggle("selected");
+    return;
+  }
 });
 
 function unselectCards() {
@@ -107,9 +120,11 @@ function unselectCards() {
 function setCardsDisableFlip(disable) {
   document.querySelectorAll("workout-card").forEach((card) => {
     if (disable) {
+      // Save current flip state and force face up
       card._wasFlipped = card._articleEl.classList.contains("flipped");
       card._articleEl.classList.remove("flipped");
     } else {
+      // Restore previous flip state if it exists
       if ('_wasFlipped' in card) {
         if (card._wasFlipped) {
           card._articleEl.classList.add("flipped");
@@ -124,8 +139,33 @@ function setCardsDisableFlip(disable) {
 }
 
 /**
+ * Extracts the workout data from a <workout-card> element.
+ *
+ * @param {HTMLElement} card - A <workout-card> element.
+ * @returns {Object} An object containing:
+ *  - name: string
+ *  - muscle: string
+ *  - description: string
+ *  - image: string (URL of the workout image)
+ */
+function getCardData(card) {
+  const front = card.shadowRoot.querySelector(".card-front");
+  const img = front.querySelector("img");
+  const name = front.querySelector(".name").textContent.trim();
+  const muscle = front.querySelector(".muscle").textContent.trim();
+  const description = front.querySelector(".description").textContent.trim();
+
+  return {
+    name,
+    muscle,
+    description,
+    image: img?.getAttribute("src") || "",
+  };
+}
+
+/**
  * Collects all currently selected workout cards and saves their data to localStorage.
- * The saved data is stored under the key 'custom-decks'.
+ * The saved data is stored under the key 'Default-Decks'.
  */
 function saveSelectedCards(deckName) {
   const selectedCards = document.querySelectorAll(".selected");
@@ -133,6 +173,7 @@ function saveSelectedCards(deckName) {
 
   const errorEl = document.getElementById("deck-name-error");
 
+  // Clear previous error
   errorEl.classList.add("hidden");
 
   selectedCards.forEach((card) => {
@@ -145,13 +186,15 @@ function saveSelectedCards(deckName) {
     cards: selectedData,
   };
 
+  // Load both stored deck arrays
   const defaultDecks = JSON.parse(localStorage.getItem("decks") || "[]");
   const customDecks = JSON.parse(localStorage.getItem("custom-decks") || "[]");
 
+  // Combine and check for duplicate deck name
   const allDecks = [...defaultDecks, ...customDecks];
   const deckExists = allDecks.some((deck) => deck.name === newDeck.name);
 
-  if (deckName.length <= 0) {
+  if(deckName.length <= 0){
     errorEl.textContent = `A deck name can't be empty`;
     errorEl.classList.remove("hidden");
     return;
@@ -162,9 +205,11 @@ function saveSelectedCards(deckName) {
     return;
   }
 
+  // Add new custom deck
   customDecks.push(newDeck);
   localStorage.setItem("custom-decks", JSON.stringify(customDecks));
 
+  // Hide modal, clear selection error, and redirect
   closeModal();
   document.getElementById("create-deck-error").classList.add("hidden");
   window.location.href = '../index.html';
@@ -178,14 +223,3 @@ function closeModal() {
   document.getElementById("deck-name-input").value = "";
   document.getElementById("deck-name-error").classList.add("hidden");
 }
-
-module.exports = {
-  setupCreateDeckPage,
-  getWorkoutsFromStorage,
-  getCardData,
-  saveSelectedCards,
-  addWorkoutsToDocument,
-  unselectCards,
-  setCardsDisableFlip,
-  closeModal,
-};

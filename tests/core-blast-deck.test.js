@@ -56,6 +56,4 @@ describe('create core blast deck test', () => {
     const workout3 = await getWorkoutName();
     expect(workout3).toBe("Leg Raises");
   }, 90000);
-
- 
 });
