@@ -1,6 +1,3 @@
-// workoutCard.js
-
-
 /**
  * Custom element representing a workout card.
  * Displays workout details on the front and the muscle group on the back.

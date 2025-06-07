@@ -1,3 +1,10 @@
+/** 
+ * @fileoverview deck-logic.js
+ * @description
+ * Handles general deck logic behavior 
+ * 
+ */
+
 export async function getWorkoutsFromStorage() {
   try {
     const dataURL = "./workouts/workouts.json";

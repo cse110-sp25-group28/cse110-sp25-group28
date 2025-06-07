@@ -1,3 +1,16 @@
+/** @
+ * @fileoverview delete-deck.js
+ * @description
+ * Handles deck deletion behavior for the workout app.
+ * 
+ * Features:
+ * - Prevents deletion of default decks
+ * - Shows confirmation modal before deletion
+ * - Removes custom deck from localStorage upon confirmation
+ * - Displays success message
+ * - Allows user to return to home page after deletion
+ */
+
 const DEFAULT_DECKS = ["Chest Day", "Legs", "Core Blast", "Arm Workout"];
 
 /**

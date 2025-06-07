@@ -1,3 +1,11 @@
+/**
+ * @fileoverview create-deck.js
+ * @description
+ * Main script for the "Create Deck" page. 
+ * Handles loading workouts, card rendering, selection mode, filtering, 
+ * deck creation, and saving to localStorage.
+ */
+
 import { initFiltering } from "./filter-control.js"
 import { getWorkoutsFromStorage, getCardData } from "./deck-logic.js"
 
