@@ -21,7 +21,7 @@
  *
  * @returns {void}
  */
-export function initFiltering(workouts) {
+function initFiltering(workouts) {
     // ─── 1. Check for edge cases  ───────────────────────────
     if (!Array.isArray(workouts) || workouts.length === 0) {
         console.warn('[filterControls] No workouts available; toolbar skipped.');
@@ -92,6 +92,7 @@ function makeSelect(type, values, labelText) {
   wrapper.className = 'custom-dropdown-wrapper filter-control';
 
   const label = document.createElement('span');
+  label.style.color = 'white';
   label.textContent = labelText;
   label.className = 'filter-label';
   wrapper.appendChild(label);
@@ -110,7 +111,6 @@ function makeSelect(type, values, labelText) {
   const optionsContainer = document.createElement('div');
   optionsContainer.className = 'custom-dropdown-options';
 
-  // Prevent scrolling past dropdown container bounds
   optionsContainer.addEventListener('wheel', (e) => {
   const isScrollingDown = e.deltaY > 0;
   const atBottom = optionsContainer.scrollTop + optionsContainer.clientHeight >= optionsContainer.scrollHeight;
@@ -121,14 +121,12 @@ function makeSelect(type, values, labelText) {
     }
   }, { passive: false });
 
-  // Default "All" option
   const allOption = document.createElement('div');
   allOption.className = 'custom-dropdown-option';
   allOption.dataset.value = 'all';
   allOption.textContent = `All Muscle Groups`;
   optionsContainer.appendChild(allOption);
 
-  // Add muscle-specific options
   values.forEach(val => {
     const opt = document.createElement('div');
     opt.className = 'custom-dropdown-option';
@@ -140,13 +138,11 @@ function makeSelect(type, values, labelText) {
   dropdown.appendChild(optionsContainer);
   wrapper.appendChild(dropdown);
 
-  // Toggle dropdown open/closed
   selected.addEventListener('click', () => {
     optionsContainer.classList.toggle('open');
     dropdown.classList.toggle('open');
   });
 
-  // Close dropdown on outside click
   document.addEventListener('click', (event) => {
   const isClickInside = dropdown.contains(event.target);
   if (!isClickInside) {
@@ -155,7 +151,6 @@ function makeSelect(type, values, labelText) {
     }
   });
 
-  // Handle option selection
   optionsContainer.addEventListener('click', e => {
     if (e.target.classList.contains('custom-dropdown-option')) {
       selected.textContent = e.target.textContent;
@@ -226,10 +221,7 @@ function applyFilters() {
     }));
 }
 
-/**
- * Restores previously saved dropdown selections from localStorage
- * @param {HTMLElement} toolbar - Filter toolbar element
- */
+/** Restores saved dropdown selections */
 function restoreSelections(toolbar) {
     try {
         const saved = JSON.parse(localStorage.getItem('filters') || '{}');
@@ -242,9 +234,9 @@ function restoreSelections(toolbar) {
     }
 }
 
-/**
- * Capitalizes the first letter of a string
- * @param {string} s
- * @returns {string}
- */
+/** Capitalize first letter */
 const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
+
+module.exports = {
+  initFiltering,
+};

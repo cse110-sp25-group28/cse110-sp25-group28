@@ -1,12 +1,10 @@
 /**
- * @file home-deck.test.js
+ * @file main-page.test.js
  * @description
- * Verifies that the initial default workout decks are loaded correctly on the homepage.
- * Specifically checks that 4 default decks are displayed.
+ * Tests the visibility of the main page upon rendering
  */
 
-describe('create deck test', () => {
-  // Navigate to homepage and wait for DOM and localStorage initialization
+describe('main page test', () => {
   beforeAll(async () => {
     await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28');
     // Reload the page so localStorage changes take effect
