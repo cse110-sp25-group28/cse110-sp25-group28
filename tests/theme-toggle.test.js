@@ -79,5 +79,4 @@ describe('Theme Toggle Button', () => {
   expect(newTheme).toBe(initialTheme);
   expect(newText).toBe(initialText);
 }, 20000);
-//comment
 });
