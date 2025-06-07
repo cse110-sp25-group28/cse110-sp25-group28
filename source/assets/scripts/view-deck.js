@@ -1,24 +1,20 @@
-import './card.js';         
-import { shuffle } from './shuffle.js';
-
 /**
  * @file view-deck.js
  * @description
  * Handles the interactive logic for the "View Deck" page of the workout app.
- * Loads a selected deck from localStorage, fetches workout data, renders cards,
- * and manages navigation, shuffling, and animated transitions between cards.
- *
- * Main Features:
- * - Loads and validates the selected workout deck.
- * - Fetches workout details from a JSON file.
- * - Renders workout cards and displays them in a carousel-like interface.
- * - Supports next/previous navigation with animated transitions.
- * - Allows shuffling of the deck.
- * - Handles navigation back to the home page.
- *
- * @module view-deck
+ * 
+ * Features:
+ * - Loads selected deck from localStorage
+ * - Fetches workout details from a JSON file
+ * - Renders workout cards with navigation and animations
+ * - Supports shuffling and return to homepage
  */
+
+import './card.js';         
+import { shuffle } from './shuffle.js';
+
 window.addEventListener('DOMContentLoaded', async () => {
+  // ───── DOM References ─────
   const title = document.getElementById('deck-title');
   const cardDisplay = document.getElementById('card-display');
   const prevButton = document.getElementById('prev-button');
@@ -27,9 +23,10 @@ window.addEventListener('DOMContentLoaded', async () => {
   const homeButton = document.getElementById('home-button');
   const shuffleButton = document.getElementById('shuffle-button');
 
+  // ───── Load Deck from Storage ─────
   const deck = JSON.parse(localStorage.getItem('selected-deck'))
 
-  /* Validation */
+  // Validation
   if (!deck || !Array.isArray(deck.cards) || deck.cards.length === 0) {
     title.textContent = deck?.name || 'Unnamed Deck';
     cardDisplay.textContent = 'No cards in this deck.';
@@ -40,6 +37,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   title.textContent = deck.name || 'Unnamed Deck';
 
+  // ───── Load Workout Data ─────
   const loadWorkout = await findWorkout('./workouts/workouts.json');
   if (!loadWorkout) {
     cardDisplay.textContent = 'Failed to load workout data!'
@@ -93,7 +91,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         card.style.display = '';      // show
         // resets flip to have card ALWAYS face down
         if (card._articleEl) {
-          card._articleEl.classList.add('flipped');
+          card._articleEl.classList.add('flipped', 'instant');
         }
       } else {
         card.style.display = 'none';  // hide
@@ -146,13 +144,31 @@ window.addEventListener('DOMContentLoaded', async () => {
    * Shuffles the cards and resets the view to the first card.
    */
   shuffleButton.addEventListener('click', () => {
-    const shuffled = shuffle([...cards]);   
-    cards.length   = 0;                    
-    cards.push(...shuffled);               
+    const firstCard = cards[currentIndex];
+    if (firstCard) {
+      // Animate the current card flipping out
+      firstCard.classList.add('card-flip-out-top');
+      setTimeout(() => {
+        firstCard.classList.remove('card-flip-out-top');
+        // Shuffle after the card flips out
+        const shuffled = shuffle([...cards]);
+        cards.length = 0;
+        cards.push(...shuffled);
 
-    cardDisplay.replaceChildren(...cards)
-    currentIndex = 0;
-    showCard();
+        cardDisplay.replaceChildren(...cards);
+        currentIndex = 0;
+        showCard();
+
+        // Animate the new first card flipping in
+        const newFirstCard = cards[0];
+        if (newFirstCard) {
+          newFirstCard.classList.add('card-flip-in-top');
+          setTimeout(() => {
+            newFirstCard.classList.remove('card-flip-in-top');
+          }, 450);
+        }
+      }, 450); // Match the animation duration
+    }
   });
 
   /**

@@ -1,5 +1,10 @@
-// workoutCard.js
-
+/**
+ * @fileoverview card.js
+ * @description
+ * Defines the <workout-card> custom element used to display individual workouts.
+ * Each card shows workout details on the front and a simple name label on the back.
+ * Cards can be flipped (unless flipping is disabled in selection mode).
+ */
 
 /**
  * Custom element representing a workout card.
@@ -34,6 +39,7 @@ class WorkoutCard extends HTMLElement {
      */
     articleEl.addEventListener("click", () => {
       if (!this._disableFlip) {
+        articleEl.classList.remove("instant");
         articleEl.classList.toggle("flipped");
       }
       articleEl.classList.toggle("active");
