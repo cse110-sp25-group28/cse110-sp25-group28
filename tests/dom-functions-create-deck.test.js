@@ -8,8 +8,8 @@
  * Tests dom functions from the create deck functionality
  */
 
-const { saveSelectedCards } = require('../source/assets/scripts/create-deck.js');
-const { getCardData } = require('../source/assets/scripts/deck-logic.js');
+import { saveSelectedCards } from '../source/assets/scripts/create-deck.js';
+import { getCardData } from '../source/assets/scripts/deck-logic.js';
 
 // Mock getCardData
 jest.mock('../source/assets/scripts/deck-logic.js', () => ({
