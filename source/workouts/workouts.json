@@ -7,7 +7,7 @@
   },
   {
     "name": "Squat",
-    "muscle": "Quadriceps",
+    "muscle": "Legs",
     "description": "Compound movement that strengthens legs and glutes.",
     "image": "workouts/images/Squat.webp"
   },
@@ -19,13 +19,13 @@
   },
   {
     "name": "Plank",
-    "muscle": "Abdominals",
+    "muscle": "Core",
     "description": "Isometric core exercise that improves stability and endurance.",
     "image": "workouts/images/Plank.webp"
   },
   {
     "name": "Lunges",
-    "muscle": "Glutes",
+    "muscle": "Legs",
     "description": "Strengthens legs and improves balance through unilateral movement.",
     "image": "workouts/images/Lunges.webp"
   },
@@ -37,7 +37,7 @@
   },
   {
     "name": "Deadlift",
-    "muscle": "Hamstrings",
+    "muscle": "Legs",
     "description": "Fundamental lifting exercise targeting posterior chain.",
     "image": "workouts/images/Deadlift.webp"
   },
@@ -49,25 +49,25 @@
   },
   {
     "name": "Bicep Curl",
-    "muscle": "Biceps",
+    "muscle": "Arms",
     "description": "Isolation movement to develop arm strength.",
     "image": "workouts/images/Bicep-Curl.webp"
   },
   {
     "name": "Tricep Dip",
-    "muscle": "Triceps",
+    "muscle": "Arms",
     "description": "Bodyweight exercise to isolate the triceps.",
     "image": "workouts/images/Tricep-Dip.webp"
   },
   {
     "name": "Oblique Crunch",
-    "muscle": "Obliques",
+    "muscle": "Core",
     "description": "Rotational ab move to target the obliques.",
     "image": "workouts/images/Oblique-Crunch.webp"
   },
   {
     "name": "Burpees",
-    "muscle": "Full Body",
+    "muscle": "Core",
     "description": "Explosive move combining squat, push-up, and jump.",
     "image": "workouts/images/Burpees.webp"
   },
@@ -79,13 +79,13 @@
   },
   {
     "name": "Leg Raises",
-    "muscle": "Abdominals",
+    "muscle": "Core",
     "description": "Hanging leg raise to activate lower abs.",
     "image": "workouts/images/Leg-Raises.webp"
   },
   {
     "name": "Calf Raises",
-    "muscle": "Calves",
+    "muscle": "Legs",
     "description": "Simple exercise to strengthen the calves.",
     "image": "workouts/images/Calf-Raises.webp"
   },
@@ -97,7 +97,7 @@
   },
   {
     "name": "Wall Sit",
-    "muscle": "Quads",
+    "muscle": "Legs",
     "description": "Isometric hold to build quad endurance.",
     "image": "workouts/images/Wall-Sit.webp"
   },
@@ -169,13 +169,13 @@
   },
   {
     "name": "Hammer Curl",
-    "muscle": "Biceps",
+    "muscle": "Arms",
     "description": "Curl variation to emphasize brachialis muscle.",
     "image": "workouts/images/Hammer-Curl.webp"
   },
   {
     "name": "Overhead Tricep Extension",
-    "muscle": "Triceps",
+    "muscle": "Arms",
     "description": "Extension movement to isolate triceps.",
     "image": "workouts/images/Overhead-Tricep-Extension.webp"
   },
@@ -199,7 +199,7 @@
   },
   {
     "name": "Goblet Squat",
-    "muscle": "Quads",
+    "muscle": "Legs",
     "description": "Squat holding a dumbbell or kettlebell at chest level.",
     "image": "workouts/images/Goblet-Squat.webp"
   },
@@ -211,13 +211,13 @@
   },
   {
     "name": "Incline Dumbbell Curl",
-    "muscle": "Biceps",
+    "muscle": "Arms",
     "description": "Curl done seated on incline bench for full range.",
     "image": "workouts/images/Incline-Dumbbell-Curl.webp"
   },
   {
     "name": "Reverse Crunch",
-    "muscle": "Abdominals",
+    "muscle": "Core",
     "description": "Lying ab move bringing knees toward chest.",
     "image": "workouts/images/Reverse-Crunch.webp"
   },
@@ -229,13 +229,13 @@
   },
   {
     "name": "Leg Curl Machine",
-    "muscle": "Hamstrings",
+    "muscle": "Legs",
     "description": "Isolates hamstrings using curling motion.",
     "image": "workouts/images/Leg-Curl-Machine.webp"
   },
   {
     "name": "Leg Extension Machine",
-    "muscle": "Quads",
+    "muscle": "Legs",
     "description": "Machine-based leg lift for quads.",
     "image": "workouts/images/Leg-Extension-Machine.webp"
   },
@@ -253,7 +253,7 @@
   },
   {
     "name": "Crunch Machine",
-    "muscle": "Abdominals",
+    "muscle": "Core",
     "description": "Sit-up performed with added weight for resistance.",
     "image": "workouts/images/Crunch-Machine.webp"
   }
