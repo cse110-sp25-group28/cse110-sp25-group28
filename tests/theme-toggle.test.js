@@ -1,8 +1,5 @@
 const puppeteer = require('puppeteer');
-const path = require('path');
-const fs = require('fs');
 
-const htmlPath = `file:${path.join(__dirname, 'theme-toggle-test.html')}`;
 
 describe('Theme Toggle Button', () => {
   let browser, page;
@@ -36,4 +33,6 @@ describe('Theme Toggle Button', () => {
     expect(newTheme).not.toBe(theme);
     expect(newText).not.toBe(text);
   });
+
+  
 });
