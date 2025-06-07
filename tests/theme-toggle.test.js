@@ -10,9 +10,7 @@ describe('Theme Toggle Button', () => {
     await page.goto("https://cse110-sp25-group28.github.io/cse110-sp25-group28/");
   });
 
-  afterAll(async () => {
-    await browser.close();
-  });
+  
 
   it('sets initial theme and toggles on click', async () => {
     const getTheme = async () => await page.evaluate(() => document.documentElement.getAttribute('data-theme'));
