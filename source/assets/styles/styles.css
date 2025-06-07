@@ -21,6 +21,7 @@
   --deck-bg:rgb(213, 222, 236);
   --carousel-img-bg: white; 
   --carousel-bg: rgb(213, 222, 236);;
+  --dropdown: white;
 }
 
 /* Dark Mode (Color Variables) */
@@ -42,6 +43,7 @@
   --deck-bg: #2b313a;
   --carousel-img-bg: #2b313a; 
   --carousel-bg: #23272f;
+  --dropdown: #cbcbd4;
 }
 
 /* Clean Slate (revert default styling) */
