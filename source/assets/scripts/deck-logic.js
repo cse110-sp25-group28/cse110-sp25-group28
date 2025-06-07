@@ -1,4 +1,4 @@
-async function getWorkoutsFromStorage() {
+export async function getWorkoutsFromStorage() {
   try {
     const dataURL = "./workouts/workouts.json";
     const response = await fetch(dataURL);
@@ -10,7 +10,7 @@ async function getWorkoutsFromStorage() {
   }
 }
 
-function getCardData(card) {
+export function getCardData(card) {
   const front = card.shadowRoot.querySelector(".card-front");
   const img = front.querySelector("img");
   const name = front.querySelector(".name").textContent.trim();
@@ -25,7 +25,7 @@ function getCardData(card) {
   };
 }
 
-module.exports = {
+export default {
   getWorkoutsFromStorage,
   getCardData
 };
