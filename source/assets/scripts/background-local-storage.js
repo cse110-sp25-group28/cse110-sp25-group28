@@ -1,9 +1,18 @@
-(function() {
-  try {
+(function() 
+{
+  try 
+  {
     var theme = localStorage.getItem('theme');
-    if (!theme) {
-      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    if (!theme) 
+    {
+      theme = window.matchMedia(
+        '(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
     document.documentElement.setAttribute('data-theme', theme);
-  } catch(e) {}
+  }
+  catch(err) 
+  {
+    console.error('Theme detection failed:', err);
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
 })();

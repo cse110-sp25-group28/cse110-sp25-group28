@@ -175,10 +175,12 @@ window.addEventListener('DOMContentLoaded', async () =>
   shuffleButton.addEventListener('click', () => 
   {
     const firstCard = cards[currentIndex];
-    if (firstCard) {
+    if (firstCard) 
+    {
       // Animate the current card flipping out
       firstCard.classList.add('card-flip-out-top');
-      setTimeout(() => {
+      setTimeout(() => 
+      {
         firstCard.classList.remove('card-flip-out-top');
         // Shuffle after the card flips out
         const shuffled = shuffle([...cards]);
@@ -192,9 +194,11 @@ window.addEventListener('DOMContentLoaded', async () =>
         cardDisplay.style.visibility = 'visible';
         // Animate the new first card flipping in
         const newFirstCard = cards[0];
-        if (newFirstCard) {
+        if (newFirstCard) 
+        {
           newFirstCard.classList.add('card-flip-in-top');
-          setTimeout(() => {
+          setTimeout(() => 
+          {
             newFirstCard.classList.remove('card-flip-in-top');
           }, 450);
         }
@@ -202,7 +206,8 @@ window.addEventListener('DOMContentLoaded', async () =>
         // Note: this eliminates the visibility for a brief moment
         // which is done in case card enlarges for split second
         cardDisplay.style.visibility = 'hidden';
-        setTimeout(() => {
+        setTimeout(() => 
+        {
           cardDisplay.style.visibility = 'visible';
         }, 10);
       }, 450); // Match the animation duration
