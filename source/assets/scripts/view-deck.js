@@ -18,7 +18,8 @@ import { shuffle } from './shuffle.js';
  *
  * @module view-deck
  */
-window.addEventListener('DOMContentLoaded', async () => {
+window.addEventListener('DOMContentLoaded', async () => 
+{
   const title = document.getElementById('deck-title');
   const cardDisplay = document.getElementById('card-display');
   const prevButton = document.getElementById('prev-button');
@@ -27,10 +28,11 @@ window.addEventListener('DOMContentLoaded', async () => {
   const homeButton = document.getElementById('home-button');
   const shuffleButton = document.getElementById('shuffle-button');
 
-  const deck = JSON.parse(localStorage.getItem('selected-deck'))
+  const deck = JSON.parse(localStorage.getItem('selected-deck'));
 
   /* Validation */
-  if (!deck || !Array.isArray(deck.cards) || deck.cards.length === 0) {
+  if (!deck || !Array.isArray(deck.cards) || deck.cards.length === 0) 
+  {
     title.textContent = deck?.name || 'Unnamed Deck';
     cardDisplay.textContent = 'No cards in this deck.';
     prevButton.style.display = 'none';
@@ -41,8 +43,9 @@ window.addEventListener('DOMContentLoaded', async () => {
   title.textContent = deck.name || 'Unnamed Deck';
 
   const loadWorkout = await findWorkout('./workouts/workouts.json');
-  if (!loadWorkout) {
-    cardDisplay.textContent = 'Failed to load workout data!'
+  if (!loadWorkout) 
+  {
+    cardDisplay.textContent = 'Failed to load workout data!';
     return;
   }
 
@@ -51,13 +54,17 @@ window.addEventListener('DOMContentLoaded', async () => {
   const cards = []; // Array holding DOM elements
 
   // Build card elements for each workout in the deck
-  for (let i = 0; i < deck.cards.length; i++) {
+  for (let i = 0; i < deck.cards.length; i++) 
+  {
     const ref = deck.cards[i];
 
     let name;
-    if (typeof ref === 'string') {
+    if (typeof ref === 'string') 
+    {
       name = ref;
-    } else {
+    }
+    else 
+    {
       name = ref.name;
     }
 
@@ -67,7 +74,8 @@ window.addEventListener('DOMContentLoaded', async () => {
     /* Hash workout data from map */
     const data = loadWorkout.get(key);
 
-    if (!data) {
+    if (!data) 
+    {
       console.warn('Unknown exercise "' + key + '" skipped');
       continue;                            // skip missing entries
     }
@@ -78,7 +86,8 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   // Add all cards to the display container
   cardDisplay.innerHTML = '';
-  for (let i = 0; i < cards.length; i++) {
+  for (let i = 0; i < cards.length; i++) 
+  {
     cardDisplay.appendChild(cards[i]);
   }
 
@@ -86,16 +95,22 @@ window.addEventListener('DOMContentLoaded', async () => {
    * Shows only the card at the current index and updates the counter.
    * @function
    */
-  function showCard() {
-    for (let i = 0; i < cards.length; i++) {
+  function showCard() 
+  {
+    for (let i = 0; i < cards.length; i++) 
+    {
       const card = cards[i];
-      if (i === currentIndex) {
+      if (i === currentIndex) 
+      {
         card.style.display = '';      // show
         // resets flip to have card ALWAYS face down
-        if (card._articleEl) {
+        if (card._articleEl) 
+        {
           card._articleEl.classList.add('flipped');
         }
-      } else {
+      }
+      else 
+      {
         card.style.display = 'none';  // hide
       }
     }
@@ -109,8 +124,10 @@ window.addEventListener('DOMContentLoaded', async () => {
    * Handles the previous button click event.
    * Animates the transition and updates the displayed card.
    */
-  prevButton.addEventListener('click', () => {
-    if (currentIndex > 0) {
+  prevButton.addEventListener('click', () => 
+  {
+    if (currentIndex > 0) 
+    {
       const oldCard = cards[currentIndex];
       currentIndex--;
       const newCard = cards[currentIndex];
@@ -123,12 +140,16 @@ window.addEventListener('DOMContentLoaded', async () => {
    * Handles the next button click event.
    * Animates the transition and updates the displayed card.
    */
-  nextButton.addEventListener('click', () => {
-    if (currentIndex < cards.length - 1) {
+  nextButton.addEventListener('click', () => 
+  {
+    if (currentIndex < cards.length - 1) 
+    {
       const oldCard = cards[currentIndex];
       currentIndex++;
       const newCard = cards[currentIndex];
-      animateCardTransition(oldCard, newCard, 'next', 'slide'); // Use slide for next
+      animateCardTransition(
+        oldCard, newCard, 'next', 'slide'
+      ); // Use slide for next
       showCard(currentIndex);
     }
   });
@@ -137,7 +158,8 @@ window.addEventListener('DOMContentLoaded', async () => {
    * Handles the home button click event.
    * Navigates back to the home page.
    */
-  homeButton.addEventListener('click', () => {
+  homeButton.addEventListener('click', () => 
+  {
     window.location.href = '../index.html';
   });
 
@@ -145,12 +167,13 @@ window.addEventListener('DOMContentLoaded', async () => {
    * Handles the shuffle button click event.
    * Shuffles the cards and resets the view to the first card.
    */
-  shuffleButton.addEventListener('click', () => {
+  shuffleButton.addEventListener('click', () => 
+  {
     const shuffled = shuffle([...cards]);   
     cards.length   = 0;                    
     cards.push(...shuffled);               
 
-    cardDisplay.replaceChildren(...cards)
+    cardDisplay.replaceChildren(...cards);
     currentIndex = 0;
     showCard();
   });
@@ -161,37 +184,55 @@ window.addEventListener('DOMContentLoaded', async () => {
    * @param {HTMLElement} newCard - The card to display next.
    * @param {'next'|'prev'} direction - The direction of the animation.
    */
-  function animateCardTransition(oldCard, newCard, direction, animationType) {
+  function animateCardTransition(oldCard, newCard, direction, animationType) 
+  {
     if (!oldCard || !newCard) return;
 
     // Remove any previous animation classes
     oldCard.classList.remove(
-      'card-slide-in-left', 'card-slide-in-right', 'card-slide-out-left', 'card-slide-out-right',
-      'card-spin-in-left', 'card-spin-in-right', 'card-spin-out-left', 'card-spin-out-right'
+      'card-slide-in-left', 'card-slide-in-right', 
+      'card-slide-out-left', 'card-slide-out-right',
+      'card-spin-in-left', 'card-spin-in-right', 
+      'card-spin-out-left', 'card-spin-out-right'
     );
     newCard.classList.remove(
-      'card-slide-in-left', 'card-slide-in-right', 'card-slide-out-left', 'card-slide-out-right',
-      'card-spin-in-left', 'card-spin-in-right', 'card-spin-out-left', 'card-spin-out-right'
+      'card-slide-in-left', 'card-slide-in-right', 
+      'card-slide-out-left', 'card-slide-out-right',
+      'card-spin-in-left', 'card-spin-in-right', 
+      'card-spin-out-left', 'card-spin-out-right'
     );
     
-    if (animationType === 'slide') {
+    if (animationType === 'slide') 
+    {
       // Animate old card out
-      oldCard.classList.add(direction === 'next' ? 'card-slide-out-left' : 'card-slide-out-right');
+      oldCard.classList.add(
+        direction === 'next' ? 'card-slide-out-left' : 'card-slide-out-right'
+      );
       // Animate new card in
-      newCard.classList.add(direction === 'next' ? 'card-slide-in-right' : 'card-slide-in-left');
+      newCard.classList.add(
+        direction === 'next' ? 'card-slide-in-right' : 'card-slide-in-left'
+      );
 
-      setTimeout(() => {
+      setTimeout(() => 
+      {
         oldCard.classList.remove('card-slide-out-left', 'card-slide-out-right');
         newCard.classList.remove('card-slide-in-left', 'card-slide-in-right');
       }, 400);
 
-    } else if (animationType === 'spin') {
+    }
+    else if (animationType === 'spin') 
+    {
       // Animate old card out
-      oldCard.classList.add(direction === 'next' ? 'card-spin-out-left' : 'card-spin-out-right');
+      oldCard.classList.add(
+        direction === 'next' ? 'card-spin-out-left' : 'card-spin-out-right'
+      );
       // Animate new card in
-      newCard.classList.add(direction === 'next' ? 'card-spin-in-right' : 'card-spin-in-left');
+      newCard.classList.add(
+        direction === 'next' ? 'card-spin-in-right' : 'card-spin-in-left'
+      );
 
-      setTimeout(() => {
+      setTimeout(() => 
+      {
         oldCard.classList.remove('card-spin-out-left', 'card-spin-out-right');
         newCard.classList.remove('card-spin-in-left', 'card-spin-in-right');
       }, 600);
@@ -201,29 +242,38 @@ window.addEventListener('DOMContentLoaded', async () => {
 });
 
 /**
- * Loads workout data from a JSON file and returns a map of workout names to data.
+ * Loads workout data from JSON file and returns a map of workout names
+ * to data.
  * @async
  * @param {string} path - The path to the workouts JSON file.
- * @returns {Promise<Map<string, Object>|null>} Map of workout names to workout data, or null on failure.
+ * @returns {Promise<Map<string, Object>|null>} Map of workout names to
+ * workout data, or null on failure.
  */
-async function findWorkout(path) {
-  try {
+async function findWorkout(path) 
+{
+  try 
+  {
     const response = await fetch (path);
-    if (!response.ok) {
+    if (!response.ok) 
+    {
       throw new Error(response.status);
     }
     const list = await response.json();
 
     const map = new Map();
-    for (let i = 0; i < list.length; i++) {
+    for (let i = 0; i < list.length; i++) 
+    {
       const workout = list[i];
-      if (workout && workout.name) {
+      if (workout && workout.name) 
+      {
         const key = workout.name.trim().toLowerCase();
         map.set(key, workout);
       }
     }
     return map;
-  } catch (err){
+  }
+  catch (err)
+  {
     console.error('Workout fetch failed:', err);
     return null;
   }
@@ -234,7 +284,8 @@ async function findWorkout(path) {
  * @param {Object} workoutData - The workout data for the card.
  * @returns {HTMLElement} The created workout card element.
  */
-function buildCard (workoutData) {
+function buildCard (workoutData) 
+{
   const card = document.createElement('workout-card');
   card.data = workoutData;
   return card;

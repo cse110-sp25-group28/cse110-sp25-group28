@@ -21,35 +21,38 @@
  *
  * @returns {void}
  */
-export function initFiltering(workouts) {
-    // ─── 1. Check for edge cases  ───────────────────────────
-    if (!Array.isArray(workouts) || workouts.length === 0) {
-        console.warn('[filterControls] No workouts available; toolbar skipped.');
-        return;
-    }
+export function initFiltering(workouts) 
+{
+  // ─── 1. Check for edge cases  ───────────────────────────
+  if (!Array.isArray(workouts) || workouts.length === 0) 
+  {
+    console.warn('[filterControls] No workouts available; toolbar skipped.');
+    return;
+  }
 
-    // ─── 2. Gather <select> option values  ──────────────────────────
+  // ─── 2. Gather <select> option values  ──────────────────────────
 
-    /* 1. Build list of every muscle name we find in the workouts array */
-    const rawMuscleNames = [];
-    for (let workout of workouts) {
-        rawMuscleNames.push(workout.muscle);
-    }
+  /* 1. Build list of every muscle name we find in the workouts array */
+  const rawMuscleNames = [];
+  for (let workout of workouts) 
+  {
+    rawMuscleNames.push(workout.muscle);
+  }
 
-    /* 2. Pass list through helper to deduplicate & sort */
-    const muscles = uniqueStrings(rawMuscleNames);
+  /* 2. Pass list through helper to deduplicate & sort */
+  const muscles = uniqueStrings(rawMuscleNames);
 
-    // ─── 3. Toolbar  ────────────────────────────
-    const toolbar = buildToolbar(muscles);
-    const controlsToolbar = document.querySelector('.controls-toolbar');
-    controlsToolbar.insertBefore(toolbar, controlsToolbar.firstChild);
+  // ─── 3. Toolbar  ────────────────────────────
+  const toolbar = buildToolbar(muscles);
+  const controlsToolbar = document.querySelector('.controls-toolbar');
+  controlsToolbar.insertBefore(toolbar, controlsToolbar.firstChild);
 
-    // ─── 4. Restore saved filter state and apply  ─────────────────
-    restoreSelections(toolbar);
-    applyFilters();
+  // ─── 4. Restore saved filter state and apply  ─────────────────
+  restoreSelections(toolbar);
+  applyFilters();
 
-    // ─── 5. Respond to user changes  ─────────────────────────────────
-    toolbar.addEventListener('change', applyFilters);
+  // ─── 5. Respond to user changes  ─────────────────────────────────
+  toolbar.addEventListener('change', applyFilters);
 }
 
 /**
@@ -57,11 +60,14 @@ export function initFiltering(workouts) {
  * @param {string[]} arr
  * @returns {string[]}
  */
-function uniqueStrings(arr) {
-    // 1. Lower case + trim
+function uniqueStrings(arr) 
+{
+  // 1. Lower case + trim
   const cleaned = [];
-  for (const word of arr) {
-    if (typeof word === 'string') {
+  for (const word of arr) 
+  {
+    if (typeof word === 'string') 
+    {
       cleaned.push(word.trim().toLowerCase());
     }
   }
@@ -69,8 +75,10 @@ function uniqueStrings(arr) {
   // 2. Deduplicate 
   const seen = {};
   const result = [];
-  for (const w of cleaned) {
-    if (!seen[w]) {
+  for (const w of cleaned) 
+  {
+    if (!seen[w]) 
+    {
       seen[w] = true;
       result.push(w);
     }
@@ -87,7 +95,8 @@ function uniqueStrings(arr) {
  * @param {string} label
  * @returns {HTMLLabelElement}
  */
-function makeSelect(type, values, labelText) {
+function makeSelect(type, values, labelText) 
+{
   const wrapper = document.createElement('label');
   wrapper.className = 'custom-dropdown-wrapper filter-control';
 
@@ -110,23 +119,28 @@ function makeSelect(type, values, labelText) {
   const optionsContainer = document.createElement('div');
   optionsContainer.className = 'custom-dropdown-options';
 
-  optionsContainer.addEventListener('wheel', (e) => {
-  const isScrollingDown = e.deltaY > 0;
-  const atBottom = optionsContainer.scrollTop + optionsContainer.clientHeight >= optionsContainer.scrollHeight;
-  const atTop = optionsContainer.scrollTop === 0;
+  optionsContainer.addEventListener('wheel', (e) => 
+  {
+    const isScrollingDown = e.deltaY > 0;
+    const atBottom = 
+      optionsContainer.scrollTop + optionsContainer.clientHeight >= 
+      optionsContainer.scrollHeight;
+    const atTop = optionsContainer.scrollTop === 0;
 
-  if ((isScrollingDown && atBottom) || (!isScrollingDown && atTop)) {
-    e.preventDefault();
+    if ((isScrollingDown && atBottom) || (!isScrollingDown && atTop)) 
+    {
+      e.preventDefault();
     }
   }, { passive: false });
 
   const allOption = document.createElement('div');
   allOption.className = 'custom-dropdown-option';
   allOption.dataset.value = 'all';
-  allOption.textContent = `All Muscle Groups`;
+  allOption.textContent = 'All Muscle Groups';
   optionsContainer.appendChild(allOption);
 
-  values.forEach(val => {
+  values.forEach((val) => 
+  {
     const opt = document.createElement('div');
     opt.className = 'custom-dropdown-option';
     opt.dataset.value = val;
@@ -137,21 +151,26 @@ function makeSelect(type, values, labelText) {
   dropdown.appendChild(optionsContainer);
   wrapper.appendChild(dropdown);
 
-  selected.addEventListener('click', () => {
+  selected.addEventListener('click', () => 
+  {
     optionsContainer.classList.toggle('open');
     dropdown.classList.toggle('open');
   });
 
-  document.addEventListener('click', (event) => {
-  const isClickInside = dropdown.contains(event.target);
-  if (!isClickInside) {
-    optionsContainer.classList.remove('open');
-    dropdown.classList.remove('open');
+  document.addEventListener('click', (event) => 
+  {
+    const isClickInside = dropdown.contains(event.target);
+    if (!isClickInside) 
+    {
+      optionsContainer.classList.remove('open');
+      dropdown.classList.remove('open');
     }
   });
 
-  optionsContainer.addEventListener('click', e => {
-    if (e.target.classList.contains('custom-dropdown-option')) {
+  optionsContainer.addEventListener('click', (e) => 
+  {
+    if (e.target.classList.contains('custom-dropdown-option')) 
+    {
       selected.textContent = e.target.textContent;
       dropdown.dataset.selected = e.target.dataset.value;
       optionsContainer.classList.remove('open');
@@ -172,21 +191,22 @@ function makeSelect(type, values, labelText) {
  * @param {string[]} categories
  * @returns {HTMLElement}
  */
-function buildToolbar(muscles) {
-    const toolbar = document.createElement('section');
-    toolbar.id = 'filter-toolbar';
-    Object.assign(toolbar.style, {
-        display: 'flex',
-        gap: '1rem',
-        margin: '1rem 0',
-        flexWrap: 'wrap',
-        color: 'black'
-    });
+function buildToolbar(muscles) 
+{
+  const toolbar = document.createElement('section');
+  toolbar.id = 'filter-toolbar';
+  Object.assign(toolbar.style, {
+    display: 'flex',
+    gap: '1rem',
+    margin: '1rem 0',
+    flexWrap: 'wrap',
+    color: 'black'
+  });
     
-    toolbar.append(
-        makeSelect('muscle', muscles,'Filter Category: '),
-    );
-    return toolbar;
+  toolbar.append(
+    makeSelect('muscle', muscles,'Filter Category: '),
+  );
+  return toolbar;
 }
 
 /**
@@ -194,47 +214,58 @@ function buildToolbar(muscles) {
  * Reads current dropdown values each time
  * @returns {void}
  */
-function applyFilters() {
-    const muscleSel = document.querySelector('#filter-muscle')?.dataset.selected || 'all';
+function applyFilters() 
+{
+  const muscleSel = document.querySelector(
+    '#filter-muscle')?.dataset.selected || 'all';
     
-    /** @type {NodeListOf<HTMLElement>} */
-    const cards = document.querySelectorAll('workout-card');
+  /** @type {NodeListOf<HTMLElement>} */
+  const cards = document.querySelectorAll('workout-card');
 
-    cards.forEach(card => {
-        const matchesMuscle =
+  cards.forEach((card) => 
+  {
+    const matchesMuscle =
             muscleSel === 'all' || card.dataset.muscle === muscleSel;
 
-        if (matchesMuscle) {
-            // Keep card visible
-            card.style.display = '';
-        } else {
-            // Hide card
-            card.style.display = 'none';
-        }
+    if (matchesMuscle) 
+    {
+      // Keep card visible
+      card.style.display = '';
+    }
+    else 
+    {
+      // Hide card
+      card.style.display = 'none';
+    }
 
-    });
+  });
 
-    // Remain for reloads
-    localStorage.setItem('filters', JSON.stringify({
-        muscle: muscleSel
-    }));
+  // Remain for reloads
+  localStorage.setItem('filters', JSON.stringify({
+    muscle: muscleSel
+  }));
 }
 
 /** Restores saved dropdown selections */
-function restoreSelections(toolbar) {
-    try {
-        const saved = JSON.parse(localStorage.getItem('filters') || '{}');
-        if (saved.muscle){
-            toolbar.querySelector('#filter-muscle').value = saved.muscle
+function restoreSelections(toolbar) 
+{
+  try 
+  {
+    const saved = JSON.parse(localStorage.getItem('filters') || '{}');
+    if (saved.muscle)
+    {
+      toolbar.querySelector('#filter-muscle').value = saved.muscle;
 
-        }     
-    } catch (err) {
-        console.warn('[filterControls] Corrupt filter data ignored!', err);
-    }
+    }     
+  }
+  catch (err) 
+  {
+    console.warn('[filterControls] Corrupt filter data ignored!', err);
+  }
 }
 
 /** Capitalize first letter */
-const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
+const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
 export default {
   initFiltering,
