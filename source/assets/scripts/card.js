@@ -35,6 +35,7 @@ class WorkoutCard extends HTMLElement
     {
       if (!this._disableFlip) 
       {
+        articleEl.classList.remove("instant");
         articleEl.classList.toggle('flipped');
       }
       articleEl.classList.toggle('active');
