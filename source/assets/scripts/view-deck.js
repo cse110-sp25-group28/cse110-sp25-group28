@@ -85,11 +85,16 @@ window.addEventListener('DOMContentLoaded', async () =>
   }
 
   // Add all cards to the display container
+  // timeout avoid image enlarging for split second
+  cardDisplay.style.visibility = 'hidden';
   cardDisplay.innerHTML = '';
   for (let i = 0; i < cards.length; i++) 
   {
     cardDisplay.appendChild(cards[i]);
   }
+  setTimeout(() => {
+    cardDisplay.style.visibility = 'visible';
+  }, 10);
 
   /**
    * Shows only the card at the current index and updates the counter.
