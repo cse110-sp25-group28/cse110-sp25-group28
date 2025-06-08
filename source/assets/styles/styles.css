@@ -4,6 +4,15 @@
 
 /* Light Mode (Color Variables) */
 
+.theme-toggle i {
+  color: var(yellow);
+  transition: color 0.3s ease;
+}
+
+.theme-toggle:hover i {
+  color: var(--primary-dark);
+}
+
 :root {
   --background: #f7f8fa;
   --foreground: #222;
@@ -24,6 +33,7 @@
   --dropdown: white;
   --card-text: #333;
   --card-muscle: #777777;
+  --card-bg: #f4f5f9;
 }
 
 /* Dark Mode (Color Variables) */
@@ -48,6 +58,7 @@
   --dropdown: #cbcbd4;
   --card-text:#ebefff;
   --card-muscle:#999999;
+  --card-bg: rgb(188, 189, 190);
 }
 
 /* Clean Slate (revert default styling) */
