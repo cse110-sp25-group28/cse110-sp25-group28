@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: card.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: card.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Custom element representing a workout card.
+ * Displays workout details on the front and the muscle group on the back.
+ * Can be flipped unless flipping is disabled (e.g., in selection mode).
+ * @class
+ * @extends HTMLElement
+ */
+class WorkoutCard extends HTMLElement {
+  // Called once when document.createElement('workout-card') is called, or
+  // the element is written into the DOM directly as &lt;workout-card>
+  constructor() {
+    super(); // Inherit everything from HTMLElement
+    let shadowEl = this.attachShadow({ mode: "open" });
+    let articleEl = document.createElement("article");
+    let styleEl = document.createElement("style");
+    let linkEl = document.createElement("link");
+    linkEl.setAttribute("rel", "stylesheet");
+    linkEl.setAttribute("href", "./assets/styles/create-deck-styles.css");
+
+    articleEl.innerHTML = `
+      &lt;div class="card-inner">
+        &lt;div class="card-back">&lt;/div>
+        &lt;div class="card-front">&lt;/div>
+      &lt;/div>
+    `;
+
+    /**
+     * Handles click events on the card.
+     * Flips the card unless flipping is disabled, and always dispatches a custom event.
+     * @event workout-card-clicked
+     */
+    articleEl.addEventListener("click", () => {
+      if (!this._disableFlip) {
+        articleEl.classList.toggle("flipped");
+      }
+      articleEl.classList.toggle("active");
+      // Always dispatch the event so selection works!
+      this.dispatchEvent(new CustomEvent("workout-card-clicked", {
+        bubbles: true,
+        composed: true,
+        detail: { card: this }
+      }));
+    });
+
+    shadowEl.append(linkEl);
+    shadowEl.append(articleEl);
+    shadowEl.append(styleEl);
+    this._articleEl = articleEl;
+  }
+
+  /**
+   * Called when the .data property is set on this element.
+   *
+   * For example:
+   * let workoutCard = document.createElement('workout-card'); // Calls constructor()
+   * workoutCard.data = { foo: 'bar' } // Calls set data({ foo: 'bar' })
+   *
+   * @param {Object} data - The data to pass into the &lt;workout-card> must be of the
+   *                        following format:
+   *                            {
+                                    "name": "string",
+                                    "muscle": "string",
+                                    "description": "string",
+                                    "image": "string"
+                                },
+   */
+    set data(data) {
+    if (!data) return;
+    this._data = data;
+
+    this.dataset.muscle = data.muscle?.toLowerCase() || '';
+    const front = this.shadowRoot.querySelector(".card-front");
+    const back = this.shadowRoot.querySelector(".card-back");
+    front.innerHTML = `
+      &lt;div class="image-wrapper">
+        &lt;img src="${data.image}" alt="${data.name}">
+      &lt;/div>
+      &lt;div class="text-content">
+        &lt;h2 class="name">&lt;a>${data.name}&lt;/a>&lt;/h2>
+        &lt;p class="muscle">${data.muscle}&lt;/p>
+        &lt;p class="description">${data.description}&lt;/p>
+      &lt;/div>
+    `;
+    back.innerHTML = `
+      &lt;div class="muscle-label">${data.name}&lt;/div>
+    `;
+  }
+
+  get data(){
+    return this._data;
+  }
+
+  /**
+   * Enables or disables flipping for the card.
+   * When set to true, the card cannot be flipped and always shows the workout (face up).
+   * When set to false, the card can be flipped.
+   * @param {boolean} val - Whether to disable flipping.
+   */
+  set disableFlip(val) {
+    this._disableFlip = val;
+    if (val) {
+      // Selection mode: flipping is disabled, show default cursor
+      this._articleEl.style.cursor = "default";
+    } else {
+      // Flipping is enabled, show pointer cursor
+      this._articleEl.style.cursor = "pointer";
+    }
+  }
+}
+
+customElements.define("workout-card", WorkoutCard);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-view-deck.html">view-deck</a></li></ul><h3>Classes</h3><ul><li><a href="WorkoutCard.html">WorkoutCard</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:workout-card-clicked">workout-card-clicked</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addWorkoutsToDocument">addWorkoutsToDocument</a></li><li><a href="global.html#applyFilters">applyFilters</a></li><li><a href="global.html#buildToolbar">buildToolbar</a></li><li><a href="global.html#capitalize">capitalize</a></li><li><a href="global.html#closeModal">closeModal</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#makeSelect">makeSelect</a></li><li><a href="global.html#restoreSelections">restoreSelections</a></li><li><a href="global.html#saveSelectedCards">saveSelectedCards</a></li><li><a href="global.html#setCardsDisableFlip">setCardsDisableFlip</a></li><li><a href="global.html#setupCreateDeckPage">setupCreateDeckPage</a></li><li><a href="global.html#setupThemeToggle">setupThemeToggle</a></li><li><a href="global.html#shuffle">shuffle</a></li><li><a href="global.html#uniqueStrings">uniqueStrings</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Jun 08 2025 10:43:01 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -54,6 +54,294 @@
 
 <header>
     
+        <h2>assets/scripts/create-deck.js</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">Main script for the "Create Deck" page. 
+Handles loading workouts, card rendering, selection mode, filtering, 
+deck creation, and saving to localStorage.</div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="create-deck.js.html">create-deck.js</a>, <a href="create-deck.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>assets/scripts/deck-logic.js</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">Handles general deck logic behavior</div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="deck-logic.js.html">deck-logic.js</a>, <a href="deck-logic.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>assets/scripts/delete-deck.js</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">Handles deck deletion behavior for the workout app.
+
+Features:
+- Prevents deletion of default decks
+- Shows confirmation modal before deletion
+- Removes custom deck from localStorage upon confirmation
+- Displays success message
+- Allows user to return to home page after deletion</div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="delete-deck.js.html">delete-deck.js</a>, <a href="delete-deck.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
         <h2>assets/scripts/filter-control.js</h2>
         
     
@@ -112,7 +400,294 @@ Bootstraps the filtering UI</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="assets_scripts_filter-control.js.html">assets/scripts/filter-control.js</a>, <a href="assets_scripts_filter-control.js.html#line1">line 1</a>
+        <a href="filter-control.js.html">filter-control.js</a>, <a href="filter-control.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>assets/scripts/header.js</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">Allows logo to be clicked for nav back to main page</div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="header.js.html">header.js</a>, <a href="header.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>assets/scripts/index.js</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">Initializes the main page by displaying default and custom decks.
+
+─────────────────────────────────────────────────────
+How it Works:
+1. Sets up default decks if not already in localStorage
+2. Displays default and custom decks as clickable elements
+3. On deck click, saves selected deck and navigates to detail view</div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>assets/scripts/theme-toggle.js</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">Handles light/dark mode theme toggling using a button.
+Applies persisted user preference or defaults to system preference.
+Saves selected theme to localStorage and updates the UI accordingly.</div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="theme-toggle.js.html">theme-toggle.js</a>, <a href="theme-toggle.js.html#line1">line 1</a>
     </li></ul></dd>
     
 
@@ -157,13 +732,13 @@ Bootstraps the filtering UI</div>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#add">add</a></li><li><a href="global.html#addWorkoutsToDocument">addWorkoutsToDocument</a></li><li><a href="global.html#applyFilters">applyFilters</a></li><li><a href="global.html#buildToolbar">buildToolbar</a></li><li><a href="global.html#capitalize">capitalize</a></li><li><a href="global.html#createWorkoutCard">createWorkoutCard</a></li><li><a href="global.html#getWorkoutsFromStorage">getWorkoutsFromStorage</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#loadWorkoutCards">loadWorkoutCards</a></li><li><a href="global.html#makeSelect">makeSelect</a></li><li><a href="global.html#restoreSelections">restoreSelections</a></li><li><a href="global.html#shuffle">shuffle</a></li><li><a href="global.html#uniqueStrings">uniqueStrings</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-view-deck.html">view-deck</a></li></ul><h3>Classes</h3><ul><li><a href="WorkoutCard.html">WorkoutCard</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:workout-card-clicked">workout-card-clicked</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addWorkoutsToDocument">addWorkoutsToDocument</a></li><li><a href="global.html#applyFilters">applyFilters</a></li><li><a href="global.html#buildToolbar">buildToolbar</a></li><li><a href="global.html#capitalize">capitalize</a></li><li><a href="global.html#closeModal">closeModal</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#makeSelect">makeSelect</a></li><li><a href="global.html#restoreSelections">restoreSelections</a></li><li><a href="global.html#saveSelectedCards">saveSelectedCards</a></li><li><a href="global.html#setCardsDisableFlip">setCardsDisableFlip</a></li><li><a href="global.html#setupCreateDeckPage">setupCreateDeckPage</a></li><li><a href="global.html#setupThemeToggle">setupThemeToggle</a></li><li><a href="global.html#shuffle">shuffle</a></li><li><a href="global.html#uniqueStrings">uniqueStrings</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat May 24 2025 20:21:32 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Jun 08 2025 10:43:01 GMT-0700 (Pacific Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>
