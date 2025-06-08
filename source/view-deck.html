@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Workout Cards</title>
+    <link rel="stylesheet" href="./assets/styles/styles.css">
     <link rel="stylesheet" href="assets/styles/view-deck-styles.css">
-    <link rel="stylesheet" href="./assets/styles/styles.css" />
     <script type="module" src="./assets/scripts/delete-deck.js"></script>
     <script type="module" src="assets/scripts/header.js"></script>
+    <script src="https://kit.fontawesome.com/63a37c6cc9.js" crossorigin="anonymous"></script>
   </head>
   <body>
       <!-- Header -->
@@ -22,7 +23,7 @@
       <div class="header-actions">
         <button class="create-deck">Delete Deck</button>
         <button id="home-button">View Decks</button>
-        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>      
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>      
       </div>
     </header>
     <main id="cards-container" class="main-content">
@@ -33,8 +34,8 @@
         </div>
         <p id="card-counter">1 / N</p>
         <div class="button-group">
-          <button id="prev-button">← Previous</button>
-          <button id="next-button">Next →</button>
+          <button id="prev-button"><i class="fa-solid fa-arrow-left"></i></button>
+          <button id="next-button"><i class="fa-solid fa-arrow-right"></i></button>
           <button id="shuffle-button">Shuffle</button>
         </div>
         <script type="module" src="./assets/scripts/view-deck.js"></script>
@@ -45,7 +46,7 @@
     </footer>
     <div id="delete-modal" class="modal hidden">
       <div class="modal-content">
-        <h3>Are you sure you want to delete this deck?</h3>
+        <h3>Delete Deck?</h3>
         <div class="modal-buttons">
           <button id="confirm-delete">Yes, Delete</button>
           <button id="cancel-delete">Cancel</button>

@@ -150,9 +150,13 @@ article.instant.flipped .card-inner {
 }
 
 .image-wrapper {
-  background: var(--deck-bg);
+  background: var(--card-bg);
+  border-radius: 12px;
+  border: 1px solid #ccc;
   flex: 1 1 auto;
-  max-height: 50%;
+  width: fit-content;
+  max-height: 45%;
+  max-width: 85%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -160,7 +164,7 @@ article.instant.flipped .card-inner {
 }
 
 .image-wrapper img {
-  background: var(--deck-bg);
+  background: var(--card-bg);
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
@@ -182,7 +186,8 @@ article.instant.flipped .card-inner {
 }
 
 .card-front img {
-  width: 100%;
+  padding: 100%;
+  width: 200px;
   height: 200px;
   object-fit: cover;
   border-top-left-radius: 12px;
@@ -357,7 +362,7 @@ article.instant.flipped .card-inner {
 
 .custom-dropdown-selected {
   background-color: var(--dropdown);
-  padding: 0.75rem 1rem;
+  padding: 0.47rem 1rem;
   border-radius: 8px;
   text-align: center;
   display: flex;
