@@ -207,12 +207,6 @@ export function saveSelectedCards(deckName)
     errorEl.classList.remove('hidden');
     return;
   }
-  else if (deckName.length > 80)
-  {
-    errorEl.textContent = 'Please limit the name to 80 characters';
-    errorEl.classList.remove('hidden');
-    return;
-  }
   if (deckExists) 
   {
     errorEl.textContent =
