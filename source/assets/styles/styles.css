@@ -5,12 +5,12 @@
 /* Light Mode (Color Variables) */
 
 .theme-toggle i {
-  color: var(yellow); /* or any hex/rgb value like #f39c12 or rgb(255,255,255) */
+  color: var(yellow);
   transition: color 0.3s ease;
 }
 
 .theme-toggle:hover i {
-  color: var(--primary-dark); /* Darker on hover */
+  color: var(--primary-dark);
 }
 
 :root {
