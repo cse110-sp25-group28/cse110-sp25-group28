@@ -92,7 +92,8 @@ window.addEventListener('DOMContentLoaded', async () =>
   {
     cardDisplay.appendChild(cards[i]);
   }
-  setTimeout(() => {
+  setTimeout(() => 
+  {
     cardDisplay.style.visibility = 'visible';
   }, 10);
 
