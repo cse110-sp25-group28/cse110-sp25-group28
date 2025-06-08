@@ -15,6 +15,7 @@
 
 :root {
   --background: #f7f8fa;
+  --background-image: url('../images/gym-light-mode.webp');
   --foreground: #222;
   --header-bg: #fff;
   --box-bg: #fff;
@@ -40,6 +41,7 @@
 
 [data-theme="dark"] {
   --background: #181a1b;
+  --background-image: url('../images/gym-dark-mode.webp');
   --foreground: #f5f6fa;
   --header-bg: #23272f;
   --box-bg: #23272f;
@@ -72,7 +74,7 @@
 body {
   font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
   background: var(--background);
-  background-image: url('../images/gym.webp');
+  background-image: var(--background-image);
   color: var(--foreground);
   min-height: 100vh;
 }

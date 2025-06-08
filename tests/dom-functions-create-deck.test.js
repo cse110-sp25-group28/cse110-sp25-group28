@@ -16,8 +16,10 @@ jest.mock('../source/assets/scripts/deck-logic.js', () => ({
   getCardData: jest.fn()
 }));
 
-describe('saveSelectedCards', () => {
-  beforeEach(() => {
+describe('saveSelectedCards', () => 
+{
+  beforeEach(() => 
+  {
     localStorage.clear();
     document.body.innerHTML = `
       <div id="deck-name-error" class="hidden"></div>
@@ -44,7 +46,8 @@ describe('saveSelectedCards', () => {
     window.location = { href: '' };
   });
 
-  it('saves a selected card to localStorage under custom-decks', () => {
+  it('saves a selected card to localStorage under custom-decks', () => 
+  {
     // Act
     saveSelectedCards('Leg Day');
 

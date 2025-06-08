@@ -7,8 +7,10 @@
  * - Proper navigation through all 3 cards
  */
 
-describe('create chest day deck test', () => {
-  beforeAll(async () => {
+describe('create chest day deck test', () => 
+{
+  beforeAll(async () => 
+  {
     await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28');
     await page.reload({ waitUntil: 'domcontentloaded' });
 
@@ -17,49 +19,63 @@ describe('create chest day deck test', () => {
     await deckCards[0].click();
   }, 30000);
 
-  it('should display the correct workout names in the carousel', async () => {
-    async function getWorkoutName() {
-        return await page.evaluate(() => {
-          const cards = Array.from(document.querySelectorAll('#card-display workout-card'));
-          const visibleCard = cards.find(c => getComputedStyle(c).display !== 'none');
-          const shadow = visibleCard?.shadowRoot;
-          return shadow?.querySelector('h2.name a')?.textContent.trim() || null;
-        });
+  it('should display the correct workout names in the carousel', async () => 
+  {
+    async function getWorkoutName() 
+    {
+      return await page.evaluate(() => 
+      {
+        const cards = Array.from(
+          document.querySelectorAll('#card-display workout-card')
+        );
+        const visibleCard = cards.find(
+          (c) => getComputedStyle(c).display !== 'none'
+        );
+        const shadow = visibleCard?.shadowRoot;
+        return shadow?.querySelector('h2.name a')?.textContent.trim() || null;
+      });
     }
 
     // Wait until first workout is loaded
-    await page.waitForFunction(() => {
+    await page.waitForFunction(() => 
+    {
       const card = document.querySelector('#card-display workout-card');
       const shadow = card?.shadowRoot;
       return shadow?.querySelector('h2.name a')?.textContent.trim().length > 0;
     }, { timeout: 15000 });
 
     const workout1 = await getWorkoutName();
-    expect(workout1).toBe("Push-Up");
+    expect(workout1).toBe('Push-Up');
     // Go to next card
     await page.click('#next-button');
-    await page.waitForFunction(() => {
-      const cards = Array.from(document.querySelectorAll('#card-display workout-card'));
-      const visibleCard = cards.find(c => getComputedStyle(c).display !== 'none');
+    await page.waitForFunction(() => 
+    {
+      const cards = Array.from(
+        document.querySelectorAll('#card-display workout-card')
+      );
+      const visibleCard = cards.find(
+        (c) => getComputedStyle(c).display !== 'none'
+      );
       const shadow = visibleCard?.shadowRoot;
       const name = shadow?.querySelector('h2.name a')?.textContent.trim();
-      return name && name !== "Push-Up";
+      return name && name !== 'Push-Up';
     }, { timeout: 15000 });
 
     const workout2 = await getWorkoutName();
-    expect(workout2).toBe("Bench Press");
+    expect(workout2).toBe('Bench Press');
 
     // Go to next card
     await page.click('#next-button');
-    await page.waitForFunction(() => {
+    await page.waitForFunction(() => 
+    {
       const card = document.querySelector('#card-display workout-card');
       const shadow = card?.shadowRoot;
       const name = shadow?.querySelector('h2.name a')?.textContent.trim();
-      return name && name !== "Bench Press";
+      return name && name !== 'Bench Press';
     }, { timeout: 20000 });
 
     const workout3 = await getWorkoutName();
-    expect(workout3).toBe("Incline Press");
+    expect(workout3).toBe('Incline Press');
   }, 60000);
 
  
