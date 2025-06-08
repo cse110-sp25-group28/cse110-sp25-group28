@@ -6,41 +6,47 @@
 
 const puppeteer = require('puppeteer');
 
-describe('Theme Toggle Button', () => {
+describe('Theme Toggle Button', () => 
+{
   let browser, page;
   let initialTheme, initialIconClass;
 
-  beforeAll(async () => {
+  beforeAll(async () => 
+  {
     browser = await puppeteer.launch({
       headless: true,
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
 
     page = await browser.newPage();
-    await page.goto("https://cse110-sp25-group28.github.io/cse110-sp25-group28/", {
+    await page.goto('https://cse110-sp25-group28.github.io/cse110-sp25-group28/', {
       waitUntil: 'domcontentloaded',
     });
 
-    await page.waitForSelector('#theme-toggle i');
+    await page.waitForSelector('#theme-toggle', { visible: true });
 
     initialTheme = await page.evaluate(() =>
       document.documentElement.getAttribute('data-theme')
     );
-    initialIconClass = await page.$eval('#theme-toggle i', icon => icon.className.trim());
+    initialIconClass = await page.$eval(
+      '#theme-toggle i', (icon) => icon.className.trim()
+    );
   }, 30000);
 
-  afterAll(async () => {
+  afterAll(async () => 
+  {
     if (browser) await browser.close();
   });
 
-  it('sets initial theme and toggles on click', async () => {
+  it('sets initial theme and toggles on click', async () => 
+  {
     const getTheme = async () =>
       await page.evaluate(() =>
         document.documentElement.getAttribute('data-theme')
       );
 
     const getIconClass = async () =>
-      await page.$eval('#theme-toggle i', icon => icon.className.trim());
+      await page.$eval('#theme-toggle i', (icon) => icon.className.trim());
 
     expect(['dark', 'light']).toContain(initialTheme);
     expect(initialIconClass).toMatch(/fa-(sun|moon)/);
@@ -48,7 +54,8 @@ describe('Theme Toggle Button', () => {
     await page.click('#theme-toggle');
 
     await page.waitForFunction(
-      oldTheme => document.documentElement.getAttribute('data-theme') !== oldTheme,
+      (oldTheme) => document.documentElement.getAttribute(
+        'data-theme') !== oldTheme,
       {},
       initialTheme
     );
@@ -60,21 +67,22 @@ describe('Theme Toggle Button', () => {
     expect(newIconClass).not.toBe(initialIconClass);
   }, 20000);
 
-  it('theme stays the same even after navigating to create deck page', async () => {
+  it('Theme stays same even after navigating to create deck page', async () => 
+  {
     const getTheme = async () =>
       await page.evaluate(() =>
         document.documentElement.getAttribute('data-theme')
       );
 
     const getIconClass = async () =>
-      await page.$eval('#theme-toggle i', icon => icon.className.trim());
+      await page.$eval('#theme-toggle i', (icon) => icon.className.trim());
 
     const initialTheme = await getTheme();
     const initialIconClass = await getIconClass();
 
     await page.click('.create-deck');
 
-    await new Promise(res => setTimeout(res, 1000)); // delay for navigation
+    await new Promise((res) => setTimeout(res, 1000)); // delay for navigation
 
     const newTheme = await getTheme();
     const newIconClass = await getIconClass();
