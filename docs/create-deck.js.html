@@ -26,82 +26,206 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { initFiltering } from './assets/scripts/filter-control.js';
-window.addEventListener("DOMContentLoaded", init);
+            <pre class="prettyprint source linenums"><code>/**
+ * @fileoverview create-deck.js
+ * @description
+ * Main script for the "Create Deck" page. 
+ * Handles loading workouts, card rendering, selection mode, filtering, 
+ * deck creation, and saving to localStorage.
+ */
+
+import { initFiltering } from "./filter-control.js"
+import { getWorkoutsFromStorage, getCardData } from "./deck-logic.js"
 
 /**
- * Starts the program, all function calls trace back here
+ * Starts the page and sets up event listeners
  */
-async function init() {
-    const workouts = await getWorkoutsFromStorage();
-    if (workouts) {
-      addWorkoutsToDocument(workouts);
-      initFiltering(workouts);
-    }
-}
+async function setupCreateDeckPage() {
+  // Load workouts and initialize filtering
+  const workouts = await getWorkoutsFromStorage();
+  if (workouts) {
+    addWorkoutsToDocument(workouts);
+    initFiltering(workouts);
+  }
 
-/**
- * Fetch workout data from JSON file and create workout cards
- * Each card includes image &amp;details about workout
- * @returns {workouts} array containing information of all workouts
- */
-async function getWorkoutsFromStorage() {
-    try {
-        const dataURL = './workouts/workouts.json';
-        const response = await fetch(dataURL);
-        if (!response.ok) {
-          throw new Error(`Failed to fetch workouts.json: ${response.status}`);
-        }
-    
-        const workouts = await response.json();
-        return workouts;
+  // Event listener: Toggle selection mode
+  window.selection = false;
 
-      } catch (err) {
-        console.error(err);
-        return null;
+  const selectorOnBtn = document.getElementById("selectorOn");
+  if (selectorOnBtn) {
+    selectorOnBtn.addEventListener("click", () => {
+      window.selection = !window.selection;
+      selectorOnBtn.textContent = window.selection ? "Cancel Selection" : "Select Cards";
+      setCardsDisableFlip(window.selection);
+      if (!window.selection) {
+        unselectCards();
       }
+    });
+  }
+
+  // Event listener: Create Deck button clicked
+  const createDeckBtn = document.getElementById("create-deck-button");
+  if (createDeckBtn) {
+    createDeckBtn.addEventListener("click", () => {
+      const selectedCards = document.querySelectorAll(".selected");
+      if (selectedCards.length > 0) {
+        document.getElementById("deck-name-modal").classList.remove("hidden");
+      } else {
+        const errorEl = document.getElementById("create-deck-error");
+        errorEl.textContent = `Please select a card before creating a deck`;
+        errorEl.classList.remove("hidden");
+        errorEl.style.opacity = "1";
+
+        setTimeout(() => {
+          errorEl.style.opacity = "0";
+          setTimeout(() => {
+            errorEl.classList.add('hidden');
+            errorEl.style.opacity = "1"; // Reset for next time
+          }, 1000);
+        }, 1000);
+      }
+    });
+  }
+
+  // Event listener: Confirm Deck Name button clicked
+  const confirmDeckNameBtn = document.getElementById("confirm-deck-name");
+  if (confirmDeckNameBtn) {
+    confirmDeckNameBtn.addEventListener("click", () => {
+      const name = document.getElementById("deck-name-input").value.trim();
+      saveSelectedCards(name);
+    });
+  }
+
+  // Event listener: Cancel Deck Name button clicked
+  const cancelDeckNameBtn = document.getElementById("cancel-deck-name");
+  if (cancelDeckNameBtn) {
+    cancelDeckNameBtn.addEventListener("click", closeModal);
+  }
 }
 
+// Run setupCreateDeckPage on actual page load
+window.addEventListener("DOMContentLoaded", () => {
+  setupCreateDeckPage();
+});
 
 /**
  * Create DOM elements representing workout cards and append them to the &lt;main> element.
  * @param {Array&lt;{name: string, category: string, muscle: string, description: string, image: string}>} workouts - Array of workout data objects
  */
 function addWorkoutsToDocument(workouts) {
-  const main = document.querySelector('main');
+  const main = document.querySelector("main");
+  const cardsContainer = document.querySelector(".cards-container");
   workouts.forEach((workout) => {
-    const workoutCard = document.createElement('workout-card');
+    const workoutCard = document.createElement("workout-card");
     workoutCard.data = workout;
-    main.appendChild(workoutCard);
+    workoutCard._articleEl.classList.toggle("flipped");
+    cardsContainer.appendChild(workoutCard);
+  });
+  main.appendChild(cardsContainer);
+}
+
+// Listen for custom events dispatched from any card
+document.addEventListener("workout-card-clicked", (e) => {
+  if (!window.selection) return; // If selection mode not enabled, ignore
+  const clickedCard = e.detail.card;
+  clickedCard.classList.toggle("selected");
+});
+
+function unselectCards() {
+  document.querySelectorAll(".selected").forEach((card) => {
+    card.classList.remove("selected");
   });
 }
 
+/**
+ * Sets whether all workout cards should have flipping disabled.
+ * @param {boolean} disable - If true, disables flipping for all cards.
+ */
+function setCardsDisableFlip(disable) {
+  document.querySelectorAll("workout-card").forEach((card) => {
+    if (disable) {
+      card._wasFlipped = card._articleEl.classList.contains("flipped");
+      card._articleEl.classList.remove("flipped");
+    } else {
+      if ('_wasFlipped' in card) {
+        if (card._wasFlipped) {
+          card._articleEl.classList.add("flipped");
+        } else {
+          card._articleEl.classList.remove("flipped");
+        }
+        delete card._wasFlipped;
+      }
+    }
+    card.disableFlip = disable;
+  });
+}
 
-// Track the currently enlarged card
-let currentEnlargedCard = null;
+/**
+ * Collects all currently selected workout cards and saves their data to localStorage.
+ * The saved data is stored under the key 'custom-decks'.
+ */
+export function saveSelectedCards(deckName) {
+  const selectedCards = document.querySelectorAll(".selected");
+  const selectedData = [];
 
-// Listen for custom events dispatched from any card
-document.addEventListener("workout-card-clicked", (e) => { // e is the custom event
-  const clickedCard = e.detail.card;
+  const errorEl = document.getElementById("deck-name-error");
 
-  // If another card is already enlarged, shrink it
-  if (currentEnlargedCard &amp;&amp; currentEnlargedCard !== clickedCard) {
-    currentEnlargedCard.shrinkCard();
+  errorEl.classList.add("hidden");
+
+  selectedCards.forEach((card) => {
+    const data = getCardData(card);
+    if (data) selectedData.push(data);
+  });
+
+  const newDeck = {
+    name: deckName,
+    cards: selectedData,
+  };
+
+  const defaultDecks = JSON.parse(localStorage.getItem("decks") || "[]");
+  const customDecks = JSON.parse(localStorage.getItem("custom-decks") || "[]");
+
+  const allDecks = [...defaultDecks, ...customDecks];
+  const deckExists = allDecks.some((deck) => deck.name === newDeck.name);
+
+  if (deckName.length &lt;= 0) {
+    errorEl.textContent = `A deck name can't be empty`;
+    errorEl.classList.remove("hidden");
+    return;
+  }
+  if (deckExists) {
+    errorEl.textContent = `A deck named "${deckName}" already exists. Please choose another name`;
+    errorEl.classList.remove("hidden");
+    return;
   }
 
-  // Toggle the clicked card's state
-  if (clickedCard.isEnlarged()) {
-    clickedCard.shrinkCard();
-    currentEnlargedCard = null;
-  } else {
-    clickedCard.enlargeCard();
-    currentEnlargedCard = clickedCard;
-  }
-});
+  customDecks.push(newDeck);
+  localStorage.setItem("custom-decks", JSON.stringify(customDecks));
 
+  closeModal();
+  document.getElementById("create-deck-error").classList.add("hidden");
+  window.location.href = '../index.html';
+}
 
+/**
+ * Closes the pop-up modal
+ */
+function closeModal() {
+  document.getElementById("deck-name-modal").classList.add("hidden");
+  document.getElementById("deck-name-input").value = "";
+  document.getElementById("deck-name-error").classList.add("hidden");
+}
 
-</code></pre>
+export default {
+  setupCreateDeckPage,
+  getWorkoutsFromStorage,
+  getCardData,
+  saveSelectedCards,
+  addWorkoutsToDocument,
+  unselectCards,
+  setCardsDisableFlip,
+  closeModal,
+};</code></pre>
         </article>
     </section>
 
@@ -111,13 +235,13 @@ document.addEventListener("workout-card-clicked", (e) => { // e is the custom ev
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#add">add</a></li><li><a href="global.html#addWorkoutsToDocument">addWorkoutsToDocument</a></li><li><a href="global.html#applyFilters">applyFilters</a></li><li><a href="global.html#buildToolbar">buildToolbar</a></li><li><a href="global.html#capitalize">capitalize</a></li><li><a href="global.html#createWorkoutCard">createWorkoutCard</a></li><li><a href="global.html#getWorkoutsFromStorage">getWorkoutsFromStorage</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#loadWorkoutCards">loadWorkoutCards</a></li><li><a href="global.html#makeSelect">makeSelect</a></li><li><a href="global.html#restoreSelections">restoreSelections</a></li><li><a href="global.html#shuffle">shuffle</a></li><li><a href="global.html#uniqueStrings">uniqueStrings</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-view-deck.html">view-deck</a></li></ul><h3>Classes</h3><ul><li><a href="WorkoutCard.html">WorkoutCard</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:workout-card-clicked">workout-card-clicked</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addWorkoutsToDocument">addWorkoutsToDocument</a></li><li><a href="global.html#applyFilters">applyFilters</a></li><li><a href="global.html#buildToolbar">buildToolbar</a></li><li><a href="global.html#capitalize">capitalize</a></li><li><a href="global.html#closeModal">closeModal</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#makeSelect">makeSelect</a></li><li><a href="global.html#restoreSelections">restoreSelections</a></li><li><a href="global.html#saveSelectedCards">saveSelectedCards</a></li><li><a href="global.html#setCardsDisableFlip">setCardsDisableFlip</a></li><li><a href="global.html#setupCreateDeckPage">setupCreateDeckPage</a></li><li><a href="global.html#setupThemeToggle">setupThemeToggle</a></li><li><a href="global.html#shuffle">shuffle</a></li><li><a href="global.html#uniqueStrings">uniqueStrings</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat May 24 2025 20:21:32 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Jun 08 2025 10:43:01 GMT-0700 (Pacific Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

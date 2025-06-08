@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: filter-control.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: filter-control.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @fileoverview
+ * Adds dropdown menu that allow users to filter
+ * &lt;workout-card> elements by muscle group &amp; exercise.
+ *
+ * ────────────────────────────────────────────────────────────────
+ * How it Works
+ * 1.  `initFiltering()` receives workout JSON array
+ * 2.  Populates &lt;select> elements with categories and an “All” option
+ * 3.  Whenever dropdown changes, `applyFilters()` checks every
+ *     &lt;workout-card>, comparing attributes against chosen filters
+ *     Cards that don’t match are simply   display:none-d.
+ * 4.  User's latest choices are persisted to localStorage so
+ *     reloads preserve state
+
+/**
+ * Bootstraps the filtering UI
+ *
+ * @param {Array&lt;Object>} workouts
+ * Array of workout card objects fetched in `index.js`
+ *
+ * @returns {void}
+ */
+export function initFiltering(workouts) {
+    // ─── 1. Check for edge cases  ───────────────────────────
+    if (!Array.isArray(workouts) || workouts.length === 0) {
+        console.warn('[filterControls] No workouts available; toolbar skipped.');
+        return;
+    }
+
+    // ─── 2. Gather &lt;select> option values  ──────────────────────────
+
+    /* 1. Build list of every muscle name we find in the workouts array */
+    const rawMuscleNames = [];
+    for (let workout of workouts) {
+        rawMuscleNames.push(workout.muscle);
+    }
+
+    /* 2. Pass list through helper to deduplicate &amp; sort */
+    const muscles = uniqueStrings(rawMuscleNames);
+
+    // ─── 3. Toolbar  ────────────────────────────
+    const toolbar = buildToolbar(muscles);
+    const controlsToolbar = document.querySelector('.controls-toolbar');
+    controlsToolbar.insertBefore(toolbar, controlsToolbar.firstChild);
+
+    // ─── 4. Restore saved filter state and apply  ─────────────────
+    restoreSelections(toolbar);
+    applyFilters();
+
+    // ─── 5. Respond to user changes  ─────────────────────────────────
+    toolbar.addEventListener('change', applyFilters);
+}
+
+/**
+ * Deduplicates + sorts string array alphabetically (case-insensitive)
+ * @param {string[]} arr
+ * @returns {string[]}
+ */
+function uniqueStrings(arr) {
+    // 1. Lower case + trim
+  const cleaned = [];
+  for (const word of arr) {
+    if (typeof word === 'string') {
+      cleaned.push(word.trim().toLowerCase());
+    }
+  }
+
+  // 2. Deduplicate 
+  const seen = {};
+  const result = [];
+  for (const w of cleaned) {
+    if (!seen[w]) {
+      seen[w] = true;
+      result.push(w);
+    }
+  }
+
+  // 3. Sort alphabetically
+  return result.sort();
+}
+
+/**
+ * Returns &lt;label> containing one configured &lt;select>
+ * @param {'muscle'|'category'} type
+ * @param {string[]} values
+ * @param {string} label
+ * @returns {HTMLLabelElement}
+ */
+function makeSelect(type, values, labelText) {
+  const wrapper = document.createElement('label');
+  wrapper.className = 'custom-dropdown-wrapper filter-control';
+
+  const label = document.createElement('span');
+  label.textContent = labelText;
+  label.className = 'filter-label';
+  wrapper.appendChild(label);
+
+  const dropdown = document.createElement('div');
+  dropdown.className = `custom-dropdown ${type}-dropdown`;
+  dropdown.id = `filter-${type}`;
+  dropdown.dataset.selected = 'all'; 
+  dropdown.tabIndex = 0;
+
+  const selected = document.createElement('div');
+  selected.className = 'custom-dropdown-selected';
+  selected.textContent = 'All Muscle Groups';
+  dropdown.appendChild(selected);
+
+  const optionsContainer = document.createElement('div');
+  optionsContainer.className = 'custom-dropdown-options';
+
+  optionsContainer.addEventListener('wheel', (e) => {
+  const isScrollingDown = e.deltaY > 0;
+  const atBottom = optionsContainer.scrollTop + optionsContainer.clientHeight >= optionsContainer.scrollHeight;
+  const atTop = optionsContainer.scrollTop === 0;
+
+  if ((isScrollingDown &amp;&amp; atBottom) || (!isScrollingDown &amp;&amp; atTop)) {
+    e.preventDefault();
+    }
+  }, { passive: false });
+
+  const allOption = document.createElement('div');
+  allOption.className = 'custom-dropdown-option';
+  allOption.dataset.value = 'all';
+  allOption.textContent = `All Muscle Groups`;
+  optionsContainer.appendChild(allOption);
+
+  values.forEach(val => {
+    const opt = document.createElement('div');
+    opt.className = 'custom-dropdown-option';
+    opt.dataset.value = val;
+    opt.textContent = capitalize(val);
+    optionsContainer.appendChild(opt);
+  });
+
+  dropdown.appendChild(optionsContainer);
+  wrapper.appendChild(dropdown);
+
+  selected.addEventListener('click', () => {
+    optionsContainer.classList.toggle('open');
+    dropdown.classList.toggle('open');
+  });
+
+  document.addEventListener('click', (event) => {
+  const isClickInside = dropdown.contains(event.target);
+  if (!isClickInside) {
+    optionsContainer.classList.remove('open');
+    dropdown.classList.remove('open');
+    }
+  });
+
+  optionsContainer.addEventListener('click', e => {
+    if (e.target.classList.contains('custom-dropdown-option')) {
+      selected.textContent = e.target.textContent;
+      dropdown.dataset.selected = e.target.dataset.value;
+      optionsContainer.classList.remove('open');
+      dropdown.classList.remove('open');
+
+      const changeEvent = new Event('change', { bubbles: true });
+      dropdown.dispatchEvent(changeEvent);
+    }
+  });
+
+  return wrapper;
+}
+
+
+/**
+ * Creates &lt;section> containing dropdown
+ * @param {string[]} muscles
+ * @param {string[]} categories
+ * @returns {HTMLElement}
+ */
+function buildToolbar(muscles) {
+    const toolbar = document.createElement('section');
+    toolbar.id = 'filter-toolbar';
+    Object.assign(toolbar.style, {
+        display: 'flex',
+        gap: '1rem',
+        margin: '1rem 0',
+        flexWrap: 'wrap',
+        color: 'black'
+    });
+    
+    toolbar.append(
+        makeSelect('muscle', muscles,'Filter Category: '),
+    );
+    return toolbar;
+}
+
+/**
+ * Hide/display each &lt;workout-card>
+ * Reads current dropdown values each time
+ * @returns {void}
+ */
+function applyFilters() {
+    const muscleSel = document.querySelector('#filter-muscle')?.dataset.selected || 'all';
+    
+    /** @type {NodeListOf&lt;HTMLElement>} */
+    const cards = document.querySelectorAll('workout-card');
+
+    cards.forEach(card => {
+        const matchesMuscle =
+            muscleSel === 'all' || card.dataset.muscle === muscleSel;
+
+        if (matchesMuscle) {
+            // Keep card visible
+            card.style.display = '';
+        } else {
+            // Hide card
+            card.style.display = 'none';
+        }
+
+    });
+
+    // Remain for reloads
+    localStorage.setItem('filters', JSON.stringify({
+        muscle: muscleSel
+    }));
+}
+
+/** Restores saved dropdown selections */
+function restoreSelections(toolbar) {
+    try {
+        const saved = JSON.parse(localStorage.getItem('filters') || '{}');
+        if (saved.muscle){
+            toolbar.querySelector('#filter-muscle').value = saved.muscle
+
+        }     
+    } catch (err) {
+        console.warn('[filterControls] Corrupt filter data ignored!', err);
+    }
+}
+
+/** Capitalize first letter */
+const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
+
+export default {
+  initFiltering,
+};</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-view-deck.html">view-deck</a></li></ul><h3>Classes</h3><ul><li><a href="WorkoutCard.html">WorkoutCard</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:workout-card-clicked">workout-card-clicked</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addWorkoutsToDocument">addWorkoutsToDocument</a></li><li><a href="global.html#applyFilters">applyFilters</a></li><li><a href="global.html#buildToolbar">buildToolbar</a></li><li><a href="global.html#capitalize">capitalize</a></li><li><a href="global.html#closeModal">closeModal</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#makeSelect">makeSelect</a></li><li><a href="global.html#restoreSelections">restoreSelections</a></li><li><a href="global.html#saveSelectedCards">saveSelectedCards</a></li><li><a href="global.html#setCardsDisableFlip">setCardsDisableFlip</a></li><li><a href="global.html#setupCreateDeckPage">setupCreateDeckPage</a></li><li><a href="global.html#setupThemeToggle">setupThemeToggle</a></li><li><a href="global.html#shuffle">shuffle</a></li><li><a href="global.html#uniqueStrings">uniqueStrings</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Jun 08 2025 10:43:01 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
