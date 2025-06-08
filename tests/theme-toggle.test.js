@@ -8,7 +8,7 @@ const puppeteer = require('puppeteer');
 
 describe('Theme Toggle Button', () => {
   let browser, page;
-  let initialTheme, initialText;
+  let initialTheme, initialIconClass;
 
   beforeAll(async () => {
     browser = await puppeteer.launch({
@@ -21,13 +21,12 @@ describe('Theme Toggle Button', () => {
       waitUntil: 'domcontentloaded',
     });
 
-    await page.waitForSelector('#theme-toggle');
+    await page.waitForSelector('#theme-toggle i');
 
-    // Capture initial theme and text once before tests
     initialTheme = await page.evaluate(() =>
       document.documentElement.getAttribute('data-theme')
     );
-    initialText = await page.$eval('#theme-toggle', btn => btn.textContent.trim());
+    initialIconClass = await page.$eval('#theme-toggle i', icon => icon.className.trim());
   }, 30000);
 
   afterAll(async () => {
@@ -40,11 +39,11 @@ describe('Theme Toggle Button', () => {
         document.documentElement.getAttribute('data-theme')
       );
 
-    const getButtonText = async () =>
-      await page.$eval('#theme-toggle', btn => btn.textContent.trim());
+    const getIconClass = async () =>
+      await page.$eval('#theme-toggle i', icon => icon.className.trim());
 
     expect(['dark', 'light']).toContain(initialTheme);
-    expect(['☀️', '🌙']).toContain(initialText);
+    expect(initialIconClass).toMatch(/fa-(sun|moon)/);
 
     await page.click('#theme-toggle');
 
@@ -55,35 +54,32 @@ describe('Theme Toggle Button', () => {
     );
 
     const newTheme = await getTheme();
-    const newText = await getButtonText();
+    const newIconClass = await getIconClass();
 
     expect(newTheme).not.toBe(initialTheme);
-    expect(newText).not.toBe(initialText);
+    expect(newIconClass).not.toBe(initialIconClass);
   }, 20000);
 
-    it('theme stays the same even after navigating to create deck page', async () => {
-  const getTheme = async () =>
-    await page.evaluate(() =>
-      document.documentElement.getAttribute('data-theme')
-    );
+  it('theme stays the same even after navigating to create deck page', async () => {
+    const getTheme = async () =>
+      await page.evaluate(() =>
+        document.documentElement.getAttribute('data-theme')
+      );
 
-  const getButtonText = async () =>
-    await page.$eval('#theme-toggle', btn => btn.textContent.trim());
+    const getIconClass = async () =>
+      await page.$eval('#theme-toggle i', icon => icon.className.trim());
 
-  const initialTheme = await getTheme();
-  const initialText = await getButtonText();
+    const initialTheme = await getTheme();
+    const initialIconClass = await getIconClass();
 
-  await page.click('.create-deck');
+    await page.click('.create-deck');
 
-  // Wait for something from the new page (or just use a small delay)
-  await page.evaluate(() => new Promise(resolve => setTimeout(resolve, 500)));
+    await new Promise(res => setTimeout(res, 1000)); // delay for navigation
 
-  const newTheme = await getTheme();
-  const newText = await getButtonText();
+    const newTheme = await getTheme();
+    const newIconClass = await getIconClass();
 
-  // ✅ Now correctly asserting that theme and toggle icon stay the same
-  expect(newTheme).toBe(initialTheme);
-  expect(newText).toBe(initialText);
-}, 20000);
-//
+    expect(newTheme).toBe(initialTheme);
+    expect(newIconClass).toBe(initialIconClass);
+  }, 20000);
 });
