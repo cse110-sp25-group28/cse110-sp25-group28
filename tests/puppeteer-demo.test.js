@@ -35,7 +35,7 @@ describe('Basic user flow for Website', () => {
     await page.evaluate(() => {
       const options = document.querySelectorAll('#filter-muscle .custom-dropdown-option');
       for (const opt of options) {
-        if (opt.dataset.value === 'biceps') {
+        if (opt.dataset.value === 'arms') {
           opt.click();
           break;
         }
@@ -50,10 +50,10 @@ describe('Basic user flow for Website', () => {
         .map(card => card.dataset.muscle);
     });
     
-    expect(visibleMuscles.every(muscle => muscle === 'biceps')).toBe(true);
+    expect(visibleMuscles.every(muscle => muscle === 'arms')).toBe(true);
 
     // Check localStorage
     const savedFilters = await page.evaluate(() => localStorage.getItem('filters'));
-    expect(savedFilters).toContain('"muscle":"biceps"');
+    expect(savedFilters).toContain('"muscle":"arms"');
   }, 15000);
 });
