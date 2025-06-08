@@ -47,7 +47,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
 
   /** @type {HTMLElement[]} */
-  /* Render all cards facing down in beginning */
+  /* Render all cards facing down in beginning  */
   const cards = []; // Array holding DOM elements
 
   // Build card elements for each workout in the deck
