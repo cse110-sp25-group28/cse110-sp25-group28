@@ -12,7 +12,8 @@ window.addEventListener('DOMContentLoaded', () =>
   // Determine correct index.html path once
   let indexPath = '../index.html';
   const path = window.location.pathname;
-  if (path.endsWith('/index.html') || path === '/' || path.endsWith('/')) {
+  if (path.endsWith('/index.html') || path === '/' || path.endsWith('/')) 
+  {
     indexPath = './index.html';
   }
   logoSection.addEventListener('click', () => 
