@@ -187,6 +187,7 @@
 
 .modal-buttons button,
 #go-home {
+  font-family: 'Poppins', 'Segoe UI', 'Roboto', Arial, sans-serif;
   background: #4666d1;
   color: #fff;
   border: none;
