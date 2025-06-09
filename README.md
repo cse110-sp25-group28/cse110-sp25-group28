@@ -20,7 +20,7 @@ Click to be directed to our most up to date iteration of our website.
 
 ## Our Team's Final Videos:
 
-[Private Videp](https://www.youtube.com/watch?v=9BOmhSIKDQE)
+[Private Video](https://www.youtube.com/watch?v=9BOmhSIKDQE)
 
 [Public Video](https://www.youtube.com/watch?v=1VHZYFgTgzk)
 
