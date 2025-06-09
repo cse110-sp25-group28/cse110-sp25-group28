@@ -16,6 +16,12 @@ Quality Code Checker used to monitor styling, security, and maintainability of o
 
 [Website](https://cse110-sp25-group28.github.io/cse110-sp25-group28/)
 
+## Our Team's Final Videos:
+
+[Private Videp](https://www.youtube.com/watch?v=9BOmhSIKDQE)
+
+[Public Video](https://www.youtube.com/watch?v=1VHZYFgTgzk)
+
 Click to be directed to our most up to date iteration of our website. 
 
 ## Overview
