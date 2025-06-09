@@ -63,6 +63,9 @@
   --card-bg: rgb(188, 189, 190);
 }
 
+[data-theme="dark"] .logo-light { display: none; }
+[data-theme="dark"] .logo-dark { display: inline; }
+
 /* Clean Slate (revert default styling) */
 
 * {
@@ -106,6 +109,9 @@ body {
   object-fit: contain;
   border-radius: 8px;
 }
+
+.logo-light { display: inline; }
+.logo-dark { display: none; }
 
 .app-name {
   font-size: 2rem;

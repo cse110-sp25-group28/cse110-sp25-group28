@@ -51,7 +51,7 @@ Inside `source/` we have the default html of `create-deck.html` and `view-deck.h
 ## Tests
 
 Tests can be found in the `tests/` folder and contains Jest unit tests and E2E Puppeteer tests  
-To run a test, first run `npm install` for Puppeteer and Jest setup.
+To run a test, first run `npm install` and `npm i jest-environment-jsdom` for Puppeteer and Jest setup.
 Then, run `npm test PATH_TO_TEST`.
 
 If you want to create your own tests, create a file with a relevant test name ending in `.test.js` inside the `tests/` folder.
